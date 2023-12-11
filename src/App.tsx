@@ -58,6 +58,13 @@ export const App: React.FC = () => {
     dispatch(startPeer(values.name));
   };
 
+  const handleJoinGame = (values: { code?: string }) => {
+    if (!values.code) {
+      return;
+    }
+    dispatch(connectionAction.connectPeer(values.code));
+  };
+
   const handleStopSession = async () => {
     await PeerConnection.closePeerSession();
     dispatch(stopPeerSession());
@@ -123,6 +130,23 @@ export const App: React.FC = () => {
         </Card>
       ) : (
         <Card>
+          <Form name="basic" onFinish={handleJoinGame}>
+            <Form.Item<FieldType>
+              label="Code"
+              name="code"
+              rules={[{ required: true, message: "Please input your code!" }]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+              <Button>Create Game</Button>
+              <Button type="primary" htmlType="submit">
+                Join Game
+              </Button>
+            </Form.Item>
+          </Form>
+          <Button>Create Game</Button>
           <Title level={4}>ID: {peer.id}</Title>
           <Title level={4}>Name: {peer.name}</Title>
         </Card>
