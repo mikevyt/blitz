@@ -105,10 +105,11 @@ export const App: React.FC = () => {
   );
 };
 
-interface PlayingCard {
+export interface PlayingCard {
   digit: number;
   color: "red" | "yellow" | "green" | "blue";
   location: "post" | "blitz" | "wood" | "dutch";
+  positive: boolean;
 }
 
 export const PlayingCard = ({
@@ -124,7 +125,7 @@ export const PlayingCard = ({
       style={{
         backgroundColor: card.color,
         color: card.color === "yellow" ? "black" : "white",
-        fontSize: "4rem",
+        fontSize: "2rem",
         border: 0,
         width: "5rem",
         height: "7rem",
@@ -136,6 +137,7 @@ export const PlayingCard = ({
       }}
     >
       {card.digit}
+      {card.positive ? "+" : "-"}
     </Card>
   );
 };
@@ -189,6 +191,7 @@ export const generateCards = () => {
         color: color as PlayingCard["color"],
         digit: i,
         location: "blitz",
+        positive: ["blue", "yellow"].includes(color),
       });
     }
   }
