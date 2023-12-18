@@ -166,9 +166,11 @@ export const PlayingCardArea = ({
         alignItems: "center",
       }}
     >
-      {playerState.post.map((card, i) => (
-        <PlayingCard key={i} card={card} />
-      ))}
+      <LabelledArea label="Post">
+        {playerState.post.map((card, i) => (
+          <PlayingCard key={i} card={card} />
+        ))}
+      </LabelledArea>
       <LabelledArea label="Blitz">
         <PlayingCardStack cards={playerState.blitz} />
       </LabelledArea>
@@ -223,7 +225,15 @@ export const LabelledArea = (
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <div style={{ border: "2px dotted #D3D3D3", padding: "8px" }}>
+      <div
+        style={{
+          border: "2px dotted #D3D3D3",
+          padding: "8px",
+          display: "flex",
+          flexDirection: "row",
+          columnGap: "20px",
+        }}
+      >
         {props.children}
       </div>
       <Paragraph style={{ color: "#D3D3D3" }}>{props.label}</Paragraph>
