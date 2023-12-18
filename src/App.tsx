@@ -49,8 +49,9 @@ export const App: React.FC = () => {
         height: "100vh" /* Make content full-height */,
         overflowY: "auto" /* Enable vertical scrolling within the content */,
         display: "flex",
-        alignItems: "flex-end",
+        alignItems: "center",
         justifyContent: "center",
+        flexDirection: "column",
         boxSizing: "border-box",
       }}
     >
@@ -99,9 +100,21 @@ export const App: React.FC = () => {
       {/* <PlayingCardStack
         cards={[{ digit: 4, color: "red", location: "blitz" }]}
       /> */}
-
+      <CenterArea />
       <PlayingCardArea playerState={playerState} />
     </div>
+  );
+};
+
+export const CenterArea = () => {
+  return (
+    <div
+      style={{
+        border: "2px dotted #D3D3D3",
+        width: "100vw",
+        height: "100vh",
+      }}
+    />
   );
 };
 
