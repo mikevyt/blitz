@@ -36,8 +36,23 @@ export const App: React.FC = () => {
     dispatch(stopPeerSession());
   };
 
+  const cards = generateCards();
+  shuffle(cards);
+
+  const playerState = setUpPlayer(cards);
+
   return (
-    <div className="App">
+    <div
+      style={{
+        width: "100vw" /* Make content full-width */,
+        height: "100vh" /* Make content full-height */,
+        overflowY: "auto" /* Enable vertical scrolling within the content */,
+        display: "flex",
+        alignItems: "flex-end",
+        justifyContent: "center",
+        boxSizing: "border-box",
+      }}
+    >
       {/* {!peer.started ? (
         <Card title="Dutch Blitz">
           <Form name="basic" onFinish={handleStartSession}>
@@ -80,14 +95,19 @@ export const App: React.FC = () => {
           <Button onClick={handleStopSession}>End Game</Button>
         </Card>
       )} */}
-      <PlayingCardStack cards={[{ digit: 4, color: "red" }]} />
+      {/* <PlayingCardStack
+        cards={[{ digit: 4, color: "red", location: "blitz" }]}
+      /> */}
+
+      <PlayingCardArea playerState={playerState} />
     </div>
   );
 };
 
 interface PlayingCard {
-  digit: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+  digit: number;
   color: "red" | "yellow" | "green" | "blue";
+  location: "post" | "blitz" | "wood" | "dutch";
 }
 
 export const PlayingCard = ({
@@ -95,7 +115,7 @@ export const PlayingCard = ({
   style,
 }: {
   card: PlayingCard;
-  style: React.CSSProperties;
+  style?: React.CSSProperties;
 }) => {
   return (
     <Card
@@ -130,6 +150,65 @@ export const PlayingCardStack = ({ cards }: { cards: PlayingCard[] }) => {
       card={cards[0]}
     />
   );
+};
+
+export const PlayingCardArea = ({
+  playerState,
+}: {
+  playerState: PlayerState;
+}) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        columnCount: 3 /* Set the number of columns */,
+        columnGap: "20px" /* Set the gap between columns */,
+      }}
+    >
+      {playerState.post.map((card, i) => (
+        <PlayingCard key={i} card={card} />
+      ))}
+      <PlayingCardStack cards={playerState.blitz} />
+      <PlayingCardStack cards={playerState.wood} />
+    </div>
+  );
+};
+
+export const generateCards = () => {
+  const cards: PlayingCard[] = [];
+  for (let i = 1; i < 11; i++) {
+    for (let color of ["red", "yellow", "green", "blue"]) {
+      cards.push({
+        color: color as PlayingCard["color"],
+        digit: i,
+        location: "blitz",
+      });
+    }
+  }
+  return cards;
+};
+
+export const shuffle = (array: any[]) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+};
+
+interface PlayerState {
+  post: PlayingCard[];
+  blitz: PlayingCard[];
+  wood: PlayingCard[];
+  dutch: PlayingCard[];
+}
+
+export const setUpPlayer = (cards: PlayingCard[]): PlayerState => {
+  return {
+    dutch: [],
+    post: cards.splice(0, 3),
+    blitz: cards.splice(0, 10),
+    wood: cards,
+  };
 };
 
 export default App;
