@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { startPeer, stopPeerSession } from "./store/peer/peerActions";
 import * as connectionAction from "./store/connection/connectionActions";
 import { PeerConnection } from "./helpers/peer";
+import Paragraph from "antd/es/typography/Paragraph";
 
 const { Title } = Typography;
 
@@ -122,8 +123,8 @@ export const PlayingCard = ({
       bordered={false}
       style={{
         backgroundColor: card.color,
-        color: "white",
-        fontSize: "6rem",
+        color: card.color === "yellow" ? "black" : "white",
+        fontSize: "4rem",
         border: 0,
         width: "5rem",
         height: "7rem",
@@ -143,8 +144,7 @@ export const PlayingCardStack = ({ cards }: { cards: PlayingCard[] }) => {
   return (
     <PlayingCard
       style={{
-        boxShadow:
-          "-1px 1px 0px 0px #FFF, -3px 3px 0px 0px #000000 -5px 5px 0px 0px #FFF, -7px 7px 0px 0px #000000",
+        boxShadow: "-3px 3px 0px 0px #D3D3D3",
         borderRadius: "8px",
       }}
       card={cards[0]}
@@ -163,13 +163,18 @@ export const PlayingCardArea = ({
         display: "flex",
         columnCount: 3 /* Set the number of columns */,
         columnGap: "20px" /* Set the gap between columns */,
+        alignItems: "center",
       }}
     >
       {playerState.post.map((card, i) => (
         <PlayingCard key={i} card={card} />
       ))}
-      <PlayingCardStack cards={playerState.blitz} />
-      <PlayingCardStack cards={playerState.wood} />
+      <LabelledArea label="Blitz">
+        <PlayingCardStack cards={playerState.blitz} />
+      </LabelledArea>
+      <LabelledArea label="Wood">
+        <PlayingCardStack cards={playerState.wood} />
+      </LabelledArea>
     </div>
   );
 };
@@ -209,6 +214,21 @@ export const setUpPlayer = (cards: PlayingCard[]): PlayerState => {
     blitz: cards.splice(0, 10),
     wood: cards,
   };
+};
+
+export const LabelledArea = (
+  props: React.PropsWithChildren<{ label: string }>
+) => {
+  return (
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <div style={{ border: "2px dotted #D3D3D3", padding: "8px" }}>
+        {props.children}
+      </div>
+      <Paragraph style={{ color: "#D3D3D3" }}>{props.label}</Paragraph>
+    </div>
+  );
 };
 
 export default App;
