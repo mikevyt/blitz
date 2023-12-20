@@ -1,9 +1,30 @@
 import { PlayingCard } from "../types/PlayingCard";
 
-export const validateMove = (
-  startingCard: PlayingCard,
-  destinationCard: PlayingCard
-) => {
+interface BaseParameters {
+  selectedCard: PlayingCard;
+}
+
+type ConditionalParameters =
+  | {
+      isDutch: true;
+      destinationCard?: never;
+    }
+  | {
+      isDutch?: never;
+      destinationCard: PlayingCard;
+    };
+
+type ValidateMoveParameters = ConditionalParameters & BaseParameters;
+
+export const validateMove = ({
+  selectedCard,
+  isDutch,
+  destinationCard,
+}: ValidateMoveParameters) => {
+  if (isDutch) {
+    return selectedCard.digit === 1;
+  }
+
   // Cannot add cards to these piles
   if (["blitz", "wood"].includes(destinationCard.location)) {
     return false;
@@ -11,7 +32,7 @@ export const validateMove = (
 
   // Can only add card incremented up to dutch pile
   if (
-    startingCard.digit !== destinationCard.digit + 1 &&
+    selectedCard.digit !== destinationCard.digit + 1 &&
     destinationCard.location === "dutch"
   ) {
     return false;
@@ -19,8 +40,8 @@ export const validateMove = (
 
   // Can only add card incremented down (and opposite sign) to post pile
   if (
-    (startingCard.digit !== destinationCard.digit - 1 ||
-      startingCard.positive === destinationCard.positive) &&
+    (selectedCard.digit !== destinationCard.digit - 1 ||
+      selectedCard.positive === destinationCard.positive) &&
     destinationCard.location === "post"
   ) {
     return false;

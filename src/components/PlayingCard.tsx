@@ -11,12 +11,12 @@ export const PlayingCard = ({
   card: PlayingCardType;
   style?: React.CSSProperties;
 }) => {
-  const gameState = useAppSelector((state) => state.game);
+  const localState = useAppSelector((state) => state.local);
   const dispatch = useAppDispatch();
 
   const handleClick = () => {
     dispatch(
-      gameState.selectedCard === card ? deselectCard() : selectCard(card)
+      localState.selectedCard === card ? deselectCard() : selectCard(card)
     );
   };
   return (
@@ -27,7 +27,7 @@ export const PlayingCard = ({
         backgroundColor: card.color,
         color: card.color === "yellow" ? "black" : "white",
         fontSize: "2rem",
-        border: gameState.selectedCard === card ? "5px solid black" : 0,
+        border: localState.selectedCard === card ? "5px solid black" : 0,
         width: "5rem",
         height: "7rem",
         display: "flex",
