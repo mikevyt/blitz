@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "antd";
 import { PlayingCard as PlayingCardType } from "../types/PlayingCard";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { deselectCard, selectCard } from "../store/game/gameActions";
+import { deselectCard, selectCard } from "../store/local/localActions";
 
 export const PlayingCard = ({
   card,

@@ -2,7 +2,7 @@ import { Reducer } from "redux";
 import { GameActionType, GameState } from "./gameTypes";
 
 export const initialState: GameState = {
-  selectedCard: undefined,
+  woodVisible: undefined,
 };
 
 export const GameReducer: Reducer<GameState> = (
@@ -10,11 +10,9 @@ export const GameReducer: Reducer<GameState> = (
   action
 ) => {
   switch (action.type) {
-    case GameActionType.SELECT_CARD:
-      const { card } = action;
-      return { selectedCard: card };
-    case GameActionType.DESELECT_CARD:
-      return { selectedCard: undefined };
+    case GameActionType.UPDATE_WOOD:
+      const { id, index } = action;
+      return { ...state, woodVisible: { ...state.woodVisible, [id]: index } };
     default:
       return state;
   }
