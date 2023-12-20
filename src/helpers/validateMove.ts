@@ -1,4 +1,4 @@
-import { PlayingCard } from "../App";
+import { PlayingCard } from "../types/PlayingCard";
 
 export const validateMove = (
   startingCard: PlayingCard,
