@@ -6,6 +6,7 @@ import { PlayingCard } from "./PlayingCard";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { updateWood } from "../store/game/gameActions";
 import { Button } from "antd";
+import { PlayingCardPlaceholder } from "./PlayingCardPlaceholder";
 
 export const PlayingCardArea = ({
   playerState,
@@ -14,18 +15,19 @@ export const PlayingCardArea = ({
 }) => {
   const gameState = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
-  const currentWoodIndex = gameState.woodVisible?.["id"] || -1; // handle wood visible - should it be an index?
+  const currentWoodIndex = gameState.woodVisible?.["id"] || -1;
   console.log({ currentWoodIndex });
   console.log({ wood: playerState.wood });
 
   const handleClick = () => {
     // handle overflow
-    if (currentWoodIndex + 3 > playerState.wood.length - 1) {
+    if (currentWoodIndex + 3 > playerState.wood.length) {
       dispatch(
-        updateWood("id", currentWoodIndex + 3 - playerState.wood.length - 1)
+        updateWood("id", currentWoodIndex + 3 - playerState.wood.length)
       );
+    } else {
+      dispatch(updateWood("id", currentWoodIndex + 3));
     }
-    dispatch(updateWood("id", currentWoodIndex + 3));
   };
 
   return (
@@ -49,15 +51,10 @@ export const PlayingCardArea = ({
         {currentWoodIndex !== -1 && (
           <PlayingCardStack cards={playerState.wood.slice(currentWoodIndex)} />
         )}
-        {currentWoodIndex !== playerState.wood.length - 1 && (
-          <PlayingCard
-            style={{
-              boxShadow: "-3px 3px 0px 0px #D3D3D3",
-              borderRadius: "8px",
-              backgroundColor: "black",
-            }}
-            card={{ digit: 4, color: "red", location: "wood", positive: true }}
-          />
+        {currentWoodIndex !== playerState.wood.length - 1 ? (
+          <PlayingCardPlaceholder />
+        ) : (
+          <PlayingCardPlaceholder style={{ backgroundColor: "white" }} />
         )}
       </LabelledArea>
       <Button onClick={handleClick}>Flip Wood</Button>
