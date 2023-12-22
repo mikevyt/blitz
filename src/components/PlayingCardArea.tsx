@@ -8,22 +8,16 @@ import { updateWood } from "../store/game/gameActions";
 import { Button } from "antd";
 import { PlayingCardPlaceholder } from "./PlayingCardPlaceholder";
 
-export const PlayingCardArea = ({
-  playerState,
-}: {
-  playerState: PlayerState;
-}) => {
+export const PlayingCardArea = () => {
   const gameState = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
   const currentWoodIndex = gameState.woodVisible?.["id"] || -1;
-  console.log({ currentWoodIndex });
-  console.log({ wood: playerState.wood });
 
   const handleClick = () => {
     // handle overflow
-    if (currentWoodIndex + 3 > playerState.wood.length) {
+    if (currentWoodIndex + 3 > gameState.wood["id"].length) {
       dispatch(
-        updateWood("id", currentWoodIndex + 3 - playerState.wood.length)
+        updateWood("id", currentWoodIndex + 3 - gameState.wood["id"].length)
       );
     } else {
       dispatch(updateWood("id", currentWoodIndex + 3));
@@ -40,18 +34,20 @@ export const PlayingCardArea = ({
       }}
     >
       <LabelledArea label="Post">
-        {playerState.post.map((card, i) => (
+        {gameState.post["id"].map((card, i) => (
           <PlayingCard key={i} card={card} />
         ))}
       </LabelledArea>
       <LabelledArea label="Blitz">
-        <PlayingCardStack cards={playerState.blitz} />
+        <PlayingCardStack cards={gameState.blitz["id"]} />
       </LabelledArea>
       <LabelledArea label="Wood">
         {currentWoodIndex !== -1 && (
-          <PlayingCardStack cards={playerState.wood.slice(currentWoodIndex)} />
+          <PlayingCardStack
+            cards={gameState.wood["id"].slice(currentWoodIndex)}
+          />
         )}
-        {currentWoodIndex !== playerState.wood.length - 1 ? (
+        {currentWoodIndex !== gameState.wood["id"].length - 1 ? (
           <PlayingCardPlaceholder />
         ) : (
           <PlayingCardPlaceholder style={{ backgroundColor: "white" }} />

@@ -42,11 +42,6 @@ export const App: React.FC = () => {
     dispatch(stopPeerSession());
   };
 
-  const cards = generateCards();
-  shuffle(cards);
-
-  const playerState = setUpPlayer(cards);
-
   return (
     <div
       style={{
@@ -106,7 +101,7 @@ export const App: React.FC = () => {
         cards={[{ digit: 4, color: "red", location: "blitz" }]}
       /> */}
       <CenterArea />
-      <PlayingCardArea playerState={playerState} />
+      <PlayingCardArea />
     </div>
   );
 };

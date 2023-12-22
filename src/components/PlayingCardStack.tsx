@@ -3,6 +3,9 @@ import { PlayingCard as PlayingCardType } from "../types/PlayingCard";
 import { PlayingCard } from "./PlayingCard";
 
 export const PlayingCardStack = ({ cards }: { cards: PlayingCardType[] }) => {
+  if (!cards.length) {
+    return null;
+  }
   return (
     <PlayingCard
       style={{
