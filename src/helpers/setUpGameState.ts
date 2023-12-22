@@ -8,9 +8,15 @@ export const setUpGameState = (): GameState => {
 
   return {
     dutch: [[]],
-    post: { ["id"]: cards.splice(0, 3) },
-    blitz: { ["id"]: cards.splice(0, 10) },
-    wood: { ["id"]: cards },
+    post: {
+      ["id"]: cards.splice(0, 3).map((card) => ({ ...card, location: "post" })),
+    },
+    blitz: {
+      ["id"]: cards
+        .splice(0, 10)
+        .map((card) => ({ ...card, location: "blitz" })),
+    },
+    wood: { ["id"]: cards.map((card) => ({ ...card, location: "wood" })) },
     woodVisible: { ["id"]: -1 },
   };
 };

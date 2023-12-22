@@ -2,7 +2,11 @@ import React from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { validateMove } from "../helpers/validateMove";
 import { PlayingCardStack } from "./PlayingCardStack";
-import { moveCardPostToNewDutchPile } from "../store/game/gameActions";
+import {
+  moveCardBlitzToNewDutchPile,
+  moveCardPostToNewDutchPile,
+  moveCardWoodToNewDutchPile,
+} from "../store/game/gameActions";
 import { deselectCard } from "../store/local/localActions";
 
 export const CenterArea = () => {
@@ -25,7 +29,21 @@ export const CenterArea = () => {
       localState.selectedCard &&
       validateMove({ selectedCard: localState.selectedCard, isDutch: true })
     ) {
-      dispatch(moveCardPostToNewDutchPile("id", localState.selectedCard));
+      console.log(localState.selectedCard);
+      switch (localState.selectedCard.location) {
+        case "post":
+          dispatch(moveCardPostToNewDutchPile("id", localState.selectedCard));
+          break;
+        case "blitz":
+          dispatch(moveCardBlitzToNewDutchPile("id", localState.selectedCard));
+          break;
+        case "wood":
+          dispatch(moveCardWoodToNewDutchPile("id", localState.selectedCard));
+          break;
+        case "dutch":
+        default:
+          break;
+      }
       dispatch(deselectCard());
     }
   };

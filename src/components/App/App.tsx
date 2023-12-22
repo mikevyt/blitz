@@ -22,6 +22,7 @@ export const App: React.FC = () => {
   const peer = useAppSelector((state) => state.peer);
   const connection = useAppSelector((state) => state.connection);
   const dispatch = useAppDispatch();
+  const gameState = useAppSelector((state) => state.game);
 
   const handleStartSession = (values: FieldType) => {
     if (!values?.name) {
