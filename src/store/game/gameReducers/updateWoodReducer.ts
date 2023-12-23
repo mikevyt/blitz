@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { GameState } from "./gameTypes";
+import { GameState } from "../gameTypes";
 
 export const updateWoodReducer = (state: GameState, action: AnyAction) => {
   const { index } = action;

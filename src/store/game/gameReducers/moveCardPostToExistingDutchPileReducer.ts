@@ -1,8 +1,8 @@
 import { AnyAction } from "redux";
-import { GameState } from "./gameTypes";
-import { isEqual } from "../../types/PlayingCard";
+import { GameState } from "../gameTypes";
+import { isEqual } from "../../../types/PlayingCard";
 
-export const moveCardWoodToExistingDutchPileReducer = (
+export const moveCardPostToExistingDutchPileReducer = (
   state: GameState,
   action: AnyAction
 ) => {
@@ -15,10 +15,13 @@ export const moveCardWoodToExistingDutchPileReducer = (
       }
     }
   }
-  const wood: GameState["wood"] = {
-    ...state.wood,
-    [id]: state.wood[id].filter((card) => !isEqual(card, startingCard)),
+
+  const post: GameState["post"] = {
+    ...state.post,
+    [id]: state.post[id].map((cards) =>
+      cards.filter((card) => !isEqual(card, startingCard))
+    ),
   };
 
-  return { ...state, dutch, wood };
+  return { ...state, dutch, post };
 };

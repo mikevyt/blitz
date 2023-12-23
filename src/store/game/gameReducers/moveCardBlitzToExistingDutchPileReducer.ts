@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
-import { GameState } from "./gameTypes";
-import { isEqual } from "../../types/PlayingCard";
+import { GameState } from "../gameTypes";
+import { isEqual } from "../../../types/PlayingCard";
 
 export const moveCardBlitzToExistingDutchPileReducer = (
   state: GameState,
