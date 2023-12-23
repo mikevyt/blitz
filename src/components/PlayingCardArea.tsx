@@ -1,8 +1,5 @@
-import React from "react";
-import { PlayerState } from "../types/PlayerState";
 import { PlayingCardStack } from "./PlayingCardStack";
 import { LabelledArea } from "./LabelledArea";
-import { PlayingCard } from "./PlayingCard";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { updateWood } from "../store/game/gameActions";
 import { Button } from "antd";
