@@ -1,10 +1,9 @@
-import { AnyAction } from "redux";
-import { GameState } from "../gameTypes";
+import { GameState, MoveCardBlitzToNewPostPileAction } from "../gameTypes";
 import { isEqual } from "../../../types/PlayingCard";
 
 export const moveCardBlitzToNewPostPileReducer = (
   state: GameState,
-  action: AnyAction
+  action: MoveCardBlitzToNewPostPileAction
 ) => {
   const { id, startingCard } = action;
   const post: GameState["post"] = {

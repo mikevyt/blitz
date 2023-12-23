@@ -1,10 +1,9 @@
-import { AnyAction } from "redux";
-import { GameState } from "../gameTypes";
+import { GameState, MoveCardWoodToExistingDutchPileAction } from "../gameTypes";
 import { isEqual } from "../../../types/PlayingCard";
 
 export const moveCardWoodToExistingDutchPileReducer = (
   state: GameState,
-  action: AnyAction
+  action: MoveCardWoodToExistingDutchPileAction
 ) => {
   const { id, startingCard, destinationCard } = action;
   const dutch = state.dutch.map((row) => [...row]);

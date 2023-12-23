@@ -1,5 +1,5 @@
 import { Reducer } from "redux";
-import { GameActionType, GameState } from "./gameTypes";
+import { GameAction, GameActionType, GameState } from "./gameTypes";
 import { setUpGameState } from "../../helpers/setUpGameState";
 import { moveCardPostToNewDutchPileReducer } from "./gameReducers/moveCardPostToNewDutchPileReducer";
 import { moveCardPostToExistingDutchPileReducer } from "./gameReducers/moveCardPostToExistingDutchPileReducer";
@@ -12,7 +12,7 @@ import { updateWoodReducer } from "./gameReducers/updateWoodReducer";
 
 export const initialState: GameState = setUpGameState();
 
-export const GameReducer: Reducer<GameState> = (
+export const GameReducer: Reducer<GameState, GameAction> = (
   state = initialState,
   action
 ) => {
