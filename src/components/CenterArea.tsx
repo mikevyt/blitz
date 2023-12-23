@@ -4,6 +4,7 @@ import { validateMove } from "../helpers/validateMove";
 import { PlayingCardStack } from "./PlayingCardStack";
 import {
   moveCardBlitzToNewDutchPile,
+  moveCardBlitzToNewPostPile,
   moveCardPostToNewDutchPile,
   moveCardWoodToNewDutchPile,
 } from "../store/game/gameActions";
@@ -33,6 +34,12 @@ export const CenterArea = () => {
       switch (localState.selectedCard.location) {
         case "post":
           dispatch(moveCardPostToNewDutchPile("id", localState.selectedCard));
+          dispatch(
+            moveCardBlitzToNewPostPile(
+              "id",
+              gameState.blitz["id"][gameState.blitz["id"].length - 1]
+            )
+          );
           break;
         case "blitz":
           dispatch(moveCardBlitzToNewDutchPile("id", localState.selectedCard));

@@ -23,6 +23,7 @@ export const App: React.FC = () => {
   const connection = useAppSelector((state) => state.connection);
   const dispatch = useAppDispatch();
   const gameState = useAppSelector((state) => state.game);
+  console.log({ gameState });
 
   const handleStartSession = (values: FieldType) => {
     if (!values?.name) {

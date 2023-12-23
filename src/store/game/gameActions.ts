@@ -66,3 +66,12 @@ export const moveCardWoodToExistingDutchPile = (
   startingCard,
   destinationCard,
 });
+
+export const moveCardBlitzToNewPostPile = (
+  id: string,
+  startingCard: PlayingCard
+) => ({
+  type: GameActionType.MOVE_CARD_BLITZ_TO_NEW_POST_PILE,
+  id,
+  startingCard,
+});

@@ -6,6 +6,7 @@ import { deselectCard, selectCard } from "../store/local/localActions";
 import { validateMove } from "../helpers/validateMove";
 import {
   moveCardBlitzToExistingDutchPile,
+  moveCardBlitzToNewPostPile,
   moveCardPostToExistingDutchPile,
   moveCardWoodToExistingDutchPile,
 } from "../store/game/gameActions";
@@ -18,6 +19,7 @@ export const PlayingCard = ({
   style?: React.CSSProperties;
 }) => {
   const localState = useAppSelector((state) => state.local);
+  const gameState = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
 
   const handleClick = () => {
@@ -43,6 +45,12 @@ export const PlayingCard = ({
         case "post":
           dispatch(
             moveCardPostToExistingDutchPile("id", localState.selectedCard, card)
+          );
+          dispatch(
+            moveCardBlitzToNewPostPile(
+              "id",
+              gameState.blitz["id"][gameState.blitz["id"].length - 1]
+            )
           );
           break;
         case "blitz":

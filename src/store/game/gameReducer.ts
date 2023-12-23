@@ -18,6 +18,8 @@ export const GameReducer: Reducer<GameState> = (
       return moveCardBlitzToNewDutchPileReducer(state, action);
     case GameActionType.MOVE_CARD_BLITZ_TO_EXISTING_DUTCH_PILE:
       return moveCardBlitzToExistingDutchPileReducer(state, action);
+    case GameActionType.MOVE_CARD_BLITZ_TO_NEW_POST_PILE:
+      return moveCardBlitzToNewPostPileReducer(state, action);
     case GameActionType.MOVE_CARD_WOOD_TO_NEW_DUTCH_PILE:
       return moveCardWoodToNewDutchPileReducer(state, action);
     case GameActionType.MOVE_CARD_WOOD_TO_EXISTING_DUTCH_PILE:
@@ -100,6 +102,20 @@ const moveCardBlitzToExistingDutchPileReducer = (
   };
 
   return { ...state, dutch, blitz };
+};
+
+const moveCardBlitzToNewPostPileReducer = (
+  state: GameState,
+  action: AnyAction
+) => {
+  const { id, startingCard } = action;
+  const post = { ...state.post, [id]: [...state.post[id], startingCard] };
+  const blitz: GameState["blitz"] = {
+    ...state.blitz,
+    [id]: state.blitz[id].filter((card) => !isEqual(card, startingCard)),
+  };
+
+  return { ...state, post, blitz };
 };
 
 const moveCardWoodToNewDutchPileReducer = (
