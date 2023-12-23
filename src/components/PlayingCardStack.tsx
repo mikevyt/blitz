@@ -12,7 +12,7 @@ export const PlayingCardStack = ({ cards }: { cards: PlayingCardType[] }) => {
         boxShadow: "-3px 3px 0px 0px #D3D3D3",
         borderRadius: "8px",
       }}
-      card={cards[0]}
+      card={cards[cards.length - 1]}
     />
   );
 };

@@ -7,7 +7,7 @@ export const setUpGameState = (): GameState => {
   shuffle(cards);
 
   return {
-    dutch: [[]],
+    dutch: [],
     post: {
       ["id"]: cards.splice(0, 3).map((card) => ({ ...card, location: "post" })),
     },

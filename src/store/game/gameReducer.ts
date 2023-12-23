@@ -35,12 +35,11 @@ const moveCardPostToNewDutchPileReducer = (
 ) => {
   const { id, startingCard } = action;
   const dutch = [...(state.dutch || [[]])];
-  dutch.push([startingCard]);
-  const post = { ...state.post };
-  post[id] = [...state.post[id]];
-  for (let i = 0; i < post[id].length; i++) {
-    if (isEqual(post[id][i], startingCard)) post[id].splice(i, 1);
-  }
+  dutch.push([{ ...startingCard, location: "dutch" }]);
+  const post: GameState["post"] = {
+    ...state.post,
+    [id]: state.post[id].filter((card) => !isEqual(card, startingCard)),
+  };
 
   return { ...state, dutch, post };
 };
@@ -50,19 +49,19 @@ const moveCardPostToExistingDutchPileReducer = (
   action: AnyAction
 ) => {
   const { id, startingCard, destinationCard } = action;
-  const dutch = [...(state.dutch || [[]])];
+  const dutch = state.dutch.map((row) => [...row]);
   for (let i = 0; i < dutch.length; i++) {
     for (let j = 0; j < dutch[i].length; j++) {
       if (isEqual(dutch[i][j], destinationCard)) {
-        dutch[i].push(startingCard);
+        dutch[i].push({ ...startingCard, location: "dutch" });
       }
     }
   }
-  const post = { ...state.post };
-  post[id] = [...state.post[id]];
-  for (let i = 0; i < post[id].length; i++) {
-    if (isEqual(post[id][i], startingCard)) post[id].splice(i, 1);
-  }
+
+  const post: GameState["post"] = {
+    ...state.post,
+    [id]: state.post[id].filter((card) => !isEqual(card, startingCard)),
+  };
 
   return { ...state, dutch, post };
 };
@@ -73,12 +72,11 @@ const moveCardBlitzToNewDutchPileReducer = (
 ) => {
   const { id, startingCard } = action;
   const dutch = [...(state.dutch || [[]])];
-  dutch.push([startingCard]);
-  const blitz = { ...state.blitz };
-  blitz[id] = [...state.blitz[id]];
-  for (let i = 0; i < blitz[id].length; i++) {
-    if (isEqual(blitz[id][i], startingCard)) blitz[id].splice(i, 1);
-  }
+  dutch.push([{ ...startingCard, location: "dutch" }]);
+  const blitz: GameState["blitz"] = {
+    ...state.blitz,
+    [id]: state.blitz[id].filter((card) => !isEqual(card, startingCard)),
+  };
 
   return { ...state, dutch, blitz };
 };
@@ -88,19 +86,18 @@ const moveCardBlitzToExistingDutchPileReducer = (
   action: AnyAction
 ) => {
   const { id, startingCard, destinationCard } = action;
-  const dutch = [...(state.dutch || [[]])];
+  const dutch = state.dutch.map((row) => [...row]);
   for (let i = 0; i < dutch.length; i++) {
     for (let j = 0; j < dutch[i].length; j++) {
       if (isEqual(dutch[i][j], destinationCard)) {
-        dutch[i].push(startingCard);
+        dutch[i].push({ ...startingCard, location: "dutch" });
       }
     }
   }
-  const blitz = { ...state.blitz };
-  blitz[id] = [...state.blitz[id]];
-  for (let i = 0; i < blitz[id].length; i++) {
-    if (isEqual(blitz[id][i], startingCard)) blitz[id].splice(i, 1);
-  }
+  const blitz: GameState["blitz"] = {
+    ...state.blitz,
+    [id]: state.blitz[id].filter((card) => !isEqual(card, startingCard)),
+  };
 
   return { ...state, dutch, blitz };
 };
@@ -111,12 +108,11 @@ const moveCardWoodToNewDutchPileReducer = (
 ) => {
   const { id, startingCard } = action;
   const dutch = [...(state.dutch || [[]])];
-  dutch.push([startingCard]);
-  const wood = { ...state.wood };
-  wood[id] = [...state.wood[id]];
-  for (let i = 0; i < wood[id].length; i++) {
-    if (isEqual(wood[id][i], startingCard)) wood[id].splice(i, 1);
-  }
+  dutch.push([{ ...startingCard, location: "dutch" }]);
+  const wood: GameState["wood"] = {
+    ...state.wood,
+    [id]: state.wood[id].filter((card) => !isEqual(card, startingCard)),
+  };
 
   return { ...state, dutch, wood };
 };
@@ -126,19 +122,18 @@ const moveCardWoodToExistingDutchPileReducer = (
   action: AnyAction
 ) => {
   const { id, startingCard, destinationCard } = action;
-  const dutch = [...(state.dutch || [[]])];
+  const dutch = state.dutch.map((row) => [...row]);
   for (let i = 0; i < dutch.length; i++) {
     for (let j = 0; j < dutch[i].length; j++) {
       if (isEqual(dutch[i][j], destinationCard)) {
-        dutch[i].push(startingCard);
+        dutch[i].push({ ...startingCard, location: "dutch" });
       }
     }
   }
-  const wood = { ...state.wood };
-  wood[id] = [...state.wood[id]];
-  for (let i = 0; i < wood[id].length; i++) {
-    if (isEqual(wood[id][i], startingCard)) wood[id].splice(i, 1);
-  }
+  const wood: GameState["wood"] = {
+    ...state.wood,
+    [id]: state.wood[id].filter((card) => !isEqual(card, startingCard)),
+  };
 
   return { ...state, dutch, wood };
 };

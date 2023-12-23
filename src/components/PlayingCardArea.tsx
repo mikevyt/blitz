@@ -44,7 +44,7 @@ export const PlayingCardArea = () => {
       <LabelledArea label="Wood">
         {currentWoodIndex !== -1 && (
           <PlayingCardStack
-            cards={gameState.wood["id"].slice(currentWoodIndex)}
+            cards={gameState.wood["id"].slice(0, currentWoodIndex)}
           />
         )}
         {currentWoodIndex !== gameState.wood["id"].length - 1 ? (

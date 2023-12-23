@@ -4,6 +4,11 @@ import { PlayingCard as PlayingCardType } from "../types/PlayingCard";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { deselectCard, selectCard } from "../store/local/localActions";
 import { validateMove } from "../helpers/validateMove";
+import {
+  moveCardBlitzToExistingDutchPile,
+  moveCardPostToExistingDutchPile,
+  moveCardWoodToExistingDutchPile,
+} from "../store/game/gameActions";
 
 export const PlayingCard = ({
   card,
@@ -17,7 +22,9 @@ export const PlayingCard = ({
 
   const handleClick = () => {
     if (!localState.selectedCard) {
-      dispatch(selectCard(card));
+      if (card.location !== "dutch") {
+        dispatch(selectCard(card));
+      }
       return;
     }
 
@@ -32,15 +39,30 @@ export const PlayingCard = ({
         destinationCard: card,
       })
     ) {
-      // switch (localState.selectedCard.location) {
-      //   case "post":
-      //     dispatch(moveCardPostToNewDutchPile("id", localState.selectedCard));
-      //   case "blitz":
-      //   case "wood":
-      //   case "dutch":
-      //   default:
-      //     return;
-      // }
+      switch (localState.selectedCard.location) {
+        case "post":
+          dispatch(
+            moveCardPostToExistingDutchPile("id", localState.selectedCard, card)
+          );
+          break;
+        case "blitz":
+          dispatch(
+            moveCardBlitzToExistingDutchPile(
+              "id",
+              localState.selectedCard,
+              card
+            )
+          );
+          break;
+        case "wood":
+          dispatch(
+            moveCardWoodToExistingDutchPile("id", localState.selectedCard, card)
+          );
+          break;
+        case "dutch":
+        default:
+          return;
+      }
       dispatch(deselectCard());
     }
   };
