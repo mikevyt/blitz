@@ -3,12 +3,14 @@ import { PeerReducer } from "./peer/peerReducer";
 import { ConnectionReducer } from "./connection/connectionReducer";
 import { GameReducer } from "./game/gameReducer";
 import { LocalReducer } from "./local/localReducer";
+import { Reducer } from "redux";
+import { GameState } from "./game/gameTypes";
 
 export const store = configureStore({
   reducer: {
     peer: PeerReducer,
     connection: ConnectionReducer,
-    game: GameReducer,
+    game: GameReducer as Reducer<GameState>,
     local: LocalReducer,
   },
 });
