@@ -9,7 +9,7 @@ export const PlayingCardStack = ({ cards }: { cards: PlayingCardType[] }) => {
   return (
     <PlayingCard
       style={{
-        boxShadow: "-3px 3px 0px 0px #D3D3D3",
+        boxShadow: cards.length > 1 ? "-3px 3px 0px 0px #D3D3D3" : undefined,
         borderRadius: "8px",
       }}
       card={cards[cards.length - 1]}

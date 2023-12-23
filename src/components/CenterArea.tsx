@@ -66,6 +66,13 @@ export const CenterArea = () => {
         height: "100vh",
         backgroundColor:
           isHover && !!localState.selectedCard ? "#CCC" : undefined,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        columnGap: "20px",
+        rowGap: "20px",
+        paddingLeft: "10vw",
+        paddingRight: "10vw",
       }}
     >
       {gameState.dutch.map((stack, i) => (
