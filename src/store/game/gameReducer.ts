@@ -1,14 +1,14 @@
 import { Reducer } from "redux";
 import { GameActionType, GameState } from "./gameTypes";
 import { setUpGameState } from "../../helpers/setUpGameState";
-import { moveCardPostToNewDutchPileReducer } from "./moveCardPostToNewDutchPileReducer";
-import { moveCardPostToExistingDutchPileReducer } from "./moveCardPostToExistingDutchPileReducer";
-import { moveCardBlitzToNewDutchPileReducer } from "./moveCardBlitzToNewDutchPileReducer";
-import { moveCardBlitzToExistingDutchPileReducer } from "./moveCardBlitzToExistingDutchPileReducer";
-import { moveCardBlitzToNewPostPileReducer } from "./moveCardBlitzToNewPostPileReducer";
-import { moveCardWoodToNewDutchPileReducer } from "./moveCardWoodToNewDutchPileReducer";
-import { moveCardWoodToExistingDutchPileReducer } from "./moveCardWoodToExistingDutchPileReducer";
-import { updateWoodReducer } from "./updateWoodReducer";
+import { moveCardPostToNewDutchPileReducer } from "./gameReducers/moveCardPostToNewDutchPileReducer";
+import { moveCardPostToExistingDutchPileReducer } from "./gameReducers/moveCardPostToExistingDutchPileReducer";
+import { moveCardBlitzToNewDutchPileReducer } from "./gameReducers/moveCardBlitzToNewDutchPileReducer";
+import { moveCardBlitzToExistingDutchPileReducer } from "./gameReducers/moveCardBlitzToExistingDutchPileReducer";
+import { moveCardBlitzToNewPostPileReducer } from "./gameReducers/moveCardBlitzToNewPostPileReducer";
+import { moveCardWoodToNewDutchPileReducer } from "./gameReducers/moveCardWoodToNewDutchPileReducer";
+import { moveCardWoodToExistingDutchPileReducer } from "./gameReducers/moveCardWoodToExistingDutchPileReducer";
+import { updateWoodReducer } from "./gameReducers/updateWoodReducer";
 
 export const initialState: GameState = setUpGameState();
 
