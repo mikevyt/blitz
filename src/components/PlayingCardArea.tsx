@@ -31,6 +31,7 @@ export const PlayingCardArea = () => {
         columnCount: 3 /* Set the number of columns */,
         columnGap: "20px" /* Set the gap between columns */,
         alignItems: "center",
+        marginTop: "20px",
       }}
     >
       <LabelledArea label="Post">

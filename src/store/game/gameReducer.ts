@@ -115,7 +115,7 @@ const moveCardBlitzToNewPostPileReducer = (
   const { id, startingCard } = action;
   const post: GameState["post"] = {
     ...state.post,
-    [id]: [...state.post[id], [startingCard]],
+    [id]: [...state.post[id], [{ ...startingCard, location: "post" }]],
   };
   const blitz: GameState["blitz"] = {
     ...state.blitz,
