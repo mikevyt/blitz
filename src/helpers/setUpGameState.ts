@@ -9,7 +9,7 @@ export const setUpGameState = (): GameState => {
   return {
     dutch: [],
     post: {
-      ["id"]: cards.splice(0, 3).map((card) => ({ ...card, location: "post" })),
+      ["id"]: cards.splice(0, 3).map((card) => [{ ...card, location: "post" }]),
     },
     blitz: {
       ["id"]: cards

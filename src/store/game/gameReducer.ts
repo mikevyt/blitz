@@ -40,7 +40,9 @@ const moveCardPostToNewDutchPileReducer = (
   dutch.push([{ ...startingCard, location: "dutch" }]);
   const post: GameState["post"] = {
     ...state.post,
-    [id]: state.post[id].filter((card) => !isEqual(card, startingCard)),
+    [id]: state.post[id].map((cards) =>
+      cards.filter((card) => !isEqual(card, startingCard))
+    ),
   };
 
   return { ...state, dutch, post };
@@ -62,7 +64,9 @@ const moveCardPostToExistingDutchPileReducer = (
 
   const post: GameState["post"] = {
     ...state.post,
-    [id]: state.post[id].filter((card) => !isEqual(card, startingCard)),
+    [id]: state.post[id].map((cards) =>
+      cards.filter((card) => !isEqual(card, startingCard))
+    ),
   };
 
   return { ...state, dutch, post };
@@ -109,7 +113,10 @@ const moveCardBlitzToNewPostPileReducer = (
   action: AnyAction
 ) => {
   const { id, startingCard } = action;
-  const post = { ...state.post, [id]: [...state.post[id], startingCard] };
+  const post: GameState["post"] = {
+    ...state.post,
+    [id]: [...state.post[id], [startingCard]],
+  };
   const blitz: GameState["blitz"] = {
     ...state.blitz,
     [id]: state.blitz[id].filter((card) => !isEqual(card, startingCard)),

@@ -34,8 +34,8 @@ export const PlayingCardArea = () => {
       }}
     >
       <LabelledArea label="Post">
-        {gameState.post["id"].map((card, i) => (
-          <PlayingCard key={i} card={card} />
+        {gameState.post["id"].map((cards, i) => (
+          <PlayingCardStack key={i} cards={cards} />
         ))}
       </LabelledArea>
       <LabelledArea label="Blitz">
