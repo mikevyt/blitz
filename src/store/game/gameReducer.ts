@@ -1,7 +1,14 @@
-import { AnyAction, Reducer } from "redux";
+import { Reducer } from "redux";
 import { GameActionType, GameState } from "./gameTypes";
-import { isEqual } from "../../types/PlayingCard";
 import { setUpGameState } from "../../helpers/setUpGameState";
+import { moveCardPostToNewDutchPileReducer } from "./moveCardPostToNewDutchPileReducer";
+import { moveCardPostToExistingDutchPileReducer } from "./moveCardPostToExistingDutchPileReducer";
+import { moveCardBlitzToNewDutchPileReducer } from "./moveCardBlitzToNewDutchPileReducer";
+import { moveCardBlitzToExistingDutchPileReducer } from "./moveCardBlitzToExistingDutchPileReducer";
+import { moveCardBlitzToNewPostPileReducer } from "./moveCardBlitzToNewPostPileReducer";
+import { moveCardWoodToNewDutchPileReducer } from "./moveCardWoodToNewDutchPileReducer";
+import { moveCardWoodToExistingDutchPileReducer } from "./moveCardWoodToExistingDutchPileReducer";
+import { updateWoodReducer } from "./updateWoodReducer";
 
 export const initialState: GameState = setUpGameState();
 
@@ -29,142 +36,4 @@ export const GameReducer: Reducer<GameState> = (
     default:
       return state;
   }
-};
-
-const moveCardPostToNewDutchPileReducer = (
-  state: GameState,
-  action: AnyAction
-) => {
-  const { id, startingCard } = action;
-  const dutch = [...(state.dutch || [[]])];
-  dutch.push([{ ...startingCard, location: "dutch" }]);
-  const post: GameState["post"] = {
-    ...state.post,
-    [id]: state.post[id].map((cards) =>
-      cards.filter((card) => !isEqual(card, startingCard))
-    ),
-  };
-
-  return { ...state, dutch, post };
-};
-
-const moveCardPostToExistingDutchPileReducer = (
-  state: GameState,
-  action: AnyAction
-) => {
-  const { id, startingCard, destinationCard } = action;
-  const dutch = state.dutch.map((row) => [...row]);
-  for (let i = 0; i < dutch.length; i++) {
-    for (let j = 0; j < dutch[i].length; j++) {
-      if (isEqual(dutch[i][j], destinationCard)) {
-        dutch[i].push({ ...startingCard, location: "dutch" });
-      }
-    }
-  }
-
-  const post: GameState["post"] = {
-    ...state.post,
-    [id]: state.post[id].map((cards) =>
-      cards.filter((card) => !isEqual(card, startingCard))
-    ),
-  };
-
-  return { ...state, dutch, post };
-};
-
-const moveCardBlitzToNewDutchPileReducer = (
-  state: GameState,
-  action: AnyAction
-) => {
-  const { id, startingCard } = action;
-  const dutch = [...(state.dutch || [[]])];
-  dutch.push([{ ...startingCard, location: "dutch" }]);
-  const blitz: GameState["blitz"] = {
-    ...state.blitz,
-    [id]: state.blitz[id].filter((card) => !isEqual(card, startingCard)),
-  };
-
-  return { ...state, dutch, blitz };
-};
-
-const moveCardBlitzToExistingDutchPileReducer = (
-  state: GameState,
-  action: AnyAction
-) => {
-  const { id, startingCard, destinationCard } = action;
-  const dutch = state.dutch.map((row) => [...row]);
-  for (let i = 0; i < dutch.length; i++) {
-    for (let j = 0; j < dutch[i].length; j++) {
-      if (isEqual(dutch[i][j], destinationCard)) {
-        dutch[i].push({ ...startingCard, location: "dutch" });
-      }
-    }
-  }
-  const blitz: GameState["blitz"] = {
-    ...state.blitz,
-    [id]: state.blitz[id].filter((card) => !isEqual(card, startingCard)),
-  };
-
-  return { ...state, dutch, blitz };
-};
-
-const moveCardBlitzToNewPostPileReducer = (
-  state: GameState,
-  action: AnyAction
-) => {
-  const { id, startingCard } = action;
-  const post: GameState["post"] = {
-    ...state.post,
-    [id]: [...state.post[id], [{ ...startingCard, location: "post" }]],
-  };
-  const blitz: GameState["blitz"] = {
-    ...state.blitz,
-    [id]: state.blitz[id].filter((card) => !isEqual(card, startingCard)),
-  };
-
-  return { ...state, post, blitz };
-};
-
-const moveCardWoodToNewDutchPileReducer = (
-  state: GameState,
-  action: AnyAction
-) => {
-  const { id, startingCard } = action;
-  const dutch = [...(state.dutch || [[]])];
-  dutch.push([{ ...startingCard, location: "dutch" }]);
-  const wood: GameState["wood"] = {
-    ...state.wood,
-    [id]: state.wood[id].filter((card) => !isEqual(card, startingCard)),
-  };
-
-  return { ...state, dutch, wood };
-};
-
-const moveCardWoodToExistingDutchPileReducer = (
-  state: GameState,
-  action: AnyAction
-) => {
-  const { id, startingCard, destinationCard } = action;
-  const dutch = state.dutch.map((row) => [...row]);
-  for (let i = 0; i < dutch.length; i++) {
-    for (let j = 0; j < dutch[i].length; j++) {
-      if (isEqual(dutch[i][j], destinationCard)) {
-        dutch[i].push({ ...startingCard, location: "dutch" });
-      }
-    }
-  }
-  const wood: GameState["wood"] = {
-    ...state.wood,
-    [id]: state.wood[id].filter((card) => !isEqual(card, startingCard)),
-  };
-
-  return { ...state, dutch, wood };
-};
-
-const updateWoodReducer = (state: GameState, action: AnyAction) => {
-  const { index } = action;
-  return {
-    ...state,
-    woodVisible: { ...state.woodVisible, [action.id]: index },
-  };
 };
