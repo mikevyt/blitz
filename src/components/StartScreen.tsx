@@ -21,11 +21,6 @@ export const StartScreen = () => {
   const connection = useAppSelector((state) => state.connection);
   const dispatch = useAppDispatch();
 
-  const handleStopSession = async () => {
-    await PeerConnection.closePeerSession();
-    dispatch(stopPeerSession());
-  };
-
   const [name, setName] = React.useState("");
 
   const handleCreateGame = async () => {
