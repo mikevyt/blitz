@@ -7,6 +7,7 @@ import {
   removeConnectionList,
 } from "../connection/connectionActions";
 import download from "js-file-download";
+import { addHost, addName } from "../multiplayer/multiplayerActions";
 
 export const startPeerSession = (id: string) => ({
   type: PeerActionType.PEER_SESSION_START,
@@ -21,8 +22,15 @@ export const setLoading = (loading: boolean) => ({
   loading,
 });
 
-export const createPeer: () => (dispatch: Dispatch) => Promise<void> =
-  () => async (dispatch) => {
+export const createPeer: ({
+  name,
+  isHost,
+}: {
+  name: string;
+  isHost: boolean;
+}) => (dispatch: Dispatch) => Promise<void> =
+  ({ name, isHost }: { name: string; isHost: boolean }) =>
+  async (dispatch) => {
     dispatch(setLoading(true));
     try {
       const id = await PeerConnection.startPeerSession();
@@ -46,7 +54,10 @@ export const createPeer: () => (dispatch: Dispatch) => Promise<void> =
         });
       });
       dispatch(startPeerSession(id));
-      // dispatch(addName(name));
+      dispatch(addName(id, name));
+      if (isHost) {
+        dispatch(addHost(id));
+      }
       dispatch(setLoading(false));
     } catch (err) {
       console.log(err);

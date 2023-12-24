@@ -6,6 +6,7 @@ import { connectPeer } from "../store/connection/connectionActions";
 import React from "react";
 import { AddPlayer } from "./AddPlayer";
 import { addHost, addName } from "../store/multiplayer/multiplayerActions";
+import { AddCode } from "./AddCode";
 
 const { Title } = Typography;
 
@@ -16,6 +17,7 @@ type FieldType = {
 
 export const StartScreen = () => {
   const peer = useAppSelector((state) => state.peer);
+  const multiplayer = useAppSelector((state) => state.multiplayer);
   const connection = useAppSelector((state) => state.connection);
   const dispatch = useAppDispatch();
 
@@ -41,13 +43,22 @@ export const StartScreen = () => {
 
   const [name, setName] = React.useState("");
 
-  const handleCreateGame = () => {
-    dispatch(createPeer());
-    dispatch(addName("id", name));
-    dispatch(addHost("id"));
+  const handleCreateGame = async () => {
+    if (!name) {
+      return;
+    }
+    await dispatch(createPeer({ name, isHost: true }));
   };
 
-  const handleJoinGame = () => {};
+  const handleJoinGame = async () => {
+    if (!name) {
+      return;
+    }
+    await dispatch(createPeer({ name, isHost: false }));
+  };
+
+  console.log({ "multiplayer.host": multiplayer.host });
+  console.log({ "peer.id": peer.id });
 
   return (
     <Card title="Dutch Blitz">
@@ -61,10 +72,10 @@ export const StartScreen = () => {
           <Button onClick={handleCreateGame}>Create Game</Button>
           <Button onClick={handleJoinGame}>Join Game</Button>
         </>
+      ) : multiplayer.host === peer.id || connection.list.length ? (
+        <AddPlayer />
       ) : (
-        <>
-          <AddPlayer />
-        </>
+        <AddCode />
       )}
     </Card>
   );

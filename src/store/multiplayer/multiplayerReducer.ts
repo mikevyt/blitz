@@ -8,7 +8,7 @@ import {
 } from "./multiplayerTypes";
 
 export const initialState: MultiplayerState = {
-  name: { id: "" },
+  name: {},
   host: "",
 };
 
