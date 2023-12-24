@@ -15,7 +15,9 @@ export const AddPlayer = () => {
     setLoading(false);
   };
 
-  const names = Object.entries(multiplayer.name).map(([_, value]) => value);
+  const names = Object.entries(multiplayer.name).map(([id, value]) =>
+    id === multiplayer.host ? value + " (Host)" : value
+  );
 
   console.log({ names });
   return (

@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { connectPeer } from "../store/connection/connectionActions";
 import React from "react";
 import { AddPlayer } from "./AddPlayer";
-import { addName } from "../store/multiplayer/multiplayerActions";
+import { addHost, addName } from "../store/multiplayer/multiplayerActions";
 
 const { Title } = Typography;
 
@@ -44,6 +44,7 @@ export const StartScreen = () => {
   const handleCreateGame = () => {
     dispatch(createPeer());
     dispatch(addName("id", name));
+    dispatch(addHost("id"));
   };
 
   const handleJoinGame = () => {};
