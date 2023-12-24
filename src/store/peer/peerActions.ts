@@ -42,15 +42,10 @@ export const createPeer: ({
           message.info("Connection closed: " + peerId);
           dispatch(removeConnectionList(peerId));
         });
-        PeerConnection.onConnectionReceiveData(peerId, (file) => {
-          message.info("Receiving file " + file.fileName + " from " + peerId);
-          if (file.dataType === DataType.FILE) {
-            download(
-              file.file || "",
-              file.fileName || "fileName",
-              file.fileType
-            );
-          }
+        PeerConnection.onConnectionReceiveData(peerId, (data) => {
+          dispatch(data);
+          console.log("Receiving data");
+          console.log({ data });
         });
       });
       dispatch(startPeerSession(id));

@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Title from "antd/es/typography/Title";
 import { CopyOutlined } from "@ant-design/icons";
 import { connectPeer } from "../store/connection/connectionActions";
+import { PeerConnection } from "../helpers/peer";
+import { addName } from "../store/multiplayer/multiplayerActions";
 
 export const AddCode = () => {
   const peer = useAppSelector((state) => state.peer);
@@ -12,8 +14,12 @@ export const AddCode = () => {
 
   const [gameCode, setGameCode] = React.useState("");
 
-  const handleJoin = () => {
-    dispatch(connectPeer(gameCode || ""));
+  const handleJoin = async () => {
+    await dispatch(connectPeer(gameCode || ""));
+    await PeerConnection.sendConnection(
+      gameCode,
+      addName(peer.id!, multiplayer.name[peer.id!])
+    );
   };
 
   return (
