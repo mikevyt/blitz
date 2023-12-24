@@ -5,7 +5,6 @@ export const initialState: PeerState = {
   id: undefined,
   loading: false,
   started: false,
-  name: "",
 };
 
 export const PeerReducer: Reducer<PeerState> = (
@@ -21,9 +20,6 @@ export const PeerReducer: Reducer<PeerState> = (
     case PeerActionType.PEER_LOADING:
       const { loading } = action;
       return { ...state, loading };
-    case PeerActionType.NAME_ADD:
-      const { name } = action;
-      return { ...state, name };
     default:
       return state;
   }

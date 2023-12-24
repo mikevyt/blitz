@@ -13,11 +13,6 @@ export const startPeerSession = (id: string) => ({
   id,
 });
 
-export const addName = (name: string) => ({
-  type: PeerActionType.NAME_ADD,
-  name,
-});
-
 export const stopPeerSession = () => ({
   type: PeerActionType.PEER_SESSION_STOP,
 });
@@ -26,7 +21,7 @@ export const setLoading = (loading: boolean) => ({
   loading,
 });
 
-export const startPeer: () => (dispatch: Dispatch) => Promise<void> =
+export const createPeer: () => (dispatch: Dispatch) => Promise<void> =
   () => async (dispatch) => {
     dispatch(setLoading(true));
     try {

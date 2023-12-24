@@ -5,6 +5,8 @@ import { GameReducer } from "./game/gameReducer";
 import { LocalReducer } from "./local/localReducer";
 import { Reducer } from "redux";
 import { GameState } from "./game/gameTypes";
+import { MultiplayerState } from "./multiplayer/multiplayerTypes";
+import { MultiplayerReducer } from "./multiplayer/multiplayerReducer";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +14,7 @@ export const store = configureStore({
     connection: ConnectionReducer,
     game: GameReducer as Reducer<GameState>,
     local: LocalReducer,
+    multiplayer: MultiplayerReducer as Reducer<MultiplayerState>,
   },
 });
 

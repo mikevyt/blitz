@@ -1,10 +1,11 @@
 import { Button, Card, Form, Input, Tabs, TabsProps, Typography } from "antd";
-import { startPeer, stopPeerSession } from "../store/peer/peerActions";
+import { createPeer, stopPeerSession } from "../store/peer/peerActions";
 import { PeerConnection } from "../helpers/peer";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { connectPeer } from "../store/connection/connectionActions";
 import React from "react";
 import { AddPlayer } from "./AddPlayer";
+import { addName } from "../store/multiplayer/multiplayerActions";
 
 const { Title } = Typography;
 
@@ -41,7 +42,8 @@ export const StartScreen = () => {
   const [name, setName] = React.useState("");
 
   const handleCreateGame = () => {
-    dispatch(startPeer());
+    dispatch(createPeer());
+    dispatch(addName("id", name));
   };
 
   const handleJoinGame = () => {};

@@ -6,6 +6,7 @@ import { CopyOutlined } from "@ant-design/icons";
 
 export const AddPlayer = () => {
   const peer = useAppSelector((state) => state.peer);
+  const multiplayer = useAppSelector((state) => state.multiplayer);
   const [loading, setLoading] = useState(false);
 
   const copyCode = async () => {
@@ -14,6 +15,9 @@ export const AddPlayer = () => {
     setLoading(false);
   };
 
+  const names = Object.entries(multiplayer.name).map(([_, value]) => value);
+
+  console.log({ names });
   return (
     <>
       <div>
@@ -21,8 +25,11 @@ export const AddPlayer = () => {
         <Button icon={<CopyOutlined />} onClick={copyCode} loading={loading} />
       </div>
       <Title level={2} onClick={copyCode}>
-        Players (0/4)
+        Players ({names.length}/4)
       </Title>
+      {names.map((name, i) => (
+        <div key={i}>{name}</div>
+      ))}
       <Button>Start Game</Button>
     </>
   );

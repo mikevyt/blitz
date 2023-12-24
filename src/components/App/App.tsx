@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, Input, Typography } from "antd";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { startPeer, stopPeerSession } from "../../store/peer/peerActions";
+import { createPeer, stopPeerSession } from "../../store/peer/peerActions";
 import * as connectionAction from "../../store/connection/connectionActions";
 import { PeerConnection } from "../../helpers/peer";
 import { setUpPlayer } from "../../helpers/setUpPlayer";
