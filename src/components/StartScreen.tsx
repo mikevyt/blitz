@@ -38,7 +38,7 @@ export const StartScreen = () => {
 
   return (
     <Card title="Dutch Blitz">
-      <Form name="basic" onFinish={}>
+      <Form name="basic" onFinish={() => {}}>
         <Form.Item<FieldType>
           label="Name"
           name="name"
