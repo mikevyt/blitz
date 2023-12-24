@@ -3,6 +3,8 @@ import { startPeer, stopPeerSession } from "../store/peer/peerActions";
 import { PeerConnection } from "../helpers/peer";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { connectPeer } from "../store/connection/connectionActions";
+import React from "react";
+import { AddPlayer } from "./AddPlayer";
 
 const { Title } = Typography;
 
@@ -16,44 +18,51 @@ export const StartScreen = () => {
   const connection = useAppSelector((state) => state.connection);
   const dispatch = useAppDispatch();
 
-  const handleStartSession = (values: FieldType) => {
-    console.log({ values });
-    if (!values?.name) {
-      return;
-    }
-    dispatch(startPeer(values.name));
-  };
+  //   const handleStartSession = (values: FieldType) => {
+  //     console.log({ values });
+  //     if (!values?.name) {
+  //       return;
+  //     }
+  //     dispatch(startPeer(values.name));
+  //   };
 
-  const handleJoinGame = (values: { code?: string }) => {
-    if (!values.code) {
-      return;
-    }
-    dispatch(connectPeer(values.code));
-  };
+  //   const handleJoinGame = (values: { code?: string }) => {
+  //     if (!values.code) {
+  //       return;
+  //     }
+  //     dispatch(connectPeer(values.code));
+  //   };
 
   const handleStopSession = async () => {
     await PeerConnection.closePeerSession();
     dispatch(stopPeerSession());
   };
 
+  const [name, setName] = React.useState("");
+
+  const handleCreateGame = () => {
+    dispatch(startPeer());
+  };
+
+  const handleJoinGame = () => {};
+
   return (
     <Card title="Dutch Blitz">
-      <Form name="basic" onFinish={() => {}}>
-        <Form.Item<FieldType>
-          label="Name"
-          name="name"
-          rules={[{ required: true, message: "Please input your name!" }]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Button name="create" htmlType="submit">
-          Create Game
-        </Button>
-        <Button name="join" type="primary" htmlType="submit">
-          Join Game
-        </Button>
-      </Form>
+      {!peer.started ? (
+        <>
+          <Input
+            placeholder="Name"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+          />
+          <Button onClick={handleCreateGame}>Create Game</Button>
+          <Button onClick={handleJoinGame}>Join Game</Button>
+        </>
+      ) : (
+        <>
+          <AddPlayer />
+        </>
+      )}
     </Card>
   );
 };

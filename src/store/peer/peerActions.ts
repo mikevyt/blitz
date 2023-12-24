@@ -26,10 +26,8 @@ export const setLoading = (loading: boolean) => ({
   loading,
 });
 
-export const startPeer: (
-  name: string
-) => (dispatch: Dispatch) => Promise<void> =
-  (name: string) => async (dispatch) => {
+export const startPeer: () => (dispatch: Dispatch) => Promise<void> =
+  () => async (dispatch) => {
     dispatch(setLoading(true));
     try {
       const id = await PeerConnection.startPeerSession();
@@ -53,7 +51,7 @@ export const startPeer: (
         });
       });
       dispatch(startPeerSession(id));
-      dispatch(addName(name));
+      // dispatch(addName(name));
       dispatch(setLoading(false));
     } catch (err) {
       console.log(err);
