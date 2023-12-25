@@ -11,6 +11,7 @@ import {
   moveCardWoodToExistingDutchPile,
 } from "../store/game/gameActions";
 import { useAppEmit } from "../helpers/useAppEmit";
+import { CheckCircleFilled } from "@ant-design/icons";
 
 export const PlayingCard = ({
   card,
@@ -103,8 +104,14 @@ export const PlayingCard = ({
         ...style,
       }}
     >
-      {card.digit}
-      {card.positive ? "+" : "-"}
+      {card.digit === 10 && card.location === "dutch" ? (
+        <CheckCircleFilled />
+      ) : (
+        <>
+          {card.digit}
+          {card.positive ? "+" : "-"}
+        </>
+      )}
     </Card>
   );
 };
