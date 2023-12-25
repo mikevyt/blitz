@@ -3,6 +3,7 @@ export interface PlayingCard {
   digit: number;
   color: "red" | "yellow" | "green" | "blue";
   positive: boolean;
+  owner: string;
 }
 
 export const isEqual = (card1: PlayingCard, card2: PlayingCard) => {

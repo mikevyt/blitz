@@ -3,7 +3,7 @@ import { generateCards } from "./generateCards";
 import { shuffle } from "./shuffle";
 
 export const setUpGameState = (id: string): GameState => {
-  const cards = generateCards();
+  const cards = generateCards(id);
   shuffle(cards);
 
   return {
