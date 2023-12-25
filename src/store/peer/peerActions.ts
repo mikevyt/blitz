@@ -8,6 +8,7 @@ import {
 } from "../connection/connectionActions";
 import download from "js-file-download";
 import {
+  addEmoji,
   addHost,
   addName,
   updateMultiplayer,
@@ -30,12 +31,14 @@ export const setLoading = (loading: boolean) => ({
 
 export const createPeer: ({
   name,
+  emoji,
   isHost,
 }: {
   name: string;
+  emoji: string;
   isHost: boolean;
 }) => (dispatch: Dispatch) => Promise<void> =
-  ({ name, isHost }: { name: string; isHost: boolean }) =>
+  ({ name, emoji, isHost }: { name: string; emoji: string; isHost: boolean }) =>
   async (dispatch) => {
     dispatch(setLoading(true));
     try {
@@ -69,6 +72,7 @@ export const createPeer: ({
       });
       dispatch(startPeerSession(id));
       dispatch(addName(id, name));
+      dispatch(addEmoji(id, emoji));
       if (isHost) {
         dispatch(addHost(id));
       }

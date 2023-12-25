@@ -5,7 +5,7 @@ import Title from "antd/es/typography/Title";
 import { CopyOutlined } from "@ant-design/icons";
 import { connectPeer } from "../store/connection/connectionActions";
 import { PeerConnection } from "../helpers/peer";
-import { addName } from "../store/multiplayer/multiplayerActions";
+import { addEmoji, addName } from "../store/multiplayer/multiplayerActions";
 
 export const AddCode = () => {
   const peer = useAppSelector((state) => state.peer);
@@ -19,6 +19,10 @@ export const AddCode = () => {
     await PeerConnection.sendConnection(
       gameCode,
       addName(peer.id!, multiplayer.name[peer.id!])
+    );
+    await PeerConnection.sendConnection(
+      gameCode,
+      addEmoji(peer.id!, multiplayer.emoji[peer.id!])
     );
   };
 

@@ -1,4 +1,5 @@
 import {
+  AddEmojiAction,
   AddHostAction,
   AddNameAction,
   MultiplayerActionType,
@@ -16,6 +17,12 @@ export const addName = (id: string, name: string): AddNameAction => ({
   type: MultiplayerActionType.ADD_NAME,
   id,
   name,
+});
+
+export const addEmoji = (id: string, emoji: string): AddEmojiAction => ({
+  type: MultiplayerActionType.ADD_EMOJI,
+  id,
+  emoji,
 });
 
 export const addHost = (id: string): AddHostAction => ({

@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, List } from "antd";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import React, { useState } from "react";
 import Title from "antd/es/typography/Title";
@@ -17,10 +17,6 @@ export const AddPlayer = () => {
     setLoading(false);
   };
 
-  const names = Object.entries(multiplayer.name).map(([id, value]) =>
-    id === multiplayer.host ? value + " (Host)" : value
-  );
-
   const handleStartGame = () => {
     startGame(
       dispatch,
@@ -32,17 +28,36 @@ export const AddPlayer = () => {
   return (
     <>
       <div>
-        Code: {multiplayer.host}
-        <Button icon={<CopyOutlined />} onClick={copyCode} loading={loading} />
+        <Button onClick={copyCode} loading={loading}>
+          Game Code <CopyOutlined />
+        </Button>
       </div>
       <Title level={2} onClick={copyCode}>
-        Players ({names.length}/4)
+        Players ({Object.entries(multiplayer.name).length}/4)
       </Title>
-      {names.map((name, i) => (
-        <div key={i}>{name}</div>
-      ))}
+      <List
+        itemLayout="horizontal"
+        dataSource={Object.entries(multiplayer.name)}
+        renderItem={([id, name]) => (
+          <List.Item>
+            <List.Item.Meta
+              avatar={
+                <div style={{ fontSize: "1rem" }}>{multiplayer.emoji[id]}</div>
+              }
+              title={
+                <div style={{ fontSize: "1rem" }}>
+                  {id === multiplayer.host ? name + " (Host)" : name}
+                </div>
+              }
+            />
+          </List.Item>
+        )}
+      />
       {peer.id === multiplayer.host ? (
-        <Button disabled={names.length < 2} onClick={handleStartGame}>
+        <Button
+          disabled={Object.entries(multiplayer.name).length < 2}
+          onClick={handleStartGame}
+        >
           Start Game
         </Button>
       ) : (
