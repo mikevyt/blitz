@@ -1,4 +1,4 @@
-import { GameState, UpdateGameAction, UpdateWoodAction } from "../gameTypes";
+import { GameState, UpdateGameAction } from "../gameTypes";
 
 export const updateGameReducer = (
   state: GameState,

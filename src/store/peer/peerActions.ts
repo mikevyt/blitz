@@ -1,12 +1,11 @@
 import { PeerActionType } from "./peerTypes";
 import { Dispatch } from "redux";
-import { DataType, PeerConnection } from "../../helpers/peer";
+import { PeerConnection } from "../../helpers/peer";
 import { message } from "antd";
 import {
   addConnectionList,
   removeConnectionList,
 } from "../connection/connectionActions";
-import download from "js-file-download";
 import {
   addEmoji,
   addHost,

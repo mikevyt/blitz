@@ -6,7 +6,6 @@ import {
   MultiplayerAction,
   MultiplayerActionType,
   MultiplayerState,
-  StartGameAction,
   UpdateAction,
 } from "./multiplayerTypes";
 
@@ -41,7 +40,7 @@ export const updateReducer = (
   state: MultiplayerState,
   action: UpdateAction
 ) => {
-  const { id, state: newState } = action;
+  const { state: newState } = action;
   return { ...state, ...newState };
 };
 

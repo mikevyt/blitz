@@ -1,10 +1,7 @@
 import { ConnectionActionType } from "./connectionTypes";
 import { Dispatch } from "redux";
-import { DataType, PeerConnection } from "../../helpers/peer";
+import { PeerConnection } from "../../helpers/peer";
 import { message } from "antd";
-import download from "js-file-download";
-import { store } from "..";
-import { updateMultiplayer } from "../multiplayer/multiplayerActions";
 
 export const changeConnectionInput = (id: string) => ({
   type: ConnectionActionType.CONNECTION_INPUT_CHANGE,
