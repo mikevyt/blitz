@@ -9,8 +9,15 @@ import { moveCardBlitzToNewPostPileReducer } from "./gameReducers/moveCardBlitzT
 import { moveCardWoodToNewDutchPileReducer } from "./gameReducers/moveCardWoodToNewDutchPileReducer";
 import { moveCardWoodToExistingDutchPileReducer } from "./gameReducers/moveCardWoodToExistingDutchPileReducer";
 import { updateWoodReducer } from "./gameReducers/updateWoodReducer";
+import { updateGameReducer } from "./gameReducers/updateGameReducer";
 
-export const initialState: GameState = setUpGameState();
+export const initialState: GameState = {
+  dutch: [],
+  post: {},
+  blitz: {},
+  wood: {},
+  woodVisible: {},
+};
 
 export const GameReducer: Reducer<GameState, GameAction> = (
   state = initialState,
@@ -33,6 +40,8 @@ export const GameReducer: Reducer<GameState, GameAction> = (
       return moveCardWoodToExistingDutchPileReducer(state, action);
     case GameActionType.UPDATE_WOOD:
       return updateWoodReducer(state, action);
+    case GameActionType.UPDATE_GAME:
+      return updateGameReducer(state, action);
     default:
       return state;
   }

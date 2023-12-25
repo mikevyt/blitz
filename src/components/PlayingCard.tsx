@@ -20,6 +20,7 @@ export const PlayingCard = ({
 }) => {
   const localState = useAppSelector((state) => state.local);
   const gameState = useAppSelector((state) => state.game);
+  const peer = useAppSelector((state) => state.peer);
   const dispatch = useAppDispatch();
 
   const handleClick = () => {
@@ -44,19 +45,23 @@ export const PlayingCard = ({
       switch (localState.selectedCard.location) {
         case "post":
           dispatch(
-            moveCardPostToExistingDutchPile("id", localState.selectedCard, card)
+            moveCardPostToExistingDutchPile(
+              peer.id!,
+              localState.selectedCard,
+              card
+            )
           );
           dispatch(
             moveCardBlitzToNewPostPile(
-              "id",
-              gameState.blitz["id"][gameState.blitz["id"].length - 1]
+              peer.id!,
+              gameState.blitz[peer.id!][gameState.blitz[peer.id!].length - 1]
             )
           );
           break;
         case "blitz":
           dispatch(
             moveCardBlitzToExistingDutchPile(
-              "id",
+              peer.id!,
               localState.selectedCard,
               card
             )
@@ -64,7 +69,11 @@ export const PlayingCard = ({
           break;
         case "wood":
           dispatch(
-            moveCardWoodToExistingDutchPile("id", localState.selectedCard, card)
+            moveCardWoodToExistingDutchPile(
+              peer.id!,
+              localState.selectedCard,
+              card
+            )
           );
           break;
         case "dutch":

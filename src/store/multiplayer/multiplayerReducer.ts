@@ -5,12 +5,14 @@ import {
   MultiplayerAction,
   MultiplayerActionType,
   MultiplayerState,
+  StartGameAction,
   UpdateAction,
 } from "./multiplayerTypes";
 
 export const initialState: MultiplayerState = {
   name: {},
   host: "",
+  gameStatus: "NOT_STARTED",
 };
 
 export const MultiplayerReducer: Reducer<
@@ -24,6 +26,8 @@ export const MultiplayerReducer: Reducer<
       return addNameReducer(state, action);
     case MultiplayerActionType.ADD_HOST:
       return addHostReducer(state, action);
+    case MultiplayerActionType.START_GAME:
+      return startGameReducer(state);
     default:
       return state;
   }
@@ -51,4 +55,8 @@ export const addHostReducer = (
 ) => {
   const { id } = action;
   return { ...state, host: id };
+};
+
+export const startGameReducer = (state: MultiplayerState): MultiplayerState => {
+  return { ...state, gameStatus: "STARTED" };
 };

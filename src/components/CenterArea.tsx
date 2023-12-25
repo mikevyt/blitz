@@ -13,6 +13,7 @@ import { deselectCard } from "../store/local/localActions";
 export const CenterArea = () => {
   const localState = useAppSelector((state) => state.local);
   const gameState = useAppSelector((state) => state.game);
+  const peer = useAppSelector((state) => state.peer);
   const dispatch = useAppDispatch();
   const [isHover, setIsHover] = React.useState(false);
 
@@ -33,19 +34,25 @@ export const CenterArea = () => {
       console.log(localState.selectedCard);
       switch (localState.selectedCard.location) {
         case "post":
-          dispatch(moveCardPostToNewDutchPile("id", localState.selectedCard));
+          dispatch(
+            moveCardPostToNewDutchPile(peer.id!, localState.selectedCard)
+          );
           dispatch(
             moveCardBlitzToNewPostPile(
-              "id",
-              gameState.blitz["id"][gameState.blitz["id"].length - 1]
+              peer.id!,
+              gameState.blitz[peer.id!][gameState.blitz[peer.id!].length - 1]
             )
           );
           break;
         case "blitz":
-          dispatch(moveCardBlitzToNewDutchPile("id", localState.selectedCard));
+          dispatch(
+            moveCardBlitzToNewDutchPile(peer.id!, localState.selectedCard)
+          );
           break;
         case "wood":
-          dispatch(moveCardWoodToNewDutchPile("id", localState.selectedCard));
+          dispatch(
+            moveCardWoodToNewDutchPile(peer.id!, localState.selectedCard)
+          );
           break;
         case "dutch":
         default:

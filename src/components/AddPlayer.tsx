@@ -1,12 +1,14 @@
 import { Button } from "antd";
-import { useAppSelector } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import React, { useState } from "react";
 import Title from "antd/es/typography/Title";
 import { CopyOutlined } from "@ant-design/icons";
+import { startGame } from "../helpers/startGame";
 
 export const AddPlayer = () => {
   const peer = useAppSelector((state) => state.peer);
   const multiplayer = useAppSelector((state) => state.multiplayer);
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
 
   const copyCode = async () => {
@@ -18,6 +20,13 @@ export const AddPlayer = () => {
   const names = Object.entries(multiplayer.name).map(([id, value]) =>
     id === multiplayer.host ? value + " (Host)" : value
   );
+
+  const handleStartGame = () => {
+    startGame(
+      dispatch,
+      Object.entries(multiplayer.name).map(([id, _]) => id)
+    );
+  };
 
   return (
     <>
@@ -32,7 +41,9 @@ export const AddPlayer = () => {
         <div key={i}>{name}</div>
       ))}
       {peer.id === multiplayer.host ? (
-        <Button disabled={names.length < 2}>Start Game</Button>
+        <Button disabled={names.length < 2} onClick={handleStartGame}>
+          Start Game
+        </Button>
       ) : (
         <div>Only the host can start the game</div>
       )}

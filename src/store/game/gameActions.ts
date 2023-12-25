@@ -1,5 +1,6 @@
 import {
   GameActionType,
+  GameState,
   MoveCardBlitzToExistingDutchPileAction,
   MoveCardBlitzToNewDutchPileAction,
   MoveCardBlitzToNewPostPileAction,
@@ -7,9 +8,15 @@ import {
   MoveCardPostToNewDutchPileAction,
   MoveCardWoodToExistingDutchPileAction,
   MoveCardWoodToNewDutchPileAction,
+  UpdateGameAction,
   UpdateWoodAction,
 } from "./gameTypes";
 import { PlayingCard } from "../../types/PlayingCard";
+
+export const updateGame = (state: GameState): UpdateGameAction => ({
+  type: GameActionType.UPDATE_GAME,
+  state,
+});
 
 export const updateWood = (id: string, index: number): UpdateWoodAction => ({
   type: GameActionType.UPDATE_WOOD,

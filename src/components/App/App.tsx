@@ -14,6 +14,7 @@ import { StartScreen } from "../StartScreen";
 
 export const App: React.FC = () => {
   const gameState = useAppSelector((state) => state.game);
+  const multiplayer = useAppSelector((state) => state.multiplayer);
   console.log({ gameState });
 
   return (
@@ -29,9 +30,14 @@ export const App: React.FC = () => {
         boxSizing: "border-box",
       }}
     >
-      <StartScreen />
-      {/* <CenterArea />
-      <PlayingCardArea /> */}
+      {multiplayer.gameStatus === "NOT_STARTED" ? (
+        <StartScreen />
+      ) : (
+        <>
+          <CenterArea />
+          <PlayingCardArea />
+        </>
+      )}
     </div>
   );
 };

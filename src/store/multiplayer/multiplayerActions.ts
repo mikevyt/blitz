@@ -3,6 +3,7 @@ import {
   AddNameAction,
   MultiplayerActionType,
   MultiplayerState,
+  StartGameAction,
   UpdateAction,
 } from "./multiplayerTypes";
 
@@ -20,4 +21,8 @@ export const addName = (id: string, name: string): AddNameAction => ({
 export const addHost = (id: string): AddHostAction => ({
   type: MultiplayerActionType.ADD_HOST,
   id,
+});
+
+export const startGame = (): StartGameAction => ({
+  type: MultiplayerActionType.START_GAME,
 });

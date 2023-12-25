@@ -3,6 +3,7 @@ import { PlayingCard } from "../../types/PlayingCard";
 
 export enum GameActionType {
   UPDATE_WOOD = "UPDATE_WOOD",
+  UPDATE_GAME = "UPDATE_GAME",
   MOVE_CARD_POST_TO_EXISTING_DUTCH_PILE = "MOVE_CARD_POST_TO_EXISTING_DUTCH_PILE",
   MOVE_CARD_POST_TO_NEW_DUTCH_PILE = "MOVE_CARD_POST_TO_NEW_DUTCH_PILE",
   MOVE_CARD_BLITZ_TO_EXISTING_DUTCH_PILE = "MOVE_CARD_BLITZ_TO_EXISTING_DUTCH_PILE",
@@ -31,7 +32,8 @@ export type GameAction =
   | MoveCardWoodToNewDutchPileAction
   | MoveCardWoodToExistingDutchPileAction
   | MoveCardBlitzToNewPostPileAction
-  | UpdateWoodAction;
+  | UpdateWoodAction
+  | UpdateGameAction;
 
 export interface MoveCardBlitzToExistingDutchPileAction extends AnyAction {
   type: GameActionType.MOVE_CARD_BLITZ_TO_EXISTING_DUTCH_PILE;
@@ -95,4 +97,9 @@ export interface UpdateWoodAction extends AnyAction {
   type: GameActionType.UPDATE_WOOD;
   id: string;
   index: number;
+}
+
+export interface UpdateGameAction extends AnyAction {
+  type: GameActionType.UPDATE_GAME;
+  state: GameState;
 }

@@ -7,17 +7,21 @@ import { PlayingCardPlaceholder } from "./PlayingCardPlaceholder";
 
 export const PlayingCardArea = () => {
   const gameState = useAppSelector((state) => state.game);
+  const peer = useAppSelector((state) => state.peer);
   const dispatch = useAppDispatch();
-  const currentWoodIndex = gameState.woodVisible?.["id"] || -1;
+  const currentWoodIndex = gameState.woodVisible?.[peer.id!] || -1;
 
   const handleClick = () => {
     // handle overflow
-    if (currentWoodIndex + 3 > gameState.wood["id"].length) {
+    if (currentWoodIndex + 3 > gameState.wood[peer.id!].length) {
       dispatch(
-        updateWood("id", currentWoodIndex + 3 - gameState.wood["id"].length)
+        updateWood(
+          peer.id!,
+          currentWoodIndex + 3 - gameState.wood[peer.id!].length
+        )
       );
     } else {
-      dispatch(updateWood("id", currentWoodIndex + 3));
+      dispatch(updateWood(peer.id!, currentWoodIndex + 3));
     }
   };
 
@@ -32,20 +36,20 @@ export const PlayingCardArea = () => {
       }}
     >
       <LabelledArea label="Post">
-        {gameState.post["id"].map((cards, i) => (
+        {gameState.post[peer.id!].map((cards, i) => (
           <PlayingCardStack key={i} cards={cards} />
         ))}
       </LabelledArea>
       <LabelledArea label="Blitz">
-        <PlayingCardStack cards={gameState.blitz["id"]} />
+        <PlayingCardStack cards={gameState.blitz[peer.id!]} />
       </LabelledArea>
       <LabelledArea label="Wood">
         {currentWoodIndex !== -1 && (
           <PlayingCardStack
-            cards={gameState.wood["id"].slice(0, currentWoodIndex)}
+            cards={gameState.wood[peer.id!].slice(0, currentWoodIndex)}
           />
         )}
-        {currentWoodIndex !== gameState.wood["id"].length - 1 ? (
+        {currentWoodIndex !== gameState.wood[peer.id!].length - 1 ? (
           <PlayingCardPlaceholder />
         ) : (
           <PlayingCardPlaceholder style={{ backgroundColor: "white" }} />
