@@ -19,11 +19,10 @@ export const AddPlayer = () => {
     id === multiplayer.host ? value + " (Host)" : value
   );
 
-  console.log({ names });
   return (
     <>
       <div>
-        Code: {peer.id}
+        Code: {multiplayer.host}
         <Button icon={<CopyOutlined />} onClick={copyCode} loading={loading} />
       </div>
       <Title level={2} onClick={copyCode}>
@@ -32,7 +31,11 @@ export const AddPlayer = () => {
       {names.map((name, i) => (
         <div key={i}>{name}</div>
       ))}
-      <Button disabled={names.length < 2}>Start Game</Button>
+      {peer.id === multiplayer.host ? (
+        <Button disabled={names.length < 2}>Start Game</Button>
+      ) : (
+        <div>Only the host can start the game</div>
+      )}
     </>
   );
 };

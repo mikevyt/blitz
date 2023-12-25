@@ -77,11 +77,16 @@ export const PeerConnection = {
         reject(err);
       }
     }),
-  onIncomingConnection: (callback: (conn: DataConnection) => void) => {
+  onIncomingConnection: (
+    callback: (
+      conn: DataConnection,
+      connectionMap: Map<string, DataConnection>
+    ) => void
+  ) => {
     peer?.on("connection", function (conn) {
       console.log("Incoming connection: " + conn.peer);
       connectionMap.set(conn.peer, conn);
-      callback(conn);
+      callback(conn, connectionMap);
     });
   },
   onConnectionDisconnected: (id: string, callback: () => void) => {

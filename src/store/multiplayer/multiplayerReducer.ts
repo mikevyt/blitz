@@ -5,6 +5,7 @@ import {
   MultiplayerAction,
   MultiplayerActionType,
   MultiplayerState,
+  UpdateAction,
 } from "./multiplayerTypes";
 
 export const initialState: MultiplayerState = {
@@ -17,6 +18,8 @@ export const MultiplayerReducer: Reducer<
   MultiplayerAction
 > = (state = initialState, action) => {
   switch (action.type) {
+    case MultiplayerActionType.UPDATE:
+      return updateReducer(state, action);
     case MultiplayerActionType.ADD_NAME:
       return addNameReducer(state, action);
     case MultiplayerActionType.ADD_HOST:
@@ -24,6 +27,14 @@ export const MultiplayerReducer: Reducer<
     default:
       return state;
   }
+};
+
+export const updateReducer = (
+  state: MultiplayerState,
+  action: UpdateAction
+) => {
+  const { id, state: newState } = action;
+  return { ...state, ...newState };
 };
 
 export const addNameReducer = (

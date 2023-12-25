@@ -7,7 +7,8 @@ import {
   removeConnectionList,
 } from "../connection/connectionActions";
 import download from "js-file-download";
-import { addHost, addName } from "../multiplayer/multiplayerActions";
+import { addHost, addName, update } from "../multiplayer/multiplayerActions";
+import { store } from "..";
 
 export const startPeerSession = (id: string) => ({
   type: PeerActionType.PEER_SESSION_START,
@@ -34,7 +35,7 @@ export const createPeer: ({
     dispatch(setLoading(true));
     try {
       const id = await PeerConnection.startPeerSession();
-      PeerConnection.onIncomingConnection((conn) => {
+      PeerConnection.onIncomingConnection((conn, connectionMap) => {
         const peerId = conn.peer;
         message.info("Incoming connection: " + peerId);
         dispatch(addConnectionList(peerId));
@@ -42,10 +43,22 @@ export const createPeer: ({
           message.info("Connection closed: " + peerId);
           dispatch(removeConnectionList(peerId));
         });
-        PeerConnection.onConnectionReceiveData(peerId, (data) => {
-          dispatch(data);
+        PeerConnection.onConnectionReceiveData(peerId, async (data) => {
+          await dispatch(data);
+          const state = store.getState();
           console.log("Receiving data");
           console.log({ data });
+
+          if (isHost) {
+            connectionMap.forEach(async (_, key) => {
+              console.log("sending this data as host");
+              console.log(update(state.multiplayer));
+              await PeerConnection.sendConnection(
+                key,
+                update(state.multiplayer)
+              );
+            });
+          }
         });
       });
       dispatch(startPeerSession(id));

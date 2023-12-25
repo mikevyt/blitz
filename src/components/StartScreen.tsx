@@ -31,9 +31,6 @@ export const StartScreen = () => {
     await dispatch(createPeer({ name, isHost: false }));
   };
 
-  console.log({ "multiplayer.host": multiplayer.host });
-  console.log({ "peer.id": peer.id });
-
   return (
     <Card title="Dutch Blitz">
       {!peer.started ? (
