@@ -10,6 +10,7 @@ import {
   moveCardPostToExistingDutchPile,
   moveCardWoodToExistingDutchPile,
 } from "../store/game/gameActions";
+import { useAppEmit } from "../helpers/useAppEmit";
 
 export const PlayingCard = ({
   card,
@@ -22,8 +23,9 @@ export const PlayingCard = ({
   const gameState = useAppSelector((state) => state.game);
   const peer = useAppSelector((state) => state.peer);
   const dispatch = useAppDispatch();
+  const emit = useAppEmit();
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (!localState.selectedCard) {
       if (card.location !== "dutch") {
         dispatch(selectCard(card));
@@ -44,14 +46,14 @@ export const PlayingCard = ({
     ) {
       switch (localState.selectedCard.location) {
         case "post":
-          dispatch(
+          await emit(
             moveCardPostToExistingDutchPile(
               peer.id!,
               localState.selectedCard,
               card
             )
           );
-          dispatch(
+          await emit(
             moveCardBlitzToNewPostPile(
               peer.id!,
               gameState.blitz[peer.id!][gameState.blitz[peer.id!].length - 1]
@@ -59,7 +61,7 @@ export const PlayingCard = ({
           );
           break;
         case "blitz":
-          dispatch(
+          await emit(
             moveCardBlitzToExistingDutchPile(
               peer.id!,
               localState.selectedCard,
@@ -68,7 +70,7 @@ export const PlayingCard = ({
           );
           break;
         case "wood":
-          dispatch(
+          await emit(
             moveCardWoodToExistingDutchPile(
               peer.id!,
               localState.selectedCard,

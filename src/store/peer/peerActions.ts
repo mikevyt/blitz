@@ -7,8 +7,13 @@ import {
   removeConnectionList,
 } from "../connection/connectionActions";
 import download from "js-file-download";
-import { addHost, addName, update } from "../multiplayer/multiplayerActions";
+import {
+  addHost,
+  addName,
+  updateMultiplayer,
+} from "../multiplayer/multiplayerActions";
 import { store } from "..";
+import { updateGame } from "../game/gameActions";
 
 export const startPeerSession = (id: string) => ({
   type: PeerActionType.PEER_SESSION_START,
@@ -45,18 +50,19 @@ export const createPeer: ({
         });
         PeerConnection.onConnectionReceiveData(peerId, async (data) => {
           await dispatch(data);
-          const state = store.getState();
           console.log("Receiving data");
           console.log({ data });
 
           if (isHost) {
             connectionMap.forEach(async (_, key) => {
+              const state = store.getState();
               console.log("sending this data as host");
-              console.log(update(state.multiplayer));
+              console.log(updateMultiplayer(state.multiplayer));
               await PeerConnection.sendConnection(
                 key,
-                update(state.multiplayer)
+                updateMultiplayer(state.multiplayer)
               );
+              await PeerConnection.sendConnection(key, updateGame(state.game));
             });
           }
         });

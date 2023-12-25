@@ -120,7 +120,10 @@ export const PeerConnection = {
       }
       resolve();
     }),
-  onConnectionReceiveData: (id: string, callback: (f: Data) => void) => {
+  onConnectionReceiveData: (
+    id: string,
+    callback: (f: Data, connectionMap: Map<string, DataConnection>) => void
+  ) => {
     if (!peer) {
       throw new Error("Peer doesn't start yet");
     }
@@ -132,7 +135,7 @@ export const PeerConnection = {
       conn.on("data", function (receivedData) {
         console.log("Receiving data from " + id);
         let data = receivedData as Data;
-        callback(data);
+        callback(data, connectionMap);
       });
     }
   },

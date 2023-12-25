@@ -7,7 +7,7 @@ import {
   UpdateAction,
 } from "./multiplayerTypes";
 
-export const update = (state: MultiplayerState): UpdateAction => ({
+export const updateMultiplayer = (state: MultiplayerState): UpdateAction => ({
   type: MultiplayerActionType.UPDATE,
   state,
 });

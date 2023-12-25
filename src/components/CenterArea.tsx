@@ -9,11 +9,13 @@ import {
   moveCardWoodToNewDutchPile,
 } from "../store/game/gameActions";
 import { deselectCard } from "../store/local/localActions";
+import { useAppEmit } from "../helpers/useAppEmit";
 
 export const CenterArea = () => {
   const localState = useAppSelector((state) => state.local);
   const gameState = useAppSelector((state) => state.game);
   const peer = useAppSelector((state) => state.peer);
+  const emit = useAppEmit();
   const dispatch = useAppDispatch();
   const [isHover, setIsHover] = React.useState(false);
 
@@ -26,7 +28,7 @@ export const CenterArea = () => {
     }
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (
       localState.selectedCard &&
       validateMove({ selectedCard: localState.selectedCard, isDutch: true })
@@ -34,10 +36,10 @@ export const CenterArea = () => {
       console.log(localState.selectedCard);
       switch (localState.selectedCard.location) {
         case "post":
-          dispatch(
+          await emit(
             moveCardPostToNewDutchPile(peer.id!, localState.selectedCard)
           );
-          dispatch(
+          await emit(
             moveCardBlitzToNewPostPile(
               peer.id!,
               gameState.blitz[peer.id!][gameState.blitz[peer.id!].length - 1]
@@ -45,12 +47,12 @@ export const CenterArea = () => {
           );
           break;
         case "blitz":
-          dispatch(
+          await emit(
             moveCardBlitzToNewDutchPile(peer.id!, localState.selectedCard)
           );
           break;
         case "wood":
-          dispatch(
+          await emit(
             moveCardWoodToNewDutchPile(peer.id!, localState.selectedCard)
           );
           break;

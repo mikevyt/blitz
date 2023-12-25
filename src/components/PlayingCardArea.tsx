@@ -4,24 +4,26 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { updateWood } from "../store/game/gameActions";
 import { Button } from "antd";
 import { PlayingCardPlaceholder } from "./PlayingCardPlaceholder";
+import { useAppEmit } from "../helpers/useAppEmit";
 
 export const PlayingCardArea = () => {
   const gameState = useAppSelector((state) => state.game);
   const peer = useAppSelector((state) => state.peer);
   const dispatch = useAppDispatch();
+  const emit = useAppEmit();
   const currentWoodIndex = gameState.woodVisible?.[peer.id!] || -1;
 
-  const handleClick = () => {
+  const handleClick = async () => {
     // handle overflow
     if (currentWoodIndex + 3 > gameState.wood[peer.id!].length) {
-      dispatch(
+      await emit(
         updateWood(
           peer.id!,
           currentWoodIndex + 3 - gameState.wood[peer.id!].length
         )
       );
     } else {
-      dispatch(updateWood(peer.id!, currentWoodIndex + 3));
+      await emit(updateWood(peer.id!, currentWoodIndex + 3));
     }
   };
 

@@ -8,10 +8,9 @@ export const moveCardPostToExistingDutchPileReducer = (
   const { id, startingCard, destinationCard } = action;
   const dutch = state.dutch.map((row) => [...row]);
   for (let i = 0; i < dutch.length; i++) {
-    for (let j = 0; j < dutch[i].length; j++) {
-      if (isEqual(dutch[i][j], destinationCard)) {
-        dutch[i].push({ ...startingCard, location: "dutch" });
-      }
+    if (isEqual(dutch[i][dutch[i].length - 1], destinationCard)) {
+      dutch[i].push({ ...startingCard, location: "dutch" });
+      break;
     }
   }
 

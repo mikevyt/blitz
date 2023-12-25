@@ -4,6 +4,7 @@ import { DataType, PeerConnection } from "../../helpers/peer";
 import { message } from "antd";
 import download from "js-file-download";
 import { store } from "..";
+import { updateMultiplayer } from "../multiplayer/multiplayerActions";
 
 export const changeConnectionInput = (id: string) => ({
   type: ConnectionActionType.CONNECTION_INPUT_CHANGE,
@@ -40,9 +41,12 @@ export const connectPeer: (
         message.info("Connection closed: " + id);
         dispatch(removeConnectionList(id));
       });
-      PeerConnection.onConnectionReceiveData(id, async (data) => {
-        await dispatch(data);
-      });
+      PeerConnection.onConnectionReceiveData(
+        id,
+        async (data, connectionMap) => {
+          await dispatch(data);
+        }
+      );
       dispatch(addConnectionList(id));
       dispatch(setLoading(false));
     } catch (err) {
