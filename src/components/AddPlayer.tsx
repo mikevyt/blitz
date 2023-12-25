@@ -32,7 +32,7 @@ export const AddPlayer = () => {
       {names.map((name, i) => (
         <div key={i}>{name}</div>
       ))}
-      <Button>Start Game</Button>
+      <Button disabled={names.length < 2}>Start Game</Button>
     </>
   );
 };

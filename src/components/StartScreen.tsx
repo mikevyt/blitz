@@ -24,16 +24,10 @@ export const StartScreen = () => {
   const [name, setName] = React.useState("");
 
   const handleCreateGame = async () => {
-    if (!name) {
-      return;
-    }
     await dispatch(createPeer({ name, isHost: true }));
   };
 
   const handleJoinGame = async () => {
-    if (!name) {
-      return;
-    }
     await dispatch(createPeer({ name, isHost: false }));
   };
 
@@ -49,8 +43,12 @@ export const StartScreen = () => {
             onChange={(e) => setName(e.target.value)}
             value={name}
           />
-          <Button onClick={handleCreateGame}>Create Game</Button>
-          <Button onClick={handleJoinGame}>Join Game</Button>
+          <Button onClick={handleCreateGame} disabled={!name}>
+            Create Game
+          </Button>
+          <Button onClick={handleJoinGame} disabled={!name}>
+            Join Game
+          </Button>
         </>
       ) : multiplayer.host === peer.id || connection.list.length ? (
         <AddPlayer />
