@@ -33,7 +33,9 @@ export const AddCode = () => {
         onChange={(e) => setGameCode(e.target.value)}
         value={gameCode}
       />
-      <Button onClick={handleJoin}>Join</Button>
+      <div style={{ textAlign: "center" }}>
+        <Button onClick={handleJoin}>Join</Button>
+      </div>
     </>
   );
 };

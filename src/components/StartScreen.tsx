@@ -51,10 +51,18 @@ export const StartScreen = () => {
             value={name}
           />
           <div style={{ display: "flex", columnGap: "2rem" }}>
-            <Button onClick={handleCreateGame} disabled={!name}>
+            <Button
+              onClick={handleCreateGame}
+              disabled={!name}
+              loading={peer.loading}
+            >
               Create Game
             </Button>
-            <Button onClick={handleJoinGame} disabled={!name}>
+            <Button
+              onClick={handleJoinGame}
+              disabled={!name}
+              loading={peer.loading}
+            >
               Join Game
             </Button>
           </div>
@@ -86,8 +94,9 @@ export const EmojiSelector = ({
         gap: "10px",
       }}
     >
-      {emojis.map((emoji) => (
+      {emojis.map((emoji, i) => (
         <Button
+          key={i}
           type={emoji === value ? "primary" : "dashed"}
           style={{ fontSize: "4rem", height: "4rem", width: "4rem" }}
           onClick={() => onChange(emoji)}
