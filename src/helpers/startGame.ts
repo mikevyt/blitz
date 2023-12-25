@@ -6,7 +6,7 @@ import { GameState } from "../store/game/gameTypes";
 import { startGame as startGameAction } from "../store/multiplayer/multiplayerActions";
 import { PeerConnection } from "./peer";
 
-export const startGame = (dispatch: Dispatch, ids: string[]) => {
+export const startGame = (dispatch: Dispatch, ownId: string, ids: string[]) => {
   const state: GameState = {
     dutch: [],
     post: {},
@@ -18,8 +18,12 @@ export const startGame = (dispatch: Dispatch, ids: string[]) => {
     const playerState = setUpGameState(id);
     merge(state, playerState);
   });
-  // console.log({ state });
   dispatch(updateGame(state));
   dispatch(startGameAction());
-  // PeerConnection.sendConnection()
+  ids.forEach(async (id) => {
+    if (id !== ownId) {
+      PeerConnection.sendConnection(id, updateGame(state));
+      PeerConnection.sendConnection(id, startGameAction());
+    }
+  });
 };

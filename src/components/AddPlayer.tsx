@@ -24,6 +24,7 @@ export const AddPlayer = () => {
   const handleStartGame = () => {
     startGame(
       dispatch,
+      peer.id!,
       Object.entries(multiplayer.name).map(([id, _]) => id)
     );
   };
