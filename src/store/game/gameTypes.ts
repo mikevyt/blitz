@@ -23,40 +23,40 @@ export interface GameState {
 }
 
 export type GameAction =
-  | MoveCardStackToExistingDutchPileAction
-  | MoveCardStackToNewDutchPileAction
-  | MoveCardStackToExistingDutchPileAction
-  | MoveCardSpreadToNewDutchPileAction
-  | MoveCardSpreadToExistingDutchPileAction
+  | MoveCardStackToExistingCenterPileAction
+  | MoveCardStackToNewCenterPileAction
+  | MoveCardStackToExistingCenterPileAction
+  | MoveCardSpreadToNewCenterPileAction
+  | MoveCardSpreadToExistingCenterPileAction
   | MoveCardSpreadToExistingSpreadPileAction
-  | MoveCardStackToNewDutchPileAction
-  | MoveCardSpreadToExistingDutchPileAction
-  | MoveCardStashToNewDutchPileAction
-  | MoveCardStashToExistingDutchPileAction
+  | MoveCardStackToNewCenterPileAction
+  | MoveCardSpreadToExistingCenterPileAction
+  | MoveCardStashToNewCenterPileAction
+  | MoveCardStashToExistingCenterPileAction
   | MoveCardStackToNewSpreadPileAction
   | UpdateStashAction
   | UpdateGameAction;
 
-export interface MoveCardStackToExistingDutchPileAction extends AnyAction {
+export interface MoveCardStackToExistingCenterPileAction extends AnyAction {
   type: GameActionType.MOVE_CARD_BLITZ_TO_EXISTING_DUTCH_PILE;
   id: string;
   startingCard: PlayingCard;
   destinationCard: PlayingCard;
 }
 
-export interface MoveCardStackToNewDutchPileAction extends AnyAction {
+export interface MoveCardStackToNewCenterPileAction extends AnyAction {
   type: GameActionType.MOVE_CARD_BLITZ_TO_NEW_DUTCH_PILE;
   id: string;
   startingCard: PlayingCard;
 }
 
-export interface MoveCardSpreadToNewDutchPileAction extends AnyAction {
+export interface MoveCardSpreadToNewCenterPileAction extends AnyAction {
   type: GameActionType.MOVE_CARD_POST_TO_NEW_DUTCH_PILE;
   id: string;
   startingCard: PlayingCard;
 }
 
-export interface MoveCardSpreadToExistingDutchPileAction extends AnyAction {
+export interface MoveCardSpreadToExistingCenterPileAction extends AnyAction {
   type: GameActionType.MOVE_CARD_POST_TO_EXISTING_DUTCH_PILE;
   id: string;
   startingCard: PlayingCard;
@@ -70,26 +70,26 @@ export interface MoveCardSpreadToExistingSpreadPileAction extends AnyAction {
   destinationCard: PlayingCard;
 }
 
-export interface MoveCardStackToNewDutchPileAction extends AnyAction {
+export interface MoveCardStackToNewCenterPileAction extends AnyAction {
   type: GameActionType.MOVE_CARD_BLITZ_TO_NEW_DUTCH_PILE;
   id: string;
   startingCard: PlayingCard;
 }
 
-export interface MoveCardStackToExistingDutchPileAction extends AnyAction {
+export interface MoveCardStackToExistingCenterPileAction extends AnyAction {
   type: GameActionType.MOVE_CARD_BLITZ_TO_EXISTING_DUTCH_PILE;
   id: string;
   startingCard: PlayingCard;
   destinationCard: PlayingCard;
 }
 
-export interface MoveCardStashToNewDutchPileAction extends AnyAction {
+export interface MoveCardStashToNewCenterPileAction extends AnyAction {
   type: GameActionType.MOVE_CARD_WOOD_TO_NEW_DUTCH_PILE;
   id: string;
   startingCard: PlayingCard;
 }
 
-export interface MoveCardStashToExistingDutchPileAction extends AnyAction {
+export interface MoveCardStashToExistingCenterPileAction extends AnyAction {
   type: GameActionType.MOVE_CARD_WOOD_TO_EXISTING_DUTCH_PILE;
   id: string;
   startingCard: PlayingCard;

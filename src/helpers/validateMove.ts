@@ -6,11 +6,11 @@ interface BaseParameters {
 
 type ConditionalParameters =
   | {
-      isDutch: true;
+      isCenter: true;
       destinationCard?: never;
     }
   | {
-      isDutch?: never;
+      isCenter?: never;
       destinationCard: PlayingCard;
     };
 
@@ -18,10 +18,10 @@ type ValidateMoveParameters = ConditionalParameters & BaseParameters;
 
 export const validateMove = ({
   selectedCard,
-  isDutch,
+  isCenter,
   destinationCard,
 }: ValidateMoveParameters) => {
-  if (isDutch) {
+  if (isCenter) {
     return selectedCard.digit === 1;
   }
 

@@ -11,7 +11,7 @@ describe("validateMove", () => {
         positive: false,
         owner: "testId",
       };
-      expect(validateMove({ isDutch: true, selectedCard })).toBe(true);
+      expect(validateMove({ isCenter: true, selectedCard })).toBe(true);
     });
 
     it("should return false if selectedCard does not digit 1", () => {
@@ -22,7 +22,7 @@ describe("validateMove", () => {
         positive: false,
         owner: "testId",
       };
-      expect(validateMove({ isDutch: true, selectedCard })).toBe(false);
+      expect(validateMove({ isCenter: true, selectedCard })).toBe(false);
     });
   });
 

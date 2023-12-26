@@ -5,11 +5,11 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { deselectCard, selectCard } from "../store/local/localActions";
 import { validateMove } from "../helpers/validateMove";
 import {
-  moveCardStackToExistingDutchPile,
+  moveCardStackToExistingCenterPile,
   moveCardStackToNewSpreadPile,
-  moveCardSpreadToExistingDutchPile,
+  moveCardSpreadToExistingCenterPile,
   moveCardSpreadToExistingSpreadPile,
-  moveCardStashToExistingDutchPile,
+  moveCardStashToExistingCenterPile,
 } from "../store/game/gameActions";
 import { useAppEmit } from "../helpers/useAppEmit";
 import { CheckCircleFilled } from "@ant-design/icons";
@@ -50,7 +50,7 @@ export const PlayingCard = ({
         case "post":
           if (card.location === "dutch") {
             await emit(
-              moveCardSpreadToExistingDutchPile(
+              moveCardSpreadToExistingCenterPile(
                 peer.id!,
                 localState.selectedCard,
                 card
@@ -75,7 +75,7 @@ export const PlayingCard = ({
           break;
         case "blitz":
           await emit(
-            moveCardStackToExistingDutchPile(
+            moveCardStackToExistingCenterPile(
               peer.id!,
               localState.selectedCard,
               card
@@ -84,7 +84,7 @@ export const PlayingCard = ({
           break;
         case "wood":
           await emit(
-            moveCardStashToExistingDutchPile(
+            moveCardStashToExistingCenterPile(
               peer.id!,
               localState.selectedCard,
               card

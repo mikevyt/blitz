@@ -3,10 +3,10 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { validateMove } from "../helpers/validateMove";
 import { PlayingCardStack } from "./PlayingCardStack";
 import {
-  moveCardStackToNewDutchPile,
+  moveCardStackToNewCenterPile,
   moveCardStackToNewSpreadPile,
-  moveCardSpreadToNewDutchPile,
-  moveCardStashToNewDutchPile,
+  moveCardSpreadToNewCenterPile,
+  moveCardStashToNewCenterPile,
 } from "../store/game/gameActions";
 import { deselectCard } from "../store/local/localActions";
 import { useAppEmit } from "../helpers/useAppEmit";
@@ -22,7 +22,7 @@ export const CenterArea = () => {
   const handleMouseEnter = () => {
     if (
       localState.selectedCard &&
-      validateMove({ selectedCard: localState.selectedCard, isDutch: true })
+      validateMove({ selectedCard: localState.selectedCard, isCenter: true })
     ) {
       setIsHover(true);
     }
@@ -31,13 +31,13 @@ export const CenterArea = () => {
   const handleClick = async () => {
     if (
       localState.selectedCard &&
-      validateMove({ selectedCard: localState.selectedCard, isDutch: true })
+      validateMove({ selectedCard: localState.selectedCard, isCenter: true })
     ) {
       console.log(localState.selectedCard);
       switch (localState.selectedCard.location) {
         case "post":
           await emit(
-            moveCardSpreadToNewDutchPile(peer.id!, localState.selectedCard)
+            moveCardSpreadToNewCenterPile(peer.id!, localState.selectedCard)
           );
           await emit(
             moveCardStackToNewSpreadPile(
@@ -48,12 +48,12 @@ export const CenterArea = () => {
           break;
         case "blitz":
           await emit(
-            moveCardStackToNewDutchPile(peer.id!, localState.selectedCard)
+            moveCardStackToNewCenterPile(peer.id!, localState.selectedCard)
           );
           break;
         case "wood":
           await emit(
-            moveCardStashToNewDutchPile(peer.id!, localState.selectedCard)
+            moveCardStashToNewCenterPile(peer.id!, localState.selectedCard)
           );
           break;
         case "dutch":

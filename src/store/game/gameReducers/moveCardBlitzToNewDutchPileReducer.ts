@@ -1,9 +1,9 @@
-import { GameState, MoveCardStackToNewDutchPileAction } from "../gameTypes";
+import { GameState, MoveCardStackToNewCenterPileAction } from "../gameTypes";
 import { isEqual } from "../../../types/PlayingCard";
 
-export const moveCardStackToNewDutchPileReducer = (
+export const moveCardStackToNewCenterPileReducer = (
   state: GameState,
-  action: MoveCardStackToNewDutchPileAction
+  action: MoveCardStackToNewCenterPileAction
 ) => {
   const { id, startingCard } = action;
   const dutch = [...(state.dutch || [[]])];
