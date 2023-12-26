@@ -2,9 +2,9 @@ import { Reducer } from "redux";
 import { GameAction, GameActionType, GameState } from "./gameTypes";
 import { moveCardSpreadToNewDutchPileReducer } from "./gameReducers/moveCardSpreadToNewDutchPileReducer";
 import { moveCardSpreadToExistingDutchPileReducer } from "./gameReducers/moveCardSpreadToExistingDutchPileReducer";
-import { moveCardBlitzToNewDutchPileReducer } from "./gameReducers/moveCardBlitzToNewDutchPileReducer";
-import { moveCardBlitzToExistingDutchPileReducer } from "./gameReducers/moveCardBlitzToExistingDutchPileReducer";
-import { moveCardBlitzToNewSpreadPileReducer } from "./gameReducers/moveCardBlitzToNewSpreadPileReducer";
+import { moveCardStackToNewDutchPileReducer } from "./gameReducers/moveCardStackToNewDutchPileReducer";
+import { moveCardStackToExistingDutchPileReducer } from "./gameReducers/moveCardStackToExistingDutchPileReducer";
+import { moveCardStackToNewSpreadPileReducer } from "./gameReducers/moveCardStackToNewSpreadPileReducer";
 import { moveCardStashToNewDutchPileReducer } from "./gameReducers/moveCardStashToNewDutchPileReducer";
 import { moveCardStashToExistingDutchPileReducer } from "./gameReducers/moveCardStashToExistingDutchPileReducer";
 import { updateStashReducer } from "./gameReducers/updateStashReducer";
@@ -31,11 +31,11 @@ export const GameReducer: Reducer<GameState, GameAction> = (
     case GameActionType.MOVE_CARD_POST_TO_EXISTING_POST_PILE:
       return moveCardSpreadToExistingSpreadPileReducer(state, action);
     case GameActionType.MOVE_CARD_BLITZ_TO_NEW_DUTCH_PILE:
-      return moveCardBlitzToNewDutchPileReducer(state, action);
+      return moveCardStackToNewDutchPileReducer(state, action);
     case GameActionType.MOVE_CARD_BLITZ_TO_EXISTING_DUTCH_PILE:
-      return moveCardBlitzToExistingDutchPileReducer(state, action);
+      return moveCardStackToExistingDutchPileReducer(state, action);
     case GameActionType.MOVE_CARD_BLITZ_TO_NEW_POST_PILE:
-      return moveCardBlitzToNewSpreadPileReducer(state, action);
+      return moveCardStackToNewSpreadPileReducer(state, action);
     case GameActionType.MOVE_CARD_WOOD_TO_NEW_DUTCH_PILE:
       return moveCardStashToNewDutchPileReducer(state, action);
     case GameActionType.MOVE_CARD_WOOD_TO_EXISTING_DUTCH_PILE:

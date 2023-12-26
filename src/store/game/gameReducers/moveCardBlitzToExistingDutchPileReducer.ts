@@ -1,12 +1,12 @@
 import {
   GameState,
-  MoveCardBlitzToExistingDutchPileAction,
+  MoveCardStackToExistingDutchPileAction,
 } from "../gameTypes";
 import { isEqual } from "../../../types/PlayingCard";
 
-export const moveCardBlitzToExistingDutchPileReducer = (
+export const moveCardStackToExistingDutchPileReducer = (
   state: GameState,
-  action: MoveCardBlitzToExistingDutchPileAction
+  action: MoveCardStackToExistingDutchPileAction
 ) => {
   const { id, startingCard, destinationCard } = action;
   const dutch = state.dutch.map((row) => [...row]);

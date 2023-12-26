@@ -5,8 +5,8 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { deselectCard, selectCard } from "../store/local/localActions";
 import { validateMove } from "../helpers/validateMove";
 import {
-  moveCardBlitzToExistingDutchPile,
-  moveCardBlitzToNewSpreadPile,
+  moveCardStackToExistingDutchPile,
+  moveCardStackToNewSpreadPile,
   moveCardSpreadToExistingDutchPile,
   moveCardSpreadToExistingSpreadPile,
   moveCardStashToExistingDutchPile,
@@ -67,7 +67,7 @@ export const PlayingCard = ({
           }
           // TODO: Need to prevent this if there's still three decks
           await emit(
-            moveCardBlitzToNewSpreadPile(
+            moveCardStackToNewSpreadPile(
               peer.id!,
               gameState.blitz[peer.id!][gameState.blitz[peer.id!].length - 1]
             )
@@ -75,7 +75,7 @@ export const PlayingCard = ({
           break;
         case "blitz":
           await emit(
-            moveCardBlitzToExistingDutchPile(
+            moveCardStackToExistingDutchPile(
               peer.id!,
               localState.selectedCard,
               card

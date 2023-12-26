@@ -1,9 +1,9 @@
-import { GameState, MoveCardBlitzToNewSpreadPileAction } from "../gameTypes";
+import { GameState, MoveCardStackToNewSpreadPileAction } from "../gameTypes";
 import { isEqual } from "../../../types/PlayingCard";
 
-export const moveCardBlitzToNewSpreadPileReducer = (
+export const moveCardStackToNewSpreadPileReducer = (
   state: GameState,
-  action: MoveCardBlitzToNewSpreadPileAction
+  action: MoveCardStackToNewSpreadPileAction
 ) => {
   const { id, startingCard } = action;
   const post: GameState["post"] = {

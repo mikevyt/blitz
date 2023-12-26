@@ -42,7 +42,7 @@ export const PlayingCardArea = () => {
           <PlayingCardStack key={i} cards={cards} />
         ))}
       </LabelledArea>
-      <LabelledArea label="Blitz">
+      <LabelledArea label="Stack">
         <PlayingCardStack cards={gameState.blitz[peer.id!]} />
       </LabelledArea>
       <LabelledArea label="Stash">
