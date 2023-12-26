@@ -7,6 +7,6 @@ export const updateStashReducer = (
   const { index } = action;
   return {
     ...state,
-    woodVisible: { ...state.woodVisible, [action.id]: index },
+    stashVisible: { ...state.stashVisible, [action.id]: index },
   };
 };
