@@ -1,3 +1,4 @@
+import { RetweetOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { useAppEmit } from "../helpers/useAppEmit";
 import { updateStash } from "../store/game/gameActions";
@@ -56,13 +57,15 @@ export const PlayingCardArea = () => {
             }}
           />
         )}
+        <Button onClick={handleClick} shape="circle">
+          <RetweetOutlined />
+        </Button>
         {currentStashIndex !== -1 && (
           <PlayingCardStack
             cards={gameState.stash[peer.id!].slice(0, currentStashIndex)}
           />
         )}
       </LabelledArea>
-      <Button onClick={handleClick}>Flip Stash</Button>
     </div>
   );
 };

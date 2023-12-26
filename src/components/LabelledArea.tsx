@@ -1,5 +1,5 @@
-import React from "react";
 import Paragraph from "antd/es/typography/Paragraph";
+import React from "react";
 
 export const LabelledArea = (
   props: React.PropsWithChildren<{ label: string }>
@@ -14,6 +14,7 @@ export const LabelledArea = (
           padding: "8px",
           display: "flex",
           flexDirection: "row",
+          alignItems: "center",
           columnGap: "20px",
         }}
       >
