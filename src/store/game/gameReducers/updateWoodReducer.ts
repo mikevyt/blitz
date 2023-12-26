@@ -1,8 +1,8 @@
-import { GameState, UpdateWoodAction } from "../gameTypes";
+import { GameState, UpdateStashAction } from "../gameTypes";
 
-export const updateWoodReducer = (
+export const updateStashReducer = (
   state: GameState,
-  action: UpdateWoodAction
+  action: UpdateStashAction
 ) => {
   const { index } = action;
   return {

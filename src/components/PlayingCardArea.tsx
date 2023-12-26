@@ -1,7 +1,7 @@
 import { PlayingCardStack } from "./PlayingCardStack";
 import { LabelledArea } from "./LabelledArea";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { updateWood } from "../store/game/gameActions";
+import { updateStash } from "../store/game/gameActions";
 import { Button } from "antd";
 import { PlayingCardPlaceholder } from "./PlayingCardPlaceholder";
 import { useAppEmit } from "../helpers/useAppEmit";
@@ -11,19 +11,19 @@ export const PlayingCardArea = () => {
   const peer = useAppSelector((state) => state.peer);
   const dispatch = useAppDispatch();
   const emit = useAppEmit();
-  const currentWoodIndex = gameState.woodVisible?.[peer.id!] || -1;
+  const currentStashIndex = gameState.woodVisible?.[peer.id!] || -1;
 
   const handleClick = async () => {
     // handle overflow
-    if (currentWoodIndex + 3 > gameState.wood[peer.id!].length) {
+    if (currentStashIndex + 3 > gameState.wood[peer.id!].length) {
       await emit(
-        updateWood(
+        updateStash(
           peer.id!,
-          currentWoodIndex + 3 - gameState.wood[peer.id!].length
+          currentStashIndex + 3 - gameState.wood[peer.id!].length
         )
       );
     } else {
-      await emit(updateWood(peer.id!, currentWoodIndex + 3));
+      await emit(updateStash(peer.id!, currentStashIndex + 3));
     }
   };
 
@@ -37,7 +37,7 @@ export const PlayingCardArea = () => {
         marginTop: "20px",
       }}
     >
-      <LabelledArea label="Post">
+      <LabelledArea label="Spread">
         {gameState.post[peer.id!].map((cards, i) => (
           <PlayingCardStack key={i} cards={cards} />
         ))}
@@ -45,19 +45,19 @@ export const PlayingCardArea = () => {
       <LabelledArea label="Blitz">
         <PlayingCardStack cards={gameState.blitz[peer.id!]} />
       </LabelledArea>
-      <LabelledArea label="Wood">
-        {currentWoodIndex !== -1 && (
+      <LabelledArea label="Stash">
+        {currentStashIndex !== -1 && (
           <PlayingCardStack
-            cards={gameState.wood[peer.id!].slice(0, currentWoodIndex)}
+            cards={gameState.wood[peer.id!].slice(0, currentStashIndex)}
           />
         )}
-        {currentWoodIndex !== gameState.wood[peer.id!].length - 1 ? (
+        {currentStashIndex !== gameState.wood[peer.id!].length - 1 ? (
           <PlayingCardPlaceholder />
         ) : (
           <PlayingCardPlaceholder style={{ backgroundColor: "white" }} />
         )}
       </LabelledArea>
-      <Button onClick={handleClick}>Flip Wood</Button>
+      <Button onClick={handleClick}>Flip Stash</Button>
     </div>
   );
 };

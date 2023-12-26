@@ -1,9 +1,12 @@
-import { GameState, MoveCardPostToExistingDutchPileAction } from "../gameTypes";
+import {
+  GameState,
+  MoveCardSpreadToExistingDutchPileAction,
+} from "../gameTypes";
 import { isEqual } from "../../../types/PlayingCard";
 
-export const moveCardPostToExistingDutchPileReducer = (
+export const moveCardSpreadToExistingDutchPileReducer = (
   state: GameState,
-  action: MoveCardPostToExistingDutchPileAction
+  action: MoveCardSpreadToExistingDutchPileAction
 ) => {
   const { id, startingCard, destinationCard } = action;
   const dutch = state.dutch.map((row) => [...row]);

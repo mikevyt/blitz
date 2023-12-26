@@ -6,10 +6,10 @@ import { deselectCard, selectCard } from "../store/local/localActions";
 import { validateMove } from "../helpers/validateMove";
 import {
   moveCardBlitzToExistingDutchPile,
-  moveCardBlitzToNewPostPile,
-  moveCardPostToExistingDutchPile,
-  moveCardPostToExistingPostPile,
-  moveCardWoodToExistingDutchPile,
+  moveCardBlitzToNewSpreadPile,
+  moveCardSpreadToExistingDutchPile,
+  moveCardSpreadToExistingSpreadPile,
+  moveCardStashToExistingDutchPile,
 } from "../store/game/gameActions";
 import { useAppEmit } from "../helpers/useAppEmit";
 import { CheckCircleFilled } from "@ant-design/icons";
@@ -50,7 +50,7 @@ export const PlayingCard = ({
         case "post":
           if (card.location === "dutch") {
             await emit(
-              moveCardPostToExistingDutchPile(
+              moveCardSpreadToExistingDutchPile(
                 peer.id!,
                 localState.selectedCard,
                 card
@@ -58,7 +58,7 @@ export const PlayingCard = ({
             );
           } else if (card.location === "post") {
             await emit(
-              moveCardPostToExistingPostPile(
+              moveCardSpreadToExistingSpreadPile(
                 peer.id!,
                 localState.selectedCard,
                 card
@@ -67,7 +67,7 @@ export const PlayingCard = ({
           }
           // TODO: Need to prevent this if there's still three decks
           await emit(
-            moveCardBlitzToNewPostPile(
+            moveCardBlitzToNewSpreadPile(
               peer.id!,
               gameState.blitz[peer.id!][gameState.blitz[peer.id!].length - 1]
             )
@@ -84,7 +84,7 @@ export const PlayingCard = ({
           break;
         case "wood":
           await emit(
-            moveCardWoodToExistingDutchPile(
+            moveCardStashToExistingDutchPile(
               peer.id!,
               localState.selectedCard,
               card

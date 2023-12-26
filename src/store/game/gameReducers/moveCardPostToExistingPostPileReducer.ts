@@ -1,9 +1,12 @@
-import { GameState, MoveCardPostToExistingPostPileAction } from "../gameTypes";
+import {
+  GameState,
+  MoveCardSpreadToExistingSpreadPileAction,
+} from "../gameTypes";
 import { isEqual } from "../../../types/PlayingCard";
 
-export const moveCardPostToExistingPostPileReducer = (
+export const moveCardSpreadToExistingSpreadPileReducer = (
   state: GameState,
-  action: MoveCardPostToExistingPostPileAction
+  action: MoveCardSpreadToExistingSpreadPileAction
 ) => {
   const { id, startingCard, destinationCard } = action;
   // add to post pile

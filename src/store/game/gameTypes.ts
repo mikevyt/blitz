@@ -26,15 +26,15 @@ export type GameAction =
   | MoveCardBlitzToExistingDutchPileAction
   | MoveCardBlitzToNewDutchPileAction
   | MoveCardBlitzToExistingDutchPileAction
-  | MoveCardPostToNewDutchPileAction
-  | MoveCardPostToExistingDutchPileAction
-  | MoveCardPostToExistingPostPileAction
+  | MoveCardSpreadToNewDutchPileAction
+  | MoveCardSpreadToExistingDutchPileAction
+  | MoveCardSpreadToExistingSpreadPileAction
   | MoveCardBlitzToNewDutchPileAction
-  | MoveCardPostToExistingDutchPileAction
-  | MoveCardWoodToNewDutchPileAction
-  | MoveCardWoodToExistingDutchPileAction
-  | MoveCardBlitzToNewPostPileAction
-  | UpdateWoodAction
+  | MoveCardSpreadToExistingDutchPileAction
+  | MoveCardStashToNewDutchPileAction
+  | MoveCardStashToExistingDutchPileAction
+  | MoveCardBlitzToNewSpreadPileAction
+  | UpdateStashAction
   | UpdateGameAction;
 
 export interface MoveCardBlitzToExistingDutchPileAction extends AnyAction {
@@ -50,20 +50,20 @@ export interface MoveCardBlitzToNewDutchPileAction extends AnyAction {
   startingCard: PlayingCard;
 }
 
-export interface MoveCardPostToNewDutchPileAction extends AnyAction {
+export interface MoveCardSpreadToNewDutchPileAction extends AnyAction {
   type: GameActionType.MOVE_CARD_POST_TO_NEW_DUTCH_PILE;
   id: string;
   startingCard: PlayingCard;
 }
 
-export interface MoveCardPostToExistingDutchPileAction extends AnyAction {
+export interface MoveCardSpreadToExistingDutchPileAction extends AnyAction {
   type: GameActionType.MOVE_CARD_POST_TO_EXISTING_DUTCH_PILE;
   id: string;
   startingCard: PlayingCard;
   destinationCard: PlayingCard;
 }
 
-export interface MoveCardPostToExistingPostPileAction extends AnyAction {
+export interface MoveCardSpreadToExistingSpreadPileAction extends AnyAction {
   type: GameActionType.MOVE_CARD_POST_TO_EXISTING_POST_PILE;
   id: string;
   startingCard: PlayingCard;
@@ -83,26 +83,26 @@ export interface MoveCardBlitzToExistingDutchPileAction extends AnyAction {
   destinationCard: PlayingCard;
 }
 
-export interface MoveCardWoodToNewDutchPileAction extends AnyAction {
+export interface MoveCardStashToNewDutchPileAction extends AnyAction {
   type: GameActionType.MOVE_CARD_WOOD_TO_NEW_DUTCH_PILE;
   id: string;
   startingCard: PlayingCard;
 }
 
-export interface MoveCardWoodToExistingDutchPileAction extends AnyAction {
+export interface MoveCardStashToExistingDutchPileAction extends AnyAction {
   type: GameActionType.MOVE_CARD_WOOD_TO_EXISTING_DUTCH_PILE;
   id: string;
   startingCard: PlayingCard;
   destinationCard: PlayingCard;
 }
 
-export interface MoveCardBlitzToNewPostPileAction extends AnyAction {
+export interface MoveCardBlitzToNewSpreadPileAction extends AnyAction {
   type: GameActionType.MOVE_CARD_BLITZ_TO_NEW_POST_PILE;
   id: string;
   startingCard: PlayingCard;
 }
 
-export interface UpdateWoodAction extends AnyAction {
+export interface UpdateStashAction extends AnyAction {
   type: GameActionType.UPDATE_WOOD;
   id: string;
   index: number;

@@ -1,15 +1,15 @@
 import { Reducer } from "redux";
 import { GameAction, GameActionType, GameState } from "./gameTypes";
-import { moveCardPostToNewDutchPileReducer } from "./gameReducers/moveCardPostToNewDutchPileReducer";
-import { moveCardPostToExistingDutchPileReducer } from "./gameReducers/moveCardPostToExistingDutchPileReducer";
+import { moveCardSpreadToNewDutchPileReducer } from "./gameReducers/moveCardSpreadToNewDutchPileReducer";
+import { moveCardSpreadToExistingDutchPileReducer } from "./gameReducers/moveCardSpreadToExistingDutchPileReducer";
 import { moveCardBlitzToNewDutchPileReducer } from "./gameReducers/moveCardBlitzToNewDutchPileReducer";
 import { moveCardBlitzToExistingDutchPileReducer } from "./gameReducers/moveCardBlitzToExistingDutchPileReducer";
-import { moveCardBlitzToNewPostPileReducer } from "./gameReducers/moveCardBlitzToNewPostPileReducer";
-import { moveCardWoodToNewDutchPileReducer } from "./gameReducers/moveCardWoodToNewDutchPileReducer";
-import { moveCardWoodToExistingDutchPileReducer } from "./gameReducers/moveCardWoodToExistingDutchPileReducer";
-import { updateWoodReducer } from "./gameReducers/updateWoodReducer";
+import { moveCardBlitzToNewSpreadPileReducer } from "./gameReducers/moveCardBlitzToNewSpreadPileReducer";
+import { moveCardStashToNewDutchPileReducer } from "./gameReducers/moveCardStashToNewDutchPileReducer";
+import { moveCardStashToExistingDutchPileReducer } from "./gameReducers/moveCardStashToExistingDutchPileReducer";
+import { updateStashReducer } from "./gameReducers/updateStashReducer";
 import { updateGameReducer } from "./gameReducers/updateGameReducer";
-import { moveCardPostToExistingPostPileReducer } from "./gameReducers/moveCardPostToExistingPostPileReducer";
+import { moveCardSpreadToExistingSpreadPileReducer } from "./gameReducers/moveCardSpreadToExistingSpreadPileReducer";
 
 export const initialState: GameState = {
   dutch: [],
@@ -25,23 +25,23 @@ export const GameReducer: Reducer<GameState, GameAction> = (
 ) => {
   switch (action.type) {
     case GameActionType.MOVE_CARD_POST_TO_NEW_DUTCH_PILE:
-      return moveCardPostToNewDutchPileReducer(state, action);
+      return moveCardSpreadToNewDutchPileReducer(state, action);
     case GameActionType.MOVE_CARD_POST_TO_EXISTING_DUTCH_PILE:
-      return moveCardPostToExistingDutchPileReducer(state, action);
+      return moveCardSpreadToExistingDutchPileReducer(state, action);
     case GameActionType.MOVE_CARD_POST_TO_EXISTING_POST_PILE:
-      return moveCardPostToExistingPostPileReducer(state, action);
+      return moveCardSpreadToExistingSpreadPileReducer(state, action);
     case GameActionType.MOVE_CARD_BLITZ_TO_NEW_DUTCH_PILE:
       return moveCardBlitzToNewDutchPileReducer(state, action);
     case GameActionType.MOVE_CARD_BLITZ_TO_EXISTING_DUTCH_PILE:
       return moveCardBlitzToExistingDutchPileReducer(state, action);
     case GameActionType.MOVE_CARD_BLITZ_TO_NEW_POST_PILE:
-      return moveCardBlitzToNewPostPileReducer(state, action);
+      return moveCardBlitzToNewSpreadPileReducer(state, action);
     case GameActionType.MOVE_CARD_WOOD_TO_NEW_DUTCH_PILE:
-      return moveCardWoodToNewDutchPileReducer(state, action);
+      return moveCardStashToNewDutchPileReducer(state, action);
     case GameActionType.MOVE_CARD_WOOD_TO_EXISTING_DUTCH_PILE:
-      return moveCardWoodToExistingDutchPileReducer(state, action);
+      return moveCardStashToExistingDutchPileReducer(state, action);
     case GameActionType.UPDATE_WOOD:
-      return updateWoodReducer(state, action);
+      return updateStashReducer(state, action);
     case GameActionType.UPDATE_GAME:
       return updateGameReducer(state, action);
     default:

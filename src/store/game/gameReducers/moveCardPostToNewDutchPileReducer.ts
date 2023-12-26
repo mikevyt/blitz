@@ -1,9 +1,9 @@
-import { GameState, MoveCardPostToNewDutchPileAction } from "../gameTypes";
+import { GameState, MoveCardSpreadToNewDutchPileAction } from "../gameTypes";
 import { isEqual } from "../../../types/PlayingCard";
 
-export const moveCardPostToNewDutchPileReducer = (
+export const moveCardSpreadToNewDutchPileReducer = (
   state: GameState,
-  action: MoveCardPostToNewDutchPileAction
+  action: MoveCardSpreadToNewDutchPileAction
 ) => {
   const { id, startingCard } = action;
   const dutch = [...(state.dutch || [[]])];

@@ -3,14 +3,14 @@ import {
   GameState,
   MoveCardBlitzToExistingDutchPileAction,
   MoveCardBlitzToNewDutchPileAction,
-  MoveCardBlitzToNewPostPileAction,
-  MoveCardPostToExistingDutchPileAction,
-  MoveCardPostToExistingPostPileAction,
-  MoveCardPostToNewDutchPileAction,
-  MoveCardWoodToExistingDutchPileAction,
-  MoveCardWoodToNewDutchPileAction,
+  MoveCardBlitzToNewSpreadPileAction,
+  MoveCardSpreadToExistingDutchPileAction,
+  MoveCardSpreadToExistingSpreadPileAction,
+  MoveCardSpreadToNewDutchPileAction,
+  MoveCardStashToExistingDutchPileAction,
+  MoveCardStashToNewDutchPileAction,
   UpdateGameAction,
-  UpdateWoodAction,
+  UpdateStashAction,
 } from "./gameTypes";
 import { PlayingCard } from "../../types/PlayingCard";
 
@@ -19,37 +19,37 @@ export const updateGame = (state: GameState): UpdateGameAction => ({
   state,
 });
 
-export const updateWood = (id: string, index: number): UpdateWoodAction => ({
+export const updateStash = (id: string, index: number): UpdateStashAction => ({
   type: GameActionType.UPDATE_WOOD,
   id,
   index,
 });
 
-export const moveCardPostToNewDutchPile = (
+export const moveCardSpreadToNewDutchPile = (
   id: string,
   startingCard: PlayingCard
-): MoveCardPostToNewDutchPileAction => ({
+): MoveCardSpreadToNewDutchPileAction => ({
   type: GameActionType.MOVE_CARD_POST_TO_NEW_DUTCH_PILE,
   id,
   startingCard,
 });
 
-export const moveCardPostToExistingDutchPile = (
+export const moveCardSpreadToExistingDutchPile = (
   id: string,
   startingCard: PlayingCard,
   destinationCard: PlayingCard
-): MoveCardPostToExistingDutchPileAction => ({
+): MoveCardSpreadToExistingDutchPileAction => ({
   type: GameActionType.MOVE_CARD_POST_TO_EXISTING_DUTCH_PILE,
   id,
   startingCard,
   destinationCard,
 });
 
-export const moveCardPostToExistingPostPile = (
+export const moveCardSpreadToExistingSpreadPile = (
   id: string,
   startingCard: PlayingCard,
   destinationCard: PlayingCard
-): MoveCardPostToExistingPostPileAction => ({
+): MoveCardSpreadToExistingSpreadPileAction => ({
   type: GameActionType.MOVE_CARD_POST_TO_EXISTING_POST_PILE,
   id,
   startingCard,
@@ -76,30 +76,30 @@ export const moveCardBlitzToExistingDutchPile = (
   destinationCard,
 });
 
-export const moveCardWoodToNewDutchPile = (
+export const moveCardStashToNewDutchPile = (
   id: string,
   startingCard: PlayingCard
-): MoveCardWoodToNewDutchPileAction => ({
+): MoveCardStashToNewDutchPileAction => ({
   type: GameActionType.MOVE_CARD_WOOD_TO_NEW_DUTCH_PILE,
   id,
   startingCard,
 });
 
-export const moveCardWoodToExistingDutchPile = (
+export const moveCardStashToExistingDutchPile = (
   id: string,
   startingCard: PlayingCard,
   destinationCard: PlayingCard
-): MoveCardWoodToExistingDutchPileAction => ({
+): MoveCardStashToExistingDutchPileAction => ({
   type: GameActionType.MOVE_CARD_WOOD_TO_EXISTING_DUTCH_PILE,
   id,
   startingCard,
   destinationCard,
 });
 
-export const moveCardBlitzToNewPostPile = (
+export const moveCardBlitzToNewSpreadPile = (
   id: string,
   startingCard: PlayingCard
-): MoveCardBlitzToNewPostPileAction => ({
+): MoveCardBlitzToNewSpreadPileAction => ({
   type: GameActionType.MOVE_CARD_BLITZ_TO_NEW_POST_PILE,
   id,
   startingCard,

@@ -4,9 +4,9 @@ import { validateMove } from "../helpers/validateMove";
 import { PlayingCardStack } from "./PlayingCardStack";
 import {
   moveCardBlitzToNewDutchPile,
-  moveCardBlitzToNewPostPile,
-  moveCardPostToNewDutchPile,
-  moveCardWoodToNewDutchPile,
+  moveCardBlitzToNewSpreadPile,
+  moveCardSpreadToNewDutchPile,
+  moveCardStashToNewDutchPile,
 } from "../store/game/gameActions";
 import { deselectCard } from "../store/local/localActions";
 import { useAppEmit } from "../helpers/useAppEmit";
@@ -37,10 +37,10 @@ export const CenterArea = () => {
       switch (localState.selectedCard.location) {
         case "post":
           await emit(
-            moveCardPostToNewDutchPile(peer.id!, localState.selectedCard)
+            moveCardSpreadToNewDutchPile(peer.id!, localState.selectedCard)
           );
           await emit(
-            moveCardBlitzToNewPostPile(
+            moveCardBlitzToNewSpreadPile(
               peer.id!,
               gameState.blitz[peer.id!][gameState.blitz[peer.id!].length - 1]
             )
@@ -53,7 +53,7 @@ export const CenterArea = () => {
           break;
         case "wood":
           await emit(
-            moveCardWoodToNewDutchPile(peer.id!, localState.selectedCard)
+            moveCardStashToNewDutchPile(peer.id!, localState.selectedCard)
           );
           break;
         case "dutch":
