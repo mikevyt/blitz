@@ -16,10 +16,10 @@ export const moveCardStackToExistingCenterPileReducer = (
       break;
     }
   }
-  const blitz: GameState["blitz"] = {
-    ...state.blitz,
-    [id]: state.blitz[id].filter((card) => !isEqual(card, startingCard)),
+  const stack: GameState["stack"] = {
+    ...state.stack,
+    [id]: state.stack[id].filter((card) => !isEqual(card, startingCard)),
   };
 
-  return { ...state, center, blitz };
+  return { ...state, center, stack };
 };

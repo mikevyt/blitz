@@ -14,9 +14,9 @@ import { moveCardSpreadToExistingSpreadPileReducer } from "./gameReducers/moveCa
 export const initialState: GameState = {
   center: [],
   spread: {},
-  blitz: {},
-  wood: {},
-  woodVisible: {},
+  stack: {},
+  stash: {},
+  stashVisible: {},
 };
 
 export const GameReducer: Reducer<GameState, GameAction> = (

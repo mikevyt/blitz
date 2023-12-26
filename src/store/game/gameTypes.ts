@@ -17,9 +17,9 @@ export enum GameActionType {
 export interface GameState {
   readonly center: PlayingCard[][];
   readonly spread: { [id: string]: PlayingCard[][] };
-  readonly blitz: { [id: string]: PlayingCard[] };
-  readonly wood: { [id: string]: PlayingCard[] };
-  readonly woodVisible: { [id: string]: number };
+  readonly stack: { [id: string]: PlayingCard[] };
+  readonly stash: { [id: string]: PlayingCard[] };
+  readonly stashVisible: { [id: string]: number };
 }
 
 export type GameAction =

@@ -26,7 +26,7 @@ export const validateMove = ({
   }
 
   // Cannot add cards to these piles
-  if (["blitz", "wood"].includes(destinationCard.location)) {
+  if (["stack", "stash"].includes(destinationCard.location)) {
     return false;
   }
 

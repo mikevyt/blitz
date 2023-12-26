@@ -16,10 +16,10 @@ export const moveCardStashToExistingCenterPileReducer = (
       break;
     }
   }
-  const wood: GameState["wood"] = {
-    ...state.wood,
-    [id]: state.wood[id].filter((card) => !isEqual(card, startingCard)),
+  const stash: GameState["stash"] = {
+    ...state.stash,
+    [id]: state.stash[id].filter((card) => !isEqual(card, startingCard)),
   };
 
-  return { ...state, center, wood };
+  return { ...state, center, stash };
 };

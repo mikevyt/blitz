@@ -42,16 +42,16 @@ export const CenterArea = () => {
           await emit(
             moveCardStackToNewSpreadPile(
               peer.id!,
-              gameState.blitz[peer.id!][gameState.blitz[peer.id!].length - 1]
+              gameState.stack[peer.id!][gameState.stack[peer.id!].length - 1]
             )
           );
           break;
-        case "blitz":
+        case "stack":
           await emit(
             moveCardStackToNewCenterPile(peer.id!, localState.selectedCard)
           );
           break;
-        case "wood":
+        case "stash":
           await emit(
             moveCardStashToNewCenterPile(peer.id!, localState.selectedCard)
           );

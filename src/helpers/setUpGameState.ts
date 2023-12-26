@@ -11,14 +11,14 @@ export const setUpGameState = (id: string): GameState => {
     spread: {
       [id]: cards.slice(0, 3).map((card) => [{ ...card, location: "spread" }]),
     },
-    blitz: {
-      [id]: cards.slice(3, 13).map((card) => ({ ...card, location: "blitz" })),
+    stack: {
+      [id]: cards.slice(3, 13).map((card) => ({ ...card, location: "stack" })),
     },
-    wood: {
+    stash: {
       [id]: cards
         .slice(14, cards.length)
-        .map((card) => ({ ...card, location: "wood" })),
+        .map((card) => ({ ...card, location: "stash" })),
     },
-    woodVisible: { [id]: -1 },
+    stashVisible: { [id]: -1 },
   };
 };

@@ -11,15 +11,15 @@ export const PlayingCardArea = () => {
   const peer = useAppSelector((state) => state.peer);
   const dispatch = useAppDispatch();
   const emit = useAppEmit();
-  const currentStashIndex = gameState.woodVisible?.[peer.id!] || -1;
+  const currentStashIndex = gameState.stashVisible?.[peer.id!] || -1;
 
   const handleClick = async () => {
     // handle overflow
-    if (currentStashIndex + 3 > gameState.wood[peer.id!].length) {
+    if (currentStashIndex + 3 > gameState.stash[peer.id!].length) {
       await emit(
         updateStash(
           peer.id!,
-          currentStashIndex + 3 - gameState.wood[peer.id!].length
+          currentStashIndex + 3 - gameState.stash[peer.id!].length
         )
       );
     } else {
@@ -43,15 +43,15 @@ export const PlayingCardArea = () => {
         ))}
       </LabelledArea>
       <LabelledArea label="Stack">
-        <PlayingCardStack cards={gameState.blitz[peer.id!]} />
+        <PlayingCardStack cards={gameState.stack[peer.id!]} />
       </LabelledArea>
       <LabelledArea label="Stash">
         {currentStashIndex !== -1 && (
           <PlayingCardStack
-            cards={gameState.wood[peer.id!].slice(0, currentStashIndex)}
+            cards={gameState.stash[peer.id!].slice(0, currentStashIndex)}
           />
         )}
-        {currentStashIndex !== gameState.wood[peer.id!].length - 1 ? (
+        {currentStashIndex !== gameState.stash[peer.id!].length - 1 ? (
           <PlayingCardPlaceholder />
         ) : (
           <PlayingCardPlaceholder style={{ backgroundColor: "white" }} />

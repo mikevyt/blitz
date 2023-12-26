@@ -10,9 +10,9 @@ export const startGame = (dispatch: Dispatch, ownId: string, ids: string[]) => {
   const state: GameState = {
     center: [],
     spread: {},
-    blitz: {},
-    wood: {},
-    woodVisible: {},
+    stack: {},
+    stash: {},
+    stashVisible: {},
   };
   ids.forEach((id) => {
     const playerState = setUpGameState(id);

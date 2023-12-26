@@ -8,10 +8,10 @@ export const moveCardStackToNewCenterPileReducer = (
   const { id, startingCard } = action;
   const center = [...(state.center || [[]])];
   center.push([{ ...startingCard, location: "center" }]);
-  const blitz: GameState["blitz"] = {
-    ...state.blitz,
-    [id]: state.blitz[id].filter((card) => !isEqual(card, startingCard)),
+  const stack: GameState["stack"] = {
+    ...state.stack,
+    [id]: state.stack[id].filter((card) => !isEqual(card, startingCard)),
   };
 
-  return { ...state, center, blitz };
+  return { ...state, center, stack };
 };

@@ -5,7 +5,7 @@ describe("validateMove", () => {
   describe("center-bound card", () => {
     it("should return true if selectedCard has digit 1", () => {
       const selectedCard: PlayingCard = {
-        location: "blitz",
+        location: "stack",
         digit: 1,
         color: "red",
         positive: false,
@@ -16,7 +16,7 @@ describe("validateMove", () => {
 
     it("should return false if selectedCard does not digit 1", () => {
       const selectedCard: PlayingCard = {
-        location: "blitz",
+        location: "stack",
         digit: 2,
         color: "red",
         positive: false,
@@ -26,11 +26,11 @@ describe("validateMove", () => {
     });
   });
 
-  it.each<PlayingCard["location"]>(["blitz", "wood"])(
+  it.each<PlayingCard["location"]>(["stack", "stash"])(
     "cannot add to %s pile",
     (pile) => {
       const selectedCard: PlayingCard = {
-        location: "blitz",
+        location: "stack",
         digit: 3,
         color: "red",
         positive: false,

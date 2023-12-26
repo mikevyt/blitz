@@ -1,5 +1,5 @@
 export interface PlayingCard {
-  location: "spread" | "blitz" | "wood" | "center";
+  location: "spread" | "stack" | "stash" | "center";
   digit: number;
   color: "red" | "yellow" | "green" | "blue";
   positive: boolean;

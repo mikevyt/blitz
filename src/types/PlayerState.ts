@@ -2,7 +2,7 @@ import { PlayingCard } from "./PlayingCard";
 
 export interface PlayerState {
   spread: PlayingCard[];
-  blitz: PlayingCard[];
-  wood: PlayingCard[];
+  stack: PlayingCard[];
+  stash: PlayingCard[];
   center: PlayingCard[];
 }

@@ -7,7 +7,7 @@ export const generateCards = (id: string) => {
       cards.push({
         color: color as PlayingCard["color"],
         digit: i,
-        location: "wood",
+        location: "stash",
         positive: ["blue", "yellow"].includes(color),
         owner: id,
       });
