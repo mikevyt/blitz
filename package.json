@@ -2,6 +2,7 @@
   "name": "pile-up",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://mikevyt.github.io/pile-up",
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
     "@reduxjs/toolkit": "^1.9.5",
@@ -25,7 +26,7 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "predeploy": "yarn build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
