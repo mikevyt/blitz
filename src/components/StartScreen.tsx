@@ -33,7 +33,7 @@ export const StartScreen = () => {
   };
 
   return (
-    <Card title="Dutch Blitz">
+    <Card title="PileUp!">
       {!peer.started ? (
         <div
           style={{
