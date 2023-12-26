@@ -1,8 +1,5 @@
-import React from "react";
 import { Card } from "antd";
-import { PlayingCard as PlayingCardType } from "../types/PlayingCard";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { deselectCard, selectCard } from "../store/local/localActions";
+import React from "react";
 
 export const PlayingCardPlaceholder = ({
   style,

@@ -1,15 +1,14 @@
-import { PlayingCardStack } from "./PlayingCardStack";
-import { LabelledArea } from "./LabelledArea";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { updateStash } from "../store/game/gameActions";
 import { Button } from "antd";
-import { PlayingCardPlaceholder } from "./PlayingCardPlaceholder";
 import { useAppEmit } from "../helpers/useAppEmit";
+import { updateStash } from "../store/game/gameActions";
+import { useAppSelector } from "../store/hooks";
+import { LabelledArea } from "./LabelledArea";
+import { PlayingCardPlaceholder } from "./PlayingCardPlaceholder";
+import { PlayingCardStack } from "./PlayingCardStack";
 
 export const PlayingCardArea = () => {
   const gameState = useAppSelector((state) => state.game);
   const peer = useAppSelector((state) => state.peer);
-  const dispatch = useAppDispatch();
   const emit = useAppEmit();
   const currentStashIndex = gameState.stashVisible?.[peer.id!] || -1;
 

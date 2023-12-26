@@ -1,19 +1,9 @@
-import { Button, Card, Form, Input, Tabs, TabsProps, Typography } from "antd";
-import { createPeer, stopPeerSession } from "../store/peer/peerActions";
-import { PeerConnection } from "../helpers/peer";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { connectPeer } from "../store/connection/connectionActions";
+import { Button, Card, Input } from "antd";
 import React from "react";
-import { AddPlayer } from "./AddPlayer";
-import { addHost, addName } from "../store/multiplayer/multiplayerActions";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { createPeer } from "../store/peer/peerActions";
 import { AddCode } from "./AddCode";
-
-const { Title } = Typography;
-
-type FieldType = {
-  name?: string;
-  code?: string;
-};
+import { AddPlayer } from "./AddPlayer";
 
 export const StartScreen = () => {
   const peer = useAppSelector((state) => state.peer);

@@ -1,10 +1,8 @@
 import { Button, Input } from "antd";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import React, { useState } from "react";
-import Title from "antd/es/typography/Title";
-import { CopyOutlined } from "@ant-design/icons";
-import { connectPeer } from "../store/connection/connectionActions";
+import React from "react";
 import { PeerConnection } from "../helpers/peer";
+import { connectPeer } from "../store/connection/connectionActions";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { addEmoji, addName } from "../store/multiplayer/multiplayerActions";
 
 export const AddCode = () => {
