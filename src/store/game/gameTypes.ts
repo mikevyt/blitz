@@ -6,6 +6,7 @@ export enum GameActionType {
   UPDATE_GAME = "UPDATE_GAME",
   MOVE_CARD_POST_TO_EXISTING_DUTCH_PILE = "MOVE_CARD_POST_TO_EXISTING_DUTCH_PILE",
   MOVE_CARD_POST_TO_NEW_DUTCH_PILE = "MOVE_CARD_POST_TO_NEW_DUTCH_PILE",
+  MOVE_CARD_POST_TO_EXISTING_POST_PILE = "MOVE_CARD_POST_TO_EXISTING_POST_PILE",
   MOVE_CARD_BLITZ_TO_EXISTING_DUTCH_PILE = "MOVE_CARD_BLITZ_TO_EXISTING_DUTCH_PILE",
   MOVE_CARD_BLITZ_TO_NEW_DUTCH_PILE = "MOVE_CARD_BLITZ_TO_NEW_DUTCH_PILE",
   MOVE_CARD_BLITZ_TO_NEW_POST_PILE = "MOVE_CARD_BLITZ_TO_NEW_POST_PILE",
@@ -27,6 +28,7 @@ export type GameAction =
   | MoveCardBlitzToExistingDutchPileAction
   | MoveCardPostToNewDutchPileAction
   | MoveCardPostToExistingDutchPileAction
+  | MoveCardPostToExistingPostPileAction
   | MoveCardBlitzToNewDutchPileAction
   | MoveCardPostToExistingDutchPileAction
   | MoveCardWoodToNewDutchPileAction
@@ -56,6 +58,13 @@ export interface MoveCardPostToNewDutchPileAction extends AnyAction {
 
 export interface MoveCardPostToExistingDutchPileAction extends AnyAction {
   type: GameActionType.MOVE_CARD_POST_TO_EXISTING_DUTCH_PILE;
+  id: string;
+  startingCard: PlayingCard;
+  destinationCard: PlayingCard;
+}
+
+export interface MoveCardPostToExistingPostPileAction extends AnyAction {
+  type: GameActionType.MOVE_CARD_POST_TO_EXISTING_POST_PILE;
   id: string;
   startingCard: PlayingCard;
   destinationCard: PlayingCard;

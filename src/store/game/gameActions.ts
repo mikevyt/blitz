@@ -5,6 +5,7 @@ import {
   MoveCardBlitzToNewDutchPileAction,
   MoveCardBlitzToNewPostPileAction,
   MoveCardPostToExistingDutchPileAction,
+  MoveCardPostToExistingPostPileAction,
   MoveCardPostToNewDutchPileAction,
   MoveCardWoodToExistingDutchPileAction,
   MoveCardWoodToNewDutchPileAction,
@@ -39,6 +40,17 @@ export const moveCardPostToExistingDutchPile = (
   destinationCard: PlayingCard
 ): MoveCardPostToExistingDutchPileAction => ({
   type: GameActionType.MOVE_CARD_POST_TO_EXISTING_DUTCH_PILE,
+  id,
+  startingCard,
+  destinationCard,
+});
+
+export const moveCardPostToExistingPostPile = (
+  id: string,
+  startingCard: PlayingCard,
+  destinationCard: PlayingCard
+): MoveCardPostToExistingPostPileAction => ({
+  type: GameActionType.MOVE_CARD_POST_TO_EXISTING_POST_PILE,
   id,
   startingCard,
   destinationCard,

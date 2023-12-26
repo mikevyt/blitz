@@ -8,6 +8,7 @@ import {
   moveCardBlitzToExistingDutchPile,
   moveCardBlitzToNewPostPile,
   moveCardPostToExistingDutchPile,
+  moveCardPostToExistingPostPile,
   moveCardWoodToExistingDutchPile,
 } from "../store/game/gameActions";
 import { useAppEmit } from "../helpers/useAppEmit";
@@ -47,13 +48,24 @@ export const PlayingCard = ({
     ) {
       switch (localState.selectedCard.location) {
         case "post":
-          await emit(
-            moveCardPostToExistingDutchPile(
-              peer.id!,
-              localState.selectedCard,
-              card
-            )
-          );
+          if (card.location === "dutch") {
+            await emit(
+              moveCardPostToExistingDutchPile(
+                peer.id!,
+                localState.selectedCard,
+                card
+              )
+            );
+          } else if (card.location === "post") {
+            await emit(
+              moveCardPostToExistingPostPile(
+                peer.id!,
+                localState.selectedCard,
+                card
+              )
+            );
+          }
+          // TODO: Need to prevent this if there's still three decks
           await emit(
             moveCardBlitzToNewPostPile(
               peer.id!,

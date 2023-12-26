@@ -1,6 +1,5 @@
 import { Reducer } from "redux";
 import { GameAction, GameActionType, GameState } from "./gameTypes";
-import { setUpGameState } from "../../helpers/setUpGameState";
 import { moveCardPostToNewDutchPileReducer } from "./gameReducers/moveCardPostToNewDutchPileReducer";
 import { moveCardPostToExistingDutchPileReducer } from "./gameReducers/moveCardPostToExistingDutchPileReducer";
 import { moveCardBlitzToNewDutchPileReducer } from "./gameReducers/moveCardBlitzToNewDutchPileReducer";
@@ -10,6 +9,7 @@ import { moveCardWoodToNewDutchPileReducer } from "./gameReducers/moveCardWoodTo
 import { moveCardWoodToExistingDutchPileReducer } from "./gameReducers/moveCardWoodToExistingDutchPileReducer";
 import { updateWoodReducer } from "./gameReducers/updateWoodReducer";
 import { updateGameReducer } from "./gameReducers/updateGameReducer";
+import { moveCardPostToExistingPostPileReducer } from "./gameReducers/moveCardPostToExistingPostPileReducer";
 
 export const initialState: GameState = {
   dutch: [],
@@ -28,6 +28,8 @@ export const GameReducer: Reducer<GameState, GameAction> = (
       return moveCardPostToNewDutchPileReducer(state, action);
     case GameActionType.MOVE_CARD_POST_TO_EXISTING_DUTCH_PILE:
       return moveCardPostToExistingDutchPileReducer(state, action);
+    case GameActionType.MOVE_CARD_POST_TO_EXISTING_POST_PILE:
+      return moveCardPostToExistingPostPileReducer(state, action);
     case GameActionType.MOVE_CARD_BLITZ_TO_NEW_DUTCH_PILE:
       return moveCardBlitzToNewDutchPileReducer(state, action);
     case GameActionType.MOVE_CARD_BLITZ_TO_EXISTING_DUTCH_PILE:
