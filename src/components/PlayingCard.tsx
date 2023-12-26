@@ -1,18 +1,19 @@
-import React from "react";
+import { CheckCircleFilled } from "@ant-design/icons";
 import { Card } from "antd";
-import { PlayingCard as PlayingCardType } from "../types/PlayingCard";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { deselectCard, selectCard } from "../store/local/localActions";
+import React from "react";
+import { colorMap } from "../helpers/colorMap";
+import { useAppEmit } from "../helpers/useAppEmit";
 import { validateMove } from "../helpers/validateMove";
 import {
-  moveCardStackToExistingCenterPile,
-  moveCardStackToNewSpreadPile,
   moveCardSpreadToExistingCenterPile,
   moveCardSpreadToExistingSpreadPile,
+  moveCardStackToExistingCenterPile,
+  moveCardStackToNewSpreadPile,
   moveCardStashToExistingCenterPile,
 } from "../store/game/gameActions";
-import { useAppEmit } from "../helpers/useAppEmit";
-import { CheckCircleFilled } from "@ant-design/icons";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { deselectCard, selectCard } from "../store/local/localActions";
+import { PlayingCard as PlayingCardType } from "../types/PlayingCard";
 
 export const PlayingCard = ({
   card,
@@ -103,16 +104,20 @@ export const PlayingCard = ({
       onClick={handleClick}
       bordered={false}
       style={{
-        backgroundColor: card.color,
-        color: card.color === "yellow" ? "black" : "white",
+        backgroundColor: colorMap[card.color],
+        color: "white",
         fontSize: "2rem",
-        border: localState.selectedCard === card ? "5px solid white" : 0,
+        border:
+          localState.selectedCard === card
+            ? "5px solid yellow"
+            : "5px solid white",
         width: "5rem",
         height: "7rem",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         userSelect: "none",
+        boxShadow: "-2px 2px 0px rgb(230, 230, 230)",
         ...style,
       }}
     >

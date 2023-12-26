@@ -45,15 +45,21 @@ export const PlayingCardArea = () => {
         <PlayingCardStack cards={gameState.stack[peer.id!]} />
       </LabelledArea>
       <LabelledArea label="Stash">
+        {currentStashIndex !== gameState.stash[peer.id!].length - 1 ? (
+          <PlayingCardPlaceholder />
+        ) : (
+          <PlayingCardPlaceholder
+            style={{
+              backgroundColor: "white",
+              boxShadow: undefined,
+              border: undefined,
+            }}
+          />
+        )}
         {currentStashIndex !== -1 && (
           <PlayingCardStack
             cards={gameState.stash[peer.id!].slice(0, currentStashIndex)}
           />
-        )}
-        {currentStashIndex !== gameState.stash[peer.id!].length - 1 ? (
-          <PlayingCardPlaceholder />
-        ) : (
-          <PlayingCardPlaceholder style={{ backgroundColor: "white" }} />
         )}
       </LabelledArea>
       <Button onClick={handleClick}>Flip Stash</Button>

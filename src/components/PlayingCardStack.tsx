@@ -1,4 +1,3 @@
-import React from "react";
 import { PlayingCard as PlayingCardType } from "../types/PlayingCard";
 import { PlayingCard } from "./PlayingCard";
 
@@ -9,7 +8,9 @@ export const PlayingCardStack = ({ cards }: { cards: PlayingCardType[] }) => {
   return (
     <PlayingCard
       style={{
-        boxShadow: cards.length > 1 ? "-3px 3px 0px 0px #D3D3D3" : undefined,
+        ...(cards.length > 1
+          ? { boxShadow: "-4px 4px 0px 0px #D3D3D3" }
+          : undefined),
         borderRadius: "8px",
       }}
       card={cards[cards.length - 1]}
