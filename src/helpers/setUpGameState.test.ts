@@ -81,14 +81,14 @@ describe("setUpGameState", () => {
           },
         ],
       },
-      dutch: [],
-      post: {
+      center: [],
+      spread: {
         testId: [
           [
             {
               color: "red",
               digit: 1,
-              location: "post",
+              location: "spread",
               owner: "testId",
               positive: false,
             },
@@ -97,7 +97,7 @@ describe("setUpGameState", () => {
             {
               color: "yellow",
               digit: 1,
-              location: "post",
+              location: "spread",
               owner: "testId",
               positive: true,
             },
@@ -106,7 +106,7 @@ describe("setUpGameState", () => {
             {
               color: "green",
               digit: 1,
-              location: "post",
+              location: "spread",
               owner: "testId",
               positive: false,
             },

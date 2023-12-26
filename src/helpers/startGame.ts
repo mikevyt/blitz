@@ -8,8 +8,8 @@ import { PeerConnection } from "./peer";
 
 export const startGame = (dispatch: Dispatch, ownId: string, ids: string[]) => {
   const state: GameState = {
-    dutch: [],
-    post: {},
+    center: [],
+    spread: {},
     blitz: {},
     wood: {},
     woodVisible: {},

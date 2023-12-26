@@ -6,14 +6,14 @@ export const moveCardStackToNewSpreadPileReducer = (
   action: MoveCardStackToNewSpreadPileAction
 ) => {
   const { id, startingCard } = action;
-  const post: GameState["post"] = {
-    ...state.post,
-    [id]: [...state.post[id], [{ ...startingCard, location: "post" }]],
+  const spread: GameState["spread"] = {
+    ...state.spread,
+    [id]: [...state.spread[id], [{ ...startingCard, location: "spread" }]],
   };
   const blitz: GameState["blitz"] = {
     ...state.blitz,
     [id]: state.blitz[id].filter((card) => !isEqual(card, startingCard)),
   };
 
-  return { ...state, post, blitz };
+  return { ...state, spread, blitz };
 };

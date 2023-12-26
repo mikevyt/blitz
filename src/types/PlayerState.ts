@@ -1,8 +1,8 @@
 import { PlayingCard } from "./PlayingCard";
 
 export interface PlayerState {
-  post: PlayingCard[];
+  spread: PlayingCard[];
   blitz: PlayingCard[];
   wood: PlayingCard[];
-  dutch: PlayingCard[];
+  center: PlayingCard[];
 }

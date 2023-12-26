@@ -6,14 +6,14 @@ export const moveCardSpreadToNewCenterPileReducer = (
   action: MoveCardSpreadToNewCenterPileAction
 ) => {
   const { id, startingCard } = action;
-  const dutch = [...(state.dutch || [[]])];
-  dutch.push([{ ...startingCard, location: "dutch" }]);
-  const post: GameState["post"] = {
-    ...state.post,
-    [id]: state.post[id].map((cards) =>
+  const center = [...(state.center || [[]])];
+  center.push([{ ...startingCard, location: "center" }]);
+  const spread: GameState["spread"] = {
+    ...state.spread,
+    [id]: state.spread[id].map((cards) =>
       cards.filter((card) => !isEqual(card, startingCard))
     ),
   };
 
-  return { ...state, dutch, post };
+  return { ...state, center, spread };
 };

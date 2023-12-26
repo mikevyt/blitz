@@ -9,20 +9,20 @@ export const moveCardSpreadToExistingSpreadPileReducer = (
   action: MoveCardSpreadToExistingSpreadPileAction
 ) => {
   const { id, startingCard, destinationCard } = action;
-  // add to post pile
-  const post: GameState["post"] = {
-    ...state.post,
-    [id]: state.post[id].map((cards) =>
+  // add to spread pile
+  const spread: GameState["spread"] = {
+    ...state.spread,
+    [id]: state.spread[id].map((cards) =>
       cards.filter((card) => !isEqual(card, startingCard))
     ),
   };
 
-  for (let i = 0; i < post[id].length; i++) {
-    if (isEqual(post[id][i][post[id][i].length - 1], destinationCard)) {
-      post[id][i].push({ ...startingCard, location: "post" });
+  for (let i = 0; i < spread[id].length; i++) {
+    if (isEqual(spread[id][i][spread[id][i].length - 1], destinationCard)) {
+      spread[id][i].push({ ...startingCard, location: "spread" });
       break;
     }
   }
 
-  return { ...state, post };
+  return { ...state, spread };
 };

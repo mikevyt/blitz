@@ -29,7 +29,7 @@ export const PlayingCard = ({
 
   const handleClick = async () => {
     if (!localState.selectedCard) {
-      if (card.location !== "dutch") {
+      if (card.location !== "center") {
         dispatch(selectCard(card));
       }
       return;
@@ -47,8 +47,8 @@ export const PlayingCard = ({
       })
     ) {
       switch (localState.selectedCard.location) {
-        case "post":
-          if (card.location === "dutch") {
+        case "spread":
+          if (card.location === "center") {
             await emit(
               moveCardSpreadToExistingCenterPile(
                 peer.id!,
@@ -56,7 +56,7 @@ export const PlayingCard = ({
                 card
               )
             );
-          } else if (card.location === "post") {
+          } else if (card.location === "spread") {
             await emit(
               moveCardSpreadToExistingSpreadPile(
                 peer.id!,
@@ -91,7 +91,7 @@ export const PlayingCard = ({
             )
           );
           break;
-        case "dutch":
+        case "center":
         default:
           return;
       }
@@ -116,7 +116,7 @@ export const PlayingCard = ({
         ...style,
       }}
     >
-      {card.digit === 10 && card.location === "dutch" ? (
+      {card.digit === 10 && card.location === "center" ? (
         <CheckCircleFilled />
       ) : (
         <>

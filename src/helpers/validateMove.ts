@@ -30,19 +30,19 @@ export const validateMove = ({
     return false;
   }
 
-  // Can only add card incremented up to dutch pile
+  // Can only add card incremented up to center pile
   if (
     selectedCard.digit !== destinationCard.digit + 1 &&
-    destinationCard.location === "dutch"
+    destinationCard.location === "center"
   ) {
     return false;
   }
 
-  // Can only add card incremented down (and opposite sign) to post pile
+  // Can only add card incremented down (and opposite sign) to spread pile
   if (
     (selectedCard.digit !== destinationCard.digit - 1 ||
       selectedCard.positive === destinationCard.positive) &&
-    destinationCard.location === "post"
+    destinationCard.location === "spread"
   ) {
     return false;
   }

@@ -2,7 +2,7 @@ import { PlayingCard } from "../types/PlayingCard";
 import { validateMove } from "./validateMove";
 
 describe("validateMove", () => {
-  describe("dutch-bound card", () => {
+  describe("center-bound card", () => {
     it("should return true if selectedCard has digit 1", () => {
       const selectedCard: PlayingCard = {
         location: "blitz",

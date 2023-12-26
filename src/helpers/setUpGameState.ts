@@ -7,9 +7,9 @@ export const setUpGameState = (id: string): GameState => {
   shuffle(cards);
 
   return {
-    dutch: [],
-    post: {
-      [id]: cards.slice(0, 3).map((card) => [{ ...card, location: "post" }]),
+    center: [],
+    spread: {
+      [id]: cards.slice(0, 3).map((card) => [{ ...card, location: "spread" }]),
     },
     blitz: {
       [id]: cards.slice(3, 13).map((card) => ({ ...card, location: "blitz" })),

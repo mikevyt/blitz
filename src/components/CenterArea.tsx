@@ -35,7 +35,7 @@ export const CenterArea = () => {
     ) {
       console.log(localState.selectedCard);
       switch (localState.selectedCard.location) {
-        case "post":
+        case "spread":
           await emit(
             moveCardSpreadToNewCenterPile(peer.id!, localState.selectedCard)
           );
@@ -56,7 +56,7 @@ export const CenterArea = () => {
             moveCardStashToNewCenterPile(peer.id!, localState.selectedCard)
           );
           break;
-        case "dutch":
+        case "center":
         default:
           break;
       }
@@ -84,7 +84,7 @@ export const CenterArea = () => {
         paddingRight: "10vw",
       }}
     >
-      {gameState.dutch.map((stack, i) => (
+      {gameState.center.map((stack, i) => (
         <PlayingCardStack key={i} cards={stack} />
       ))}
     </div>

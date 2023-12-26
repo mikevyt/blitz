@@ -6,12 +6,12 @@ export const moveCardStashToNewCenterPileReducer = (
   action: MoveCardStashToNewCenterPileAction
 ) => {
   const { id, startingCard } = action;
-  const dutch = [...(state.dutch || [[]])];
-  dutch.push([{ ...startingCard, location: "dutch" }]);
+  const center = [...(state.center || [[]])];
+  center.push([{ ...startingCard, location: "center" }]);
   const wood: GameState["wood"] = {
     ...state.wood,
     [id]: state.wood[id].filter((card) => !isEqual(card, startingCard)),
   };
 
-  return { ...state, dutch, wood };
+  return { ...state, center, wood };
 };

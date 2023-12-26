@@ -9,10 +9,10 @@ export const moveCardStackToExistingCenterPileReducer = (
   action: MoveCardStackToExistingCenterPileAction
 ) => {
   const { id, startingCard, destinationCard } = action;
-  const dutch = state.dutch.map((row) => [...row]);
-  for (let i = 0; i < dutch.length; i++) {
-    if (isEqual(dutch[i][dutch[i].length - 1], destinationCard)) {
-      dutch[i].push({ ...startingCard, location: "dutch" });
+  const center = state.center.map((row) => [...row]);
+  for (let i = 0; i < center.length; i++) {
+    if (isEqual(center[i][center[i].length - 1], destinationCard)) {
+      center[i].push({ ...startingCard, location: "center" });
       break;
     }
   }
@@ -21,5 +21,5 @@ export const moveCardStackToExistingCenterPileReducer = (
     [id]: state.blitz[id].filter((card) => !isEqual(card, startingCard)),
   };
 
-  return { ...state, dutch, blitz };
+  return { ...state, center, blitz };
 };

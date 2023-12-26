@@ -38,7 +38,7 @@ export const PlayingCardArea = () => {
       }}
     >
       <LabelledArea label="Spread">
-        {gameState.post[peer.id!].map((cards, i) => (
+        {gameState.spread[peer.id!].map((cards, i) => (
           <PlayingCardStack key={i} cards={cards} />
         ))}
       </LabelledArea>

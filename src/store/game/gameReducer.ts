@@ -12,8 +12,8 @@ import { updateGameReducer } from "./gameReducers/updateGameReducer";
 import { moveCardSpreadToExistingSpreadPileReducer } from "./gameReducers/moveCardSpreadToExistingSpreadPileReducer";
 
 export const initialState: GameState = {
-  dutch: [],
-  post: {},
+  center: [],
+  spread: {},
   blitz: {},
   wood: {},
   woodVisible: {},

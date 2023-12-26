@@ -6,12 +6,12 @@ export const moveCardStackToNewCenterPileReducer = (
   action: MoveCardStackToNewCenterPileAction
 ) => {
   const { id, startingCard } = action;
-  const dutch = [...(state.dutch || [[]])];
-  dutch.push([{ ...startingCard, location: "dutch" }]);
+  const center = [...(state.center || [[]])];
+  center.push([{ ...startingCard, location: "center" }]);
   const blitz: GameState["blitz"] = {
     ...state.blitz,
     [id]: state.blitz[id].filter((card) => !isEqual(card, startingCard)),
   };
 
-  return { ...state, dutch, blitz };
+  return { ...state, center, blitz };
 };
