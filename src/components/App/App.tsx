@@ -3,11 +3,15 @@ import { useAppSelector } from "../../store/hooks";
 import { CenterArea } from "../CenterArea";
 import { PlayingCardArea } from "../PlayingCardArea";
 import { StartScreen } from "../StartScreen";
+import { TopOpponentCardArea } from "../TopOpponentCardArea";
 
 export const App: React.FC = () => {
   const gameState = useAppSelector((state) => state.game);
+  const peer = useAppSelector((state) => state.peer);
   const multiplayer = useAppSelector((state) => state.multiplayer);
-  console.log({ gameState });
+  const otherPlayerIds = Object.keys(multiplayer.name).filter(
+    (id) => id !== peer.id
+  );
 
   return (
     <div
@@ -26,6 +30,10 @@ export const App: React.FC = () => {
         <StartScreen />
       ) : (
         <>
+          {otherPlayerIds.length > 0 && (
+            <TopOpponentCardArea id={otherPlayerIds[0]} />
+          )}
+          {/* TODO: 1, 2 on sides */}
           <CenterArea />
           <PlayingCardArea />
         </>

@@ -31,6 +31,10 @@ export const PlayingCard = ({
   const emit = useAppEmit();
 
   const handleClick = async () => {
+    // Cannot click another person's card TODO: remove if we use different card
+    if (card.owner !== peer.id && card.location !== "center") {
+      return;
+    }
     if (!localState.selectedCard) {
       if (card.location !== "center") {
         dispatch(selectCard(card));
