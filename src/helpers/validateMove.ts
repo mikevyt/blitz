@@ -33,7 +33,8 @@ export const validateMove = ({
   // Can only add card incremented up to center pile
   if (
     selectedCard.digit !== destinationCard.digit + 1 &&
-    destinationCard.location === "center"
+    destinationCard.location === "center" &&
+    selectedCard.color === destinationCard.color
   ) {
     return false;
   }
