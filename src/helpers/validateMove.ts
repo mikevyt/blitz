@@ -25,28 +25,22 @@ export const validateMove = ({
     return selectedCard.digit === 1;
   }
 
-  // Cannot add cards to these piles
-  if (["stack", "stash"].includes(destinationCard.location)) {
-    return false;
+  switch (destinationCard.location) {
+    // Cannot add cards to these piles
+    case "stack":
+    case "stash":
+      return false;
+    // Can only add card incremented and of same color to center pile
+    case "center":
+      return (
+        selectedCard.digit === destinationCard.digit + 1 &&
+        selectedCard.color === destinationCard.color
+      );
+    // Can only add card decremented and of opposite sign to spread pile
+    case "spread":
+      return (
+        selectedCard.digit === destinationCard.digit - 1 &&
+        selectedCard.positive !== destinationCard.positive
+      );
   }
-
-  // Can only add card incremented up to center pile
-  if (
-    (selectedCard.digit !== destinationCard.digit + 1 ||
-      selectedCard.color === destinationCard.color) &&
-    destinationCard.location === "center"
-  ) {
-    return false;
-  }
-
-  // Can only add card incremented down (and opposite sign) to spread pile
-  if (
-    (selectedCard.digit !== destinationCard.digit - 1 ||
-      selectedCard.positive === destinationCard.positive) &&
-    destinationCard.location === "spread"
-  ) {
-    return false;
-  }
-
-  return true;
 };
