@@ -15,7 +15,7 @@ import {
 } from "../store/game/gameActions";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { deselectCard, selectCard } from "../store/local/localActions";
-import { PlayingCard as PlayingCardType } from "../types/PlayingCard";
+import { PlayingCard as PlayingCardType, isEqual } from "../types/PlayingCard";
 
 export const PlayingCard = ({
   card,
@@ -49,6 +49,7 @@ export const PlayingCard = ({
         destinationCard: card,
       })
     ) {
+      console.log(localState.selectedCard.location);
       switch (localState.selectedCard.location) {
         case "spread":
           if (card.location === "center") {
@@ -68,13 +69,23 @@ export const PlayingCard = ({
               )
             );
           }
-          // TODO: Need to prevent this if there's still three decks
-          await emit(
-            moveCardStackToNewSpreadPile(
-              peer.id!,
-              gameState.stack[peer.id!][gameState.stack[peer.id!].length - 1]
-            )
-          );
+          // Only add card if removing card would lead to empty stack
+          if (
+            gameState.spread[peer.id!].find((cards) => {
+              return (
+                !!cards.filter((card) =>
+                  isEqual(localState.selectedCard!, card)
+                ).length && cards.length === 1
+              );
+            })
+          ) {
+            await emit(
+              moveCardStackToNewSpreadPile(
+                peer.id!,
+                gameState.stack[peer.id!][gameState.stack[peer.id!].length - 1]
+              )
+            );
+          }
           break;
         case "stack":
           if (card.location === "center") {

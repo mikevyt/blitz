@@ -1,15 +1,16 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { useAppEmit } from "../helpers/useAppEmit";
 import { validateMove } from "../helpers/validateMove";
-import { PlayingCardStack } from "./PlayingCardStack";
 import {
+  moveCardSpreadToNewCenterPile,
   moveCardStackToNewCenterPile,
   moveCardStackToNewSpreadPile,
-  moveCardSpreadToNewCenterPile,
   moveCardStashToNewCenterPile,
 } from "../store/game/gameActions";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { deselectCard } from "../store/local/localActions";
-import { useAppEmit } from "../helpers/useAppEmit";
+import { isEqual } from "../types/PlayingCard";
+import { PlayingCardStack } from "./PlayingCardStack";
 
 export const CenterArea = () => {
   const localState = useAppSelector((state) => state.local);
@@ -39,12 +40,22 @@ export const CenterArea = () => {
           await emit(
             moveCardSpreadToNewCenterPile(peer.id!, localState.selectedCard)
           );
-          await emit(
-            moveCardStackToNewSpreadPile(
-              peer.id!,
-              gameState.stack[peer.id!][gameState.stack[peer.id!].length - 1]
-            )
-          );
+          if (
+            gameState.spread[peer.id!].find((cards) => {
+              return (
+                !!cards.filter((card) =>
+                  isEqual(localState.selectedCard!, card)
+                ).length && cards.length === 1
+              );
+            })
+          ) {
+            await emit(
+              moveCardStackToNewSpreadPile(
+                peer.id!,
+                gameState.stack[peer.id!][gameState.stack[peer.id!].length - 1]
+              )
+            );
+          }
           break;
         case "stack":
           await emit(
