@@ -1,18 +1,18 @@
+import { PlayingCard } from "../../types/PlayingCard";
 import {
   GameActionType,
   GameState,
-  MoveCardStackToExistingCenterPileAction,
-  MoveCardStackToNewCenterPileAction,
-  MoveCardStackToNewSpreadPileAction,
   MoveCardSpreadToExistingCenterPileAction,
   MoveCardSpreadToExistingSpreadPileAction,
   MoveCardSpreadToNewCenterPileAction,
+  MoveCardStackToExistingCenterPileAction,
+  MoveCardStackToNewCenterPileAction,
+  MoveCardStackToNewSpreadPileAction,
   MoveCardStashToExistingCenterPileAction,
   MoveCardStashToNewCenterPileAction,
   UpdateGameAction,
   UpdateStashAction,
 } from "./gameTypes";
-import { PlayingCard } from "../../types/PlayingCard";
 
 export const updateGame = (state: GameState): UpdateGameAction => ({
   type: GameActionType.UPDATE_GAME,
@@ -20,7 +20,7 @@ export const updateGame = (state: GameState): UpdateGameAction => ({
 });
 
 export const updateStash = (id: string, index: number): UpdateStashAction => ({
-  type: GameActionType.UPDATE_WOOD,
+  type: GameActionType.UPDATE_STASH,
   id,
   index,
 });
@@ -29,7 +29,7 @@ export const moveCardSpreadToNewCenterPile = (
   id: string,
   startingCard: PlayingCard
 ): MoveCardSpreadToNewCenterPileAction => ({
-  type: GameActionType.MOVE_CARD_POST_TO_NEW_DUTCH_PILE,
+  type: GameActionType.MOVE_CARD_SPREAD_TO_NEW_CENTER_PILE,
   id,
   startingCard,
 });
@@ -39,7 +39,7 @@ export const moveCardSpreadToExistingCenterPile = (
   startingCard: PlayingCard,
   destinationCard: PlayingCard
 ): MoveCardSpreadToExistingCenterPileAction => ({
-  type: GameActionType.MOVE_CARD_POST_TO_EXISTING_DUTCH_PILE,
+  type: GameActionType.MOVE_CARD_SPREAD_TO_EXISTING_CENTER_PILE,
   id,
   startingCard,
   destinationCard,
@@ -50,7 +50,7 @@ export const moveCardSpreadToExistingSpreadPile = (
   startingCard: PlayingCard,
   destinationCard: PlayingCard
 ): MoveCardSpreadToExistingSpreadPileAction => ({
-  type: GameActionType.MOVE_CARD_POST_TO_EXISTING_POST_PILE,
+  type: GameActionType.MOVE_CARD_SPREAD_TO_EXISTING_SPREAD_PILE,
   id,
   startingCard,
   destinationCard,
@@ -60,7 +60,7 @@ export const moveCardStackToNewCenterPile = (
   id: string,
   startingCard: PlayingCard
 ): MoveCardStackToNewCenterPileAction => ({
-  type: GameActionType.MOVE_CARD_BLITZ_TO_NEW_DUTCH_PILE,
+  type: GameActionType.MOVE_CARD_STACK_TO_NEW_CENTER_PILE,
   id,
   startingCard,
 });
@@ -70,7 +70,7 @@ export const moveCardStackToExistingCenterPile = (
   startingCard: PlayingCard,
   destinationCard: PlayingCard
 ): MoveCardStackToExistingCenterPileAction => ({
-  type: GameActionType.MOVE_CARD_BLITZ_TO_EXISTING_DUTCH_PILE,
+  type: GameActionType.MOVE_CARD_STACK_TO_EXISTING_CENTER_PILE,
   id,
   startingCard,
   destinationCard,
@@ -80,7 +80,7 @@ export const moveCardStashToNewCenterPile = (
   id: string,
   startingCard: PlayingCard
 ): MoveCardStashToNewCenterPileAction => ({
-  type: GameActionType.MOVE_CARD_WOOD_TO_NEW_DUTCH_PILE,
+  type: GameActionType.MOVE_CARD_STASH_TO_NEW_CENTER_PILE,
   id,
   startingCard,
 });
@@ -90,7 +90,7 @@ export const moveCardStashToExistingCenterPile = (
   startingCard: PlayingCard,
   destinationCard: PlayingCard
 ): MoveCardStashToExistingCenterPileAction => ({
-  type: GameActionType.MOVE_CARD_WOOD_TO_EXISTING_DUTCH_PILE,
+  type: GameActionType.MOVE_CARD_STASH_TO_EXISTING_CENTER_PILE,
   id,
   startingCard,
   destinationCard,
@@ -100,7 +100,7 @@ export const moveCardStackToNewSpreadPile = (
   id: string,
   startingCard: PlayingCard
 ): MoveCardStackToNewSpreadPileAction => ({
-  type: GameActionType.MOVE_CARD_BLITZ_TO_NEW_POST_PILE,
+  type: GameActionType.MOVE_CARD_STACK_TO_NEW_SPREAD_PILE,
   id,
   startingCard,
 });
