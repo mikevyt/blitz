@@ -3,9 +3,11 @@ import { moveCardSpreadToExistingCenterPileReducer } from "./gameReducers/moveCa
 import { moveCardSpreadToExistingSpreadPileReducer } from "./gameReducers/moveCardSpreadToExistingSpreadPileReducer";
 import { moveCardSpreadToNewCenterPileReducer } from "./gameReducers/moveCardSpreadToNewCenterPileReducer";
 import { moveCardStackToExistingCenterPileReducer } from "./gameReducers/moveCardStackToExistingCenterPileReducer";
+import { moveCardStackToExistingSpreadPileReducer } from "./gameReducers/moveCardStackToExistingSpreadPileReducer";
 import { moveCardStackToNewCenterPileReducer } from "./gameReducers/moveCardStackToNewCenterPileReducer";
 import { moveCardStackToNewSpreadPileReducer } from "./gameReducers/moveCardStackToNewSpreadPileReducer";
 import { moveCardStashToExistingCenterPileReducer } from "./gameReducers/moveCardStashToExistingCenterPileReducer";
+import { moveCardStashToExistingSpreadPileReducer } from "./gameReducers/moveCardStashToExistingSpreadPileReducer";
 import { moveCardStashToNewCenterPileReducer } from "./gameReducers/moveCardStashToNewCenterPileReducer";
 import { updateGameReducer } from "./gameReducers/updateGameReducer";
 import { updateStashReducer } from "./gameReducers/updateStashReducer";
@@ -30,6 +32,10 @@ export const GameReducer: Reducer<GameState, GameAction> = (
       return moveCardSpreadToExistingCenterPileReducer(state, action);
     case GameActionType.MOVE_CARD_SPREAD_TO_EXISTING_SPREAD_PILE:
       return moveCardSpreadToExistingSpreadPileReducer(state, action);
+    case GameActionType.MOVE_CARD_STASH_TO_EXISTING_SPREAD_PILE:
+      return moveCardStashToExistingSpreadPileReducer(state, action);
+    case GameActionType.MOVE_CARD_STACK_TO_EXISTING_SPREAD_PILE:
+      return moveCardStackToExistingSpreadPileReducer(state, action);
     case GameActionType.MOVE_CARD_STACK_TO_NEW_CENTER_PILE:
       return moveCardStackToNewCenterPileReducer(state, action);
     case GameActionType.MOVE_CARD_STACK_TO_EXISTING_CENTER_PILE:

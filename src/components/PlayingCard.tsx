@@ -8,8 +8,10 @@ import {
   moveCardSpreadToExistingCenterPile,
   moveCardSpreadToExistingSpreadPile,
   moveCardStackToExistingCenterPile,
+  moveCardStackToExistingSpreadPile,
   moveCardStackToNewSpreadPile,
   moveCardStashToExistingCenterPile,
+  moveCardStashToExistingSpreadPile,
 } from "../store/game/gameActions";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { deselectCard, selectCard } from "../store/local/localActions";
@@ -75,22 +77,43 @@ export const PlayingCard = ({
           );
           break;
         case "stack":
-          await emit(
-            moveCardStackToExistingCenterPile(
-              peer.id!,
-              localState.selectedCard,
-              card
-            )
-          );
+          if (card.location === "center") {
+            await emit(
+              moveCardStackToExistingCenterPile(
+                peer.id!,
+                localState.selectedCard,
+                card
+              )
+            );
+          } else if (card.location === "spread") {
+            await emit(
+              moveCardStackToExistingSpreadPile(
+                peer.id!,
+                localState.selectedCard,
+                card
+              )
+            );
+          }
+
           break;
         case "stash":
-          await emit(
-            moveCardStashToExistingCenterPile(
-              peer.id!,
-              localState.selectedCard,
-              card
-            )
-          );
+          if (card.location === "center") {
+            await emit(
+              moveCardStashToExistingCenterPile(
+                peer.id!,
+                localState.selectedCard,
+                card
+              )
+            );
+          } else if (card.location === "spread") {
+            await emit(
+              moveCardStashToExistingSpreadPile(
+                peer.id!,
+                localState.selectedCard,
+                card
+              )
+            );
+          }
           break;
         case "center":
         default:

@@ -7,6 +7,8 @@ export enum GameActionType {
   MOVE_CARD_SPREAD_TO_EXISTING_CENTER_PILE = "MOVE_CARD_SPREAD_TO_EXISTING_CENTER_PILE",
   MOVE_CARD_SPREAD_TO_NEW_CENTER_PILE = "MOVE_CARD_SPREAD_TO_NEW_CENTER_PILE",
   MOVE_CARD_SPREAD_TO_EXISTING_SPREAD_PILE = "MOVE_CARD_SPREAD_TO_EXISTING_SPREAD_PILE",
+  MOVE_CARD_STASH_TO_EXISTING_SPREAD_PILE = "MOVE_CARD_STASH_TO_EXISTING_SPREAD_PILE",
+  MOVE_CARD_STACK_TO_EXISTING_SPREAD_PILE = "MOVE_CARD_STACK_TO_EXISTING_SPREAD_PILE",
   MOVE_CARD_STACK_TO_EXISTING_CENTER_PILE = "MOVE_CARD_STACK_TO_EXISTING_CENTER_PILE",
   MOVE_CARD_STACK_TO_NEW_CENTER_PILE = "MOVE_CARD_STACK_TO_NEW_CENTER_PILE",
   MOVE_CARD_STACK_TO_NEW_SPREAD_PILE = "MOVE_CARD_STACK_TO_NEW_SPREAD_PILE",
@@ -29,6 +31,8 @@ export type GameAction =
   | MoveCardSpreadToNewCenterPileAction
   | MoveCardSpreadToExistingCenterPileAction
   | MoveCardSpreadToExistingSpreadPileAction
+  | MoveCardStashToExistingSpreadPileAction
+  | MoveCardStackToExistingSpreadPileAction
   | MoveCardStackToNewCenterPileAction
   | MoveCardSpreadToExistingCenterPileAction
   | MoveCardStashToNewCenterPileAction
@@ -65,6 +69,20 @@ export interface MoveCardSpreadToExistingCenterPileAction extends AnyAction {
 
 export interface MoveCardSpreadToExistingSpreadPileAction extends AnyAction {
   type: GameActionType.MOVE_CARD_SPREAD_TO_EXISTING_SPREAD_PILE;
+  id: string;
+  startingCard: PlayingCard;
+  destinationCard: PlayingCard;
+}
+
+export interface MoveCardStackToExistingSpreadPileAction extends AnyAction {
+  type: GameActionType.MOVE_CARD_STACK_TO_EXISTING_SPREAD_PILE;
+  id: string;
+  startingCard: PlayingCard;
+  destinationCard: PlayingCard;
+}
+
+export interface MoveCardStashToExistingSpreadPileAction extends AnyAction {
+  type: GameActionType.MOVE_CARD_STASH_TO_EXISTING_SPREAD_PILE;
   id: string;
   startingCard: PlayingCard;
   destinationCard: PlayingCard;

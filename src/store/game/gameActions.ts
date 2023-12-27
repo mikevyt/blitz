@@ -6,9 +6,11 @@ import {
   MoveCardSpreadToExistingSpreadPileAction,
   MoveCardSpreadToNewCenterPileAction,
   MoveCardStackToExistingCenterPileAction,
+  MoveCardStackToExistingSpreadPileAction,
   MoveCardStackToNewCenterPileAction,
   MoveCardStackToNewSpreadPileAction,
   MoveCardStashToExistingCenterPileAction,
+  MoveCardStashToExistingSpreadPileAction,
   MoveCardStashToNewCenterPileAction,
   UpdateGameAction,
   UpdateStashAction,
@@ -51,6 +53,28 @@ export const moveCardSpreadToExistingSpreadPile = (
   destinationCard: PlayingCard
 ): MoveCardSpreadToExistingSpreadPileAction => ({
   type: GameActionType.MOVE_CARD_SPREAD_TO_EXISTING_SPREAD_PILE,
+  id,
+  startingCard,
+  destinationCard,
+});
+
+export const moveCardStashToExistingSpreadPile = (
+  id: string,
+  startingCard: PlayingCard,
+  destinationCard: PlayingCard
+): MoveCardStashToExistingSpreadPileAction => ({
+  type: GameActionType.MOVE_CARD_STASH_TO_EXISTING_SPREAD_PILE,
+  id,
+  startingCard,
+  destinationCard,
+});
+
+export const moveCardStackToExistingSpreadPile = (
+  id: string,
+  startingCard: PlayingCard,
+  destinationCard: PlayingCard
+): MoveCardStackToExistingSpreadPileAction => ({
+  type: GameActionType.MOVE_CARD_STACK_TO_EXISTING_SPREAD_PILE,
   id,
   startingCard,
   destinationCard,
