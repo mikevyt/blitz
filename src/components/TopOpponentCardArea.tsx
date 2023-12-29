@@ -1,4 +1,5 @@
 import { useAppSelector } from "../store/hooks";
+import { NameEmojiDisplay } from "./NameEmojiDisplay";
 import { PlayingCardPlaceholder } from "./PlayingCardPlaceholder";
 import { PlayingCardStack } from "./PlayingCardStack";
 
@@ -8,33 +9,32 @@ export const TopOpponentCardArea = ({ id }: { id: string }) => {
   const currentStashIndex = gameState.stashVisible?.[id] || -1;
 
   return (
-    <div style={{ display: "flex", flexDirection: "row" }}>
-      {/* TODO: create own component */}
-      <div>
-        {multiplayer.emoji[id]}
-        {multiplayer.name[id]}
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        {gameState.spread[id!].map((cards, i) => (
+          <PlayingCardStack key={i} cards={cards} />
+        ))}
+        <PlayingCardStack cards={gameState.stack[id]} />
+        {currentStashIndex !== gameState.stash[id!].length - 1 ? (
+          <PlayingCardPlaceholder />
+        ) : (
+          <PlayingCardPlaceholder
+            style={{
+              backgroundColor: "white",
+              boxShadow: undefined,
+              border: undefined,
+            }}
+          />
+        )}
+        {currentStashIndex !== -1 && (
+          <PlayingCardStack
+            cards={gameState.stash[id].slice(0, currentStashIndex)}
+          />
+        )}
       </div>
-
-      {gameState.spread[id!].map((cards, i) => (
-        <PlayingCardStack key={i} cards={cards} />
-      ))}
-      <PlayingCardStack cards={gameState.stack[id]} />
-      {currentStashIndex !== gameState.stash[id!].length - 1 ? (
-        <PlayingCardPlaceholder />
-      ) : (
-        <PlayingCardPlaceholder
-          style={{
-            backgroundColor: "white",
-            boxShadow: undefined,
-            border: undefined,
-          }}
-        />
-      )}
-      {currentStashIndex !== -1 && (
-        <PlayingCardStack
-          cards={gameState.stash[id].slice(0, currentStashIndex)}
-        />
-      )}
+      <NameEmojiDisplay id={id} />
     </div>
   );
 };
