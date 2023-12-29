@@ -12,13 +12,13 @@ export const TopOpponentCardArea = ({ id }: { id: string }) => {
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div style={{ display: "flex", flexDirection: "row", columnGap: "8px" }}>
         {gameState.spread[id!].map((cards, i) => (
           <PlayingCardStack key={i} cards={cards} />
         ))}
         <PlayingCardStack cards={gameState.stack[id]} />
         {currentStashIndex !== gameState.stash[id!].length - 1 ? (
-          <PlayingCardPlaceholder />
+          <PlayingCardPlaceholder isOpponentCard={true} />
         ) : (
           <PlayingCardPlaceholder
             style={{
@@ -26,6 +26,7 @@ export const TopOpponentCardArea = ({ id }: { id: string }) => {
               boxShadow: undefined,
               border: undefined,
             }}
+            isOpponentCard={true}
           />
         )}
         {currentStashIndex !== -1 && (

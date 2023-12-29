@@ -137,6 +137,40 @@ export const PlayingCard = ({
       dispatch(deselectCard());
     }
   };
+
+  const isOpponentCard = card.location !== "center" && card.owner !== peer.id;
+
+  if (isOpponentCard) {
+    return (
+      <Card
+        bordered={false}
+        style={{
+          backgroundColor: colorMap[card.color],
+          color: "white",
+          fontSize: "1rem",
+          border: "2.5px solid white",
+          width: "2.5rem",
+          height: "3.5rem",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          userSelect: "none",
+          boxShadow: "-1px 1px 0px rgb(230, 230, 230)",
+          ...style,
+        }}
+      >
+        {card.digit === 10 && card.location === "center" ? (
+          <CheckCircleFilled />
+        ) : (
+          <>
+            {card.digit}
+            {card.positive ? "+" : "-"}
+          </>
+        )}
+      </Card>
+    );
+  }
+
   return (
     <Card
       onClick={handleClick}
