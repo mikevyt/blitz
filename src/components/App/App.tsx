@@ -18,7 +18,7 @@ export const App: React.FC = () => {
   return (
     <div
       style={{
-        width: "100vw" /* Make content full-width */,
+        width: "100%" /* Make content full-width */,
         height: "100vh" /* Make content full-height */,
         overflowY: "auto" /* Enable vertical scrolling within the content */,
         display: "flex",
@@ -38,7 +38,8 @@ export const App: React.FC = () => {
               display: "flex",
               flexDirection: "row",
               flexGrow: 1,
-              width: "100vw",
+              width: "100%",
+              overflowX: "hidden",
             }}
           >
             {player2 && <SideOpponentCardArea id={player2} />}
