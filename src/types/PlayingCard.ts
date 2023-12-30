@@ -7,5 +7,10 @@ export interface PlayingCard {
 }
 
 export const isEqual = (card1: PlayingCard, card2: PlayingCard) => {
-  return card1.digit === card2.digit && card1.color === card2.color;
+  return (
+    !!card1 &&
+    !!card2 &&
+    card1.digit === card2.digit &&
+    card1.color === card2.color
+  );
 };
