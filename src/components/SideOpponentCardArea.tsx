@@ -5,7 +5,6 @@ import { PlayingCardStack } from "./PlayingCardStack";
 
 export const SideOpponentCardArea = ({ id }: { id: string }) => {
   const gameState = useAppSelector((state) => state.game);
-  const multiplayer = useAppSelector((state) => state.multiplayer);
   const currentStashIndex = gameState.stashVisible?.[id] || -1;
 
   return (

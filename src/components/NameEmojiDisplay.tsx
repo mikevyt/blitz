@@ -1,7 +1,7 @@
 import { Avatar, Typography } from "antd";
 import { useAppSelector } from "../store/hooks";
 
-const { Text, Link } = Typography;
+const { Text } = Typography;
 
 export const NameEmojiDisplay = ({ id }: { id: string }) => {
   const multiplayer = useAppSelector((state) => state.multiplayer);

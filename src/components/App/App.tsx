@@ -7,7 +7,6 @@ import { StartScreen } from "../StartScreen";
 import { TopOpponentCardArea } from "../TopOpponentCardArea";
 
 export const App: React.FC = () => {
-  const gameState = useAppSelector((state) => state.game);
   const peer = useAppSelector((state) => state.peer);
   const multiplayer = useAppSelector((state) => state.multiplayer);
   const otherPlayerIds = Object.keys(multiplayer.name).filter(
