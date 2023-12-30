@@ -46,96 +46,96 @@ export const PlayingCard = ({
       dispatch(deselectCard());
       return;
     }
-
     if (
-      validateMove({
+      !validateMove({
         selectedCard: localState.selectedCard,
         destinationCard: card,
       })
     ) {
-      console.log(localState.selectedCard.location);
-      switch (localState.selectedCard.location) {
-        case "spread":
-          if (card.location === "center") {
-            await emit(
-              moveCardSpreadToExistingCenterPile(
-                peer.id!,
-                localState.selectedCard,
-                card
-              )
-            );
-          } else if (card.location === "spread") {
-            await emit(
-              moveCardSpreadToExistingSpreadPile(
-                peer.id!,
-                localState.selectedCard,
-                card
-              )
-            );
-          }
-          // Only add card if removing card would lead to empty stack
-          if (
-            gameState.spread[peer.id!].find((cards) => {
-              return (
-                !!cards.filter((card) =>
-                  isEqual(localState.selectedCard!, card)
-                ).length && cards.length === 1
-              );
-            })
-          ) {
-            await emit(
-              moveCardStackToNewSpreadPile(
-                peer.id!,
-                gameState.stack[peer.id!][gameState.stack[peer.id!].length - 1]
-              )
-            );
-          }
-          break;
-        case "stack":
-          if (card.location === "center") {
-            await emit(
-              moveCardStackToExistingCenterPile(
-                peer.id!,
-                localState.selectedCard,
-                card
-              )
-            );
-          } else if (card.location === "spread") {
-            await emit(
-              moveCardStackToExistingSpreadPile(
-                peer.id!,
-                localState.selectedCard,
-                card
-              )
-            );
-          }
-
-          break;
-        case "stash":
-          if (card.location === "center") {
-            await emit(
-              moveCardStashToExistingCenterPile(
-                peer.id!,
-                localState.selectedCard,
-                card
-              )
-            );
-          } else if (card.location === "spread") {
-            await emit(
-              moveCardStashToExistingSpreadPile(
-                peer.id!,
-                localState.selectedCard,
-                card
-              )
-            );
-          }
-          break;
-        case "center":
-        default:
-          return;
-      }
       dispatch(deselectCard());
     }
+
+    console.log(localState.selectedCard.location);
+    switch (localState.selectedCard.location) {
+      case "spread":
+        if (card.location === "center") {
+          await emit(
+            moveCardSpreadToExistingCenterPile(
+              peer.id!,
+              localState.selectedCard,
+              card
+            )
+          );
+        } else if (card.location === "spread") {
+          await emit(
+            moveCardSpreadToExistingSpreadPile(
+              peer.id!,
+              localState.selectedCard,
+              card
+            )
+          );
+        }
+        // Only add card if removing card would lead to empty stack
+        if (
+          gameState.spread[peer.id!].find((cards) => {
+            return (
+              !!cards.filter((card) => isEqual(localState.selectedCard!, card))
+                .length && cards.length === 1
+            );
+          })
+        ) {
+          await emit(
+            moveCardStackToNewSpreadPile(
+              peer.id!,
+              gameState.stack[peer.id!][gameState.stack[peer.id!].length - 1]
+            )
+          );
+        }
+        break;
+      case "stack":
+        if (card.location === "center") {
+          await emit(
+            moveCardStackToExistingCenterPile(
+              peer.id!,
+              localState.selectedCard,
+              card
+            )
+          );
+        } else if (card.location === "spread") {
+          await emit(
+            moveCardStackToExistingSpreadPile(
+              peer.id!,
+              localState.selectedCard,
+              card
+            )
+          );
+        }
+
+        break;
+      case "stash":
+        if (card.location === "center") {
+          await emit(
+            moveCardStashToExistingCenterPile(
+              peer.id!,
+              localState.selectedCard,
+              card
+            )
+          );
+        } else if (card.location === "spread") {
+          await emit(
+            moveCardStashToExistingSpreadPile(
+              peer.id!,
+              localState.selectedCard,
+              card
+            )
+          );
+        }
+        break;
+      case "center":
+      default:
+        return;
+    }
+    dispatch(deselectCard());
   };
 
   const isOpponentCard = card.location !== "center" && card.owner !== peer.id;
