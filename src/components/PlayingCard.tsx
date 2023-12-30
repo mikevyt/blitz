@@ -53,6 +53,7 @@ export const PlayingCard = ({
       })
     ) {
       dispatch(deselectCard());
+      return;
     }
 
     console.log(localState.selectedCard.location);
