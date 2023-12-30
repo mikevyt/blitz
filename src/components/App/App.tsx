@@ -2,6 +2,7 @@ import React from "react";
 import { useAppSelector } from "../../store/hooks";
 import { CenterArea } from "../CenterArea";
 import { PlayingCardArea } from "../PlayingCardArea";
+import { SideOpponentCardArea } from "../SideOpponentCardArea";
 import { StartScreen } from "../StartScreen";
 import { TopOpponentCardArea } from "../TopOpponentCardArea";
 
@@ -32,9 +33,18 @@ export const App: React.FC = () => {
       ) : (
         <>
           {player1 && <TopOpponentCardArea id={player1} />}
-          {/* {player2 && <TopOpponentCardArea id={player2} />}
-          {player3 && <TopOpponentCardArea id={player3} />} */}
-          <CenterArea />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              flexGrow: 1,
+              width: "100vw",
+            }}
+          >
+            {player2 && <SideOpponentCardArea id={player2} />}
+            <CenterArea />
+            {player3 && <SideOpponentCardArea id={player3} />}
+          </div>
           <PlayingCardArea />
         </>
       )}

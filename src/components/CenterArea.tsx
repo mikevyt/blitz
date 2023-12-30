@@ -82,8 +82,7 @@ export const CenterArea = () => {
       onMouseLeave={() => setIsHover(false)}
       style={{
         border: "2px dotted #D3D3D3",
-        width: "100vw",
-        height: "100vh",
+        flex: 1,
         backgroundColor:
           isHover && !!localState.selectedCard ? "#CCC" : undefined,
         display: "flex",
