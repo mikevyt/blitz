@@ -18,9 +18,8 @@ export const App: React.FC = () => {
   return (
     <div
       style={{
-        width: "100%" /* Make content full-width */,
-        height: "100vh" /* Make content full-height */,
-        overflowY: "auto" /* Enable vertical scrolling within the content */,
+        width: "100%",
+        height: "calc(100vh - 16px)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

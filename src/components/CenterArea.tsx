@@ -90,8 +90,7 @@ export const CenterArea = () => {
         alignItems: "center",
         columnGap: "20px",
         rowGap: "20px",
-        paddingLeft: "10vw",
-        paddingRight: "10vw",
+        flexWrap: "wrap",
       }}
     >
       {gameState.center.map((stack, i) => (
