@@ -35,6 +35,7 @@ export const PlayingCardArea = () => {
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
+        marginTop: "20px",
       }}
     >
       <NameEmojiDisplay id={peer.id!} />
@@ -44,7 +45,6 @@ export const PlayingCardArea = () => {
           columnCount: 3 /* Set the number of columns */,
           columnGap: "20px" /* Set the gap between columns */,
           alignItems: "center",
-          marginTop: "20px",
         }}
       >
         <LabelledArea label="Spread">
