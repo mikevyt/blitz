@@ -1,8 +1,8 @@
+import { isEqual } from "../../../types/PlayingCard";
 import {
   GameState,
   MoveCardSpreadToExistingCenterPileAction,
 } from "../gameTypes";
-import { isEqual } from "../../../types/PlayingCard";
 
 export const moveCardSpreadToExistingCenterPileReducer = (
   state: GameState,
@@ -19,8 +19,8 @@ export const moveCardSpreadToExistingCenterPileReducer = (
 
   const spread: GameState["spread"] = {
     ...state.spread,
-    [id]: state.spread[id].map((cards) =>
-      cards.filter((card) => !isEqual(card, startingCard))
+    [id]: state.spread[id].filter(
+      (cards) => cards.filter((card) => !isEqual(card, startingCard)).length
     ),
   };
 
