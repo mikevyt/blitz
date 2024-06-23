@@ -31,6 +31,8 @@ export const MultiplayerReducer: Reducer<
       return addHostReducer(state, action);
     case MultiplayerActionType.START_GAME:
       return startGameReducer(state);
+    case MultiplayerActionType.END_GAME:
+      return endGameReducer(state);
     default:
       return state;
   }
@@ -70,4 +72,8 @@ export const addHostReducer = (
 
 export const startGameReducer = (state: MultiplayerState): MultiplayerState => {
   return { ...state, gameStatus: "STARTED" };
+};
+
+export const endGameReducer = (state: MultiplayerState): MultiplayerState => {
+  return { ...state, gameStatus: "ENDED" };
 };

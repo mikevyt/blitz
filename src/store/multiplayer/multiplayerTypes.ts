@@ -6,13 +6,14 @@ export enum MultiplayerActionType {
   ADD_EMOJI = "ADD_EMOJI",
   ADD_HOST = "ADD_HOST",
   START_GAME = "START_GAME",
+  END_GAME = "END_GAME",
 }
 
 export interface MultiplayerState {
   readonly name: { [id: string]: string };
   readonly emoji: { [id: string]: string };
   readonly host: string;
-  readonly gameStatus: "NOT_STARTED" | "STARTED";
+  readonly gameStatus: "NOT_STARTED" | "STARTED" | "ENDED";
 }
 
 export type MultiplayerAction =
@@ -20,7 +21,8 @@ export type MultiplayerAction =
   | AddEmojiAction
   | AddHostAction
   | UpdateAction
-  | StartGameAction;
+  | StartGameAction
+  | EndGameAction;
 
 export interface UpdateAction extends AnyAction {
   type: MultiplayerActionType.UPDATE;
@@ -46,4 +48,8 @@ export interface AddHostAction extends AnyAction {
 
 export interface StartGameAction extends AnyAction {
   type: MultiplayerActionType.START_GAME;
+}
+
+export interface EndGameAction extends AnyAction {
+  type: MultiplayerActionType.END_GAME;
 }

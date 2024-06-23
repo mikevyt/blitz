@@ -1,6 +1,7 @@
 import React from "react";
 import { useAppSelector } from "../../store/hooks";
 import { CenterArea } from "../CenterArea";
+import { EndScreen } from "../EndScreen";
 import { PlayingCardArea } from "../PlayingCardArea";
 import { SideOpponentCardArea } from "../SideOpponentCardArea";
 import { StartScreen } from "../StartScreen";
@@ -26,9 +27,8 @@ export const App: React.FC = () => {
         boxSizing: "border-box",
       }}
     >
-      {multiplayer.gameStatus === "NOT_STARTED" ? (
-        <StartScreen />
-      ) : (
+      {multiplayer.gameStatus === "NOT_STARTED" && <StartScreen />}
+      {multiplayer.gameStatus === "STARTED" && (
         <>
           {player1 && <TopOpponentCardArea id={player1} />}
           <div
@@ -47,6 +47,7 @@ export const App: React.FC = () => {
           <PlayingCardArea />
         </>
       )}
+      {multiplayer.gameStatus === "ENDED" && <EndScreen />}
     </div>
   );
 };

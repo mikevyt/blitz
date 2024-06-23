@@ -2,6 +2,7 @@ import {
   AddEmojiAction,
   AddHostAction,
   AddNameAction,
+  EndGameAction,
   MultiplayerActionType,
   MultiplayerState,
   StartGameAction,
@@ -32,4 +33,8 @@ export const addHost = (id: string): AddHostAction => ({
 
 export const startGame = (): StartGameAction => ({
   type: MultiplayerActionType.START_GAME,
+});
+
+export const endGame = (): EndGameAction => ({
+  type: MultiplayerActionType.END_GAME,
 });
