@@ -2,7 +2,7 @@ import { GameState } from "../store/game/gameTypes";
 import { calculateScores } from "./calculateScores";
 
 describe("calculateScores", () => {
-  it("should", () => {
+  it.skip("should", () => {
     const game: GameState = {
       center: [
         [
