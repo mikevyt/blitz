@@ -1,20 +1,7 @@
 import React from "react";
-import { useAppSelector } from "../../store/hooks";
-import { CenterArea } from "../CenterArea";
-import { EndScreen } from "../EndScreen";
-import { PlayingCardArea } from "../PlayingCardArea";
-import { SideOpponentCardArea } from "../SideOpponentCardArea";
-import { StartScreen } from "../StartScreen";
-import { TopOpponentCardArea } from "../TopOpponentCardArea";
+import { MainContent } from "../MainContent/MainContent";
 
 export const App: React.FC = () => {
-  const peer = useAppSelector((state) => state.peer);
-  const multiplayer = useAppSelector((state) => state.multiplayer);
-  const otherPlayerIds = Object.keys(multiplayer.name).filter(
-    (id) => id !== peer.id
-  );
-  const [player1, player2, player3] = otherPlayerIds;
-
   return (
     <div
       style={{
@@ -27,27 +14,7 @@ export const App: React.FC = () => {
         boxSizing: "border-box",
       }}
     >
-      {multiplayer.gameStatus === "NOT_STARTED" && <StartScreen />}
-      {multiplayer.gameStatus === "STARTED" && (
-        <>
-          {player1 && <TopOpponentCardArea id={player1} />}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              flexGrow: 1,
-              width: "100%",
-              overflowX: "hidden",
-            }}
-          >
-            {player2 && <SideOpponentCardArea id={player2} />}
-            <CenterArea />
-            {player3 && <SideOpponentCardArea id={player3} />}
-          </div>
-          <PlayingCardArea />
-        </>
-      )}
-      {multiplayer.gameStatus === "ENDED" && <EndScreen />}
+      <MainContent />
     </div>
   );
 };
