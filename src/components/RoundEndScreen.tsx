@@ -1,7 +1,7 @@
 import { Button, Card, Table } from "antd";
 import { useAppSelector } from "../store/hooks";
 
-export const EndScreen = () => {
+export const RoundEndScreen = () => {
   const multiplayer = useAppSelector((state) => state.multiplayer);
   // const game = useAppSelector((state) => state.game);
   // const scores = calculateScores(game);

@@ -1,7 +1,7 @@
 import { useAppSelector } from "../../store/hooks";
 import { CenterArea } from "../CenterArea";
-import { EndScreen } from "../EndScreen";
 import { PlayingCardArea } from "../PlayingCardArea";
+import { RoundEndScreen } from "../RoundEndScreen";
 import { SideOpponentCardArea } from "../SideOpponentCardArea";
 import { StartScreen } from "../StartScreen";
 import { TopOpponentCardArea } from "../TopOpponentCardArea";
@@ -17,7 +17,7 @@ export const MainContent = () => {
   switch (multiplayer.gameStatus) {
     case "NOT_STARTED":
       return <StartScreen />;
-    case "STARTED":
+    case "ROUND_STARTED":
       return (
         <>
           {player1 && <TopOpponentCardArea id={player1} />}
@@ -37,8 +37,9 @@ export const MainContent = () => {
           <PlayingCardArea />
         </>
       );
-
-    case "ENDED":
-      return <EndScreen />;
+    case "ROUND_ENDED":
+      return <RoundEndScreen />;
+    default:
+      return null;
   }
 };

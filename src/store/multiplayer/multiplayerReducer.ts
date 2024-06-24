@@ -72,9 +72,9 @@ export const addHostReducer = (
 };
 
 export const startGameReducer = (state: MultiplayerState): MultiplayerState => {
-  return { ...state, gameStatus: "STARTED" };
+  return { ...state, gameStatus: "ROUND_STARTED" };
 };
 
 export const endGameReducer = (state: MultiplayerState): MultiplayerState => {
-  return { ...state, gameStatus: "ENDED" };
+  return { ...state, gameStatus: "ROUND_ENDED" };
 };

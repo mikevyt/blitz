@@ -13,7 +13,11 @@ export interface MultiplayerState {
   readonly name: { [id: string]: string };
   readonly emoji: { [id: string]: string };
   readonly host: string;
-  readonly gameStatus: "NOT_STARTED" | "STARTED" | "ENDED";
+  readonly gameStatus:
+    | "NOT_STARTED"
+    | "ROUND_STARTED"
+    | "ROUND_ENDED"
+    | "ENDED";
   readonly previousScore: { [id: string]: number[] };
 }
 
