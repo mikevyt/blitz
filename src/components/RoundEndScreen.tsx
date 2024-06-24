@@ -48,10 +48,14 @@ export const RoundEndScreen = () => {
         pagination={false}
         bordered={true}
       />
-      <div style={{ display: "flex", columnGap: "2rem" }}>
-        <Button>End Game</Button>
-        <Button>Next Round</Button>
-      </div>
+      {multiplayer.gameStatus === "ENDED" ? (
+        <div>Thanks for playing!</div>
+      ) : (
+        <div style={{ display: "flex", columnGap: "2rem" }}>
+          <Button>End Game</Button>
+          <Button>Next Round</Button>
+        </div>
+      )}
     </Card>
   );
 };

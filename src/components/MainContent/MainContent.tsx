@@ -38,6 +38,7 @@ export const MainContent = () => {
         </>
       );
     case "ROUND_ENDED":
+    case "ENDED":
       return <RoundEndScreen />;
     default:
       return null;
