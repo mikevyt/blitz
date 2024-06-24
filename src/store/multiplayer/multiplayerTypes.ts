@@ -14,6 +14,7 @@ export interface MultiplayerState {
   readonly emoji: { [id: string]: string };
   readonly host: string;
   readonly gameStatus: "NOT_STARTED" | "STARTED" | "ENDED";
+  readonly previousScore: { [id: string]: number[] };
 }
 
 export type MultiplayerAction =

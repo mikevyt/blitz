@@ -14,6 +14,7 @@ export const initialState: MultiplayerState = {
   emoji: {},
   host: "",
   gameStatus: "NOT_STARTED",
+  previousScore: {},
 };
 
 export const MultiplayerReducer: Reducer<

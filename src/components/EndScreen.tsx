@@ -3,7 +3,7 @@ import { useAppSelector } from "../store/hooks";
 
 export const EndScreen = () => {
   const multiplayer = useAppSelector((state) => state.multiplayer);
-  const game = useAppSelector((state) => state.game);
+  // const game = useAppSelector((state) => state.game);
   // const scores = calculateScores(game);
   const scores = new Map(
     Object.entries(multiplayer.name).map(([id, _], index) => [id, index])
