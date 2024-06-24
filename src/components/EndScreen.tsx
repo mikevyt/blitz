@@ -5,6 +5,9 @@ export const EndScreen = () => {
   const multiplayer = useAppSelector((state) => state.multiplayer);
   // const game = useAppSelector((state) => state.game);
   // const scores = calculateScores(game);
+  const peer = useAppSelector((state) => state.peer);
+  const previousScores = multiplayer.previousScore;
+  const previousScoreCount = multiplayer.previousScore[peer.id!]?.length || 0;
   const scores = new Map(
     Object.entries(multiplayer.name).map(([id, _], index) => [id, index])
   );
@@ -15,18 +18,25 @@ export const EndScreen = () => {
       dataIndex: "name",
       key: "name",
     },
-    {
-      title: "Round 1",
-      dataIndex: "score",
-      key: "score",
-    },
+    ...Array(previousScoreCount + 1)
+      .fill(0)
+      .map((i) => ({
+        title: `Round ${i + 1}`,
+        dataIndex: `score${i}`,
+        key: `score${i}`,
+      })),
   ];
 
   const dataSource = Object.entries(multiplayer.name).map(([id, name]) => {
     return {
       key: id,
       name: id === multiplayer.host ? name + " (Host)" : name,
-      score: scores.get(id),
+      ...Object.fromEntries(
+        Array(previousScoreCount)
+          .fill(0)
+          .map((i) => [`score${i}`, previousScores[id][i]])
+      ),
+      [`score${previousScoreCount}`]: scores.get(id),
     };
   });
 
