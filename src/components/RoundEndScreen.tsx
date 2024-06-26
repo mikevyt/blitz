@@ -1,11 +1,16 @@
 import { Button, Card, Table } from "antd";
 import { calculateScores } from "../helpers/calculateScores";
+import { startGame } from "../helpers/startGame";
 import { useAppEmit } from "../helpers/useAppEmit";
-import { useAppSelector } from "../store/hooks";
-import { endGame, endRound } from "../store/multiplayer/multiplayerActions";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import {
+  addPreviousScores,
+  endGame,
+} from "../store/multiplayer/multiplayerActions";
 
 export const RoundEndScreen = () => {
   const emit = useAppEmit();
+  const dispatch = useAppDispatch();
   const multiplayer = useAppSelector((state) => state.multiplayer);
   const game = useAppSelector((state) => state.game);
   const scores = calculateScores(game);
@@ -46,7 +51,13 @@ export const RoundEndScreen = () => {
   };
 
   const handleNextRound = async () => {
-    await emit(endRound());
+    // set previous scores
+    await emit(addPreviousScores(scores));
+    startGame(
+      dispatch,
+      peer.id!,
+      Object.entries(multiplayer.name).map(([id, _]) => id)
+    );
   };
 
   return (

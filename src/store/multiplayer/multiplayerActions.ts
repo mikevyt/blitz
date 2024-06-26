@@ -2,6 +2,7 @@ import {
   AddEmojiAction,
   AddHostAction,
   AddNameAction,
+  AddPreviousScoresAction,
   EndGameAction,
   EndRoundAction,
   MultiplayerActionType,
@@ -30,6 +31,13 @@ export const addEmoji = (id: string, emoji: string): AddEmojiAction => ({
 export const addHost = (id: string): AddHostAction => ({
   type: MultiplayerActionType.ADD_HOST,
   id,
+});
+
+export const addPreviousScores = (
+  scores: Map<string, number>
+): AddPreviousScoresAction => ({
+  type: MultiplayerActionType.ADD_PREVIOUS_SCORES,
+  scores,
 });
 
 export const startGame = (): StartGameAction => ({

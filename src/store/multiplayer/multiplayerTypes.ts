@@ -5,6 +5,7 @@ export enum MultiplayerActionType {
   ADD_NAME = "ADD_NAME",
   ADD_EMOJI = "ADD_EMOJI",
   ADD_HOST = "ADD_HOST",
+  ADD_PREVIOUS_SCORES = "ADD_PREVIOUS_SCORES",
   START_GAME = "START_GAME",
   END_ROUND = "END_ROUND",
   END_GAME = "END_GAME",
@@ -26,6 +27,7 @@ export type MultiplayerAction =
   | AddNameAction
   | AddEmojiAction
   | AddHostAction
+  | AddPreviousScoresAction
   | UpdateAction
   | StartGameAction
   | EndRoundAction
@@ -51,6 +53,10 @@ export interface AddEmojiAction extends AnyAction {
 export interface AddHostAction extends AnyAction {
   type: MultiplayerActionType.ADD_HOST;
   id: string;
+}
+export interface AddPreviousScoresAction extends AnyAction {
+  type: MultiplayerActionType.ADD_PREVIOUS_SCORES;
+  scores: Map<string, number>;
 }
 
 export interface StartGameAction extends AnyAction {
