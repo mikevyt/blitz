@@ -15,6 +15,7 @@ import {
 } from "../store/game/gameActions";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { deselectCard, selectCard } from "../store/local/localActions";
+import { endGame } from "../store/multiplayer/multiplayerActions";
 import { PlayingCard as PlayingCardType, isEqual } from "../types/PlayingCard";
 
 export const PlayingCard = ({
@@ -135,6 +136,14 @@ export const PlayingCard = ({
       case "center":
       default:
         return;
+    }
+
+    console.log("gameState", gameState.stack[peer.id!]);
+    if (
+      gameState.stack[peer.id!].length === 1 &&
+      isEqual(gameState.stack[peer.id!][0], localState.selectedCard)
+    ) {
+      await emit(endGame());
     }
     dispatch(deselectCard());
   };

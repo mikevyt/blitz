@@ -1,16 +1,14 @@
 import { Button, Card, Table } from "antd";
+import { calculateScores } from "../helpers/calculateScores";
 import { useAppSelector } from "../store/hooks";
 
 export const RoundEndScreen = () => {
   const multiplayer = useAppSelector((state) => state.multiplayer);
-  // const game = useAppSelector((state) => state.game);
-  // const scores = calculateScores(game);
+  const game = useAppSelector((state) => state.game);
+  const scores = calculateScores(game);
   const peer = useAppSelector((state) => state.peer);
   const previousScores = multiplayer.previousScore;
   const previousScoreCount = multiplayer.previousScore[peer.id!]?.length || 0;
-  const scores = new Map(
-    Object.entries(multiplayer.name).map(([id, _], index) => [id, index])
-  );
 
   const columns = [
     {

@@ -72,7 +72,10 @@ export const CenterArea = () => {
         default:
           break;
       }
-      if (gameState.stack[peer.id!].length === 0) {
+      if (
+        gameState.stack[peer.id!].length === 1 &&
+        isEqual(gameState.stack[peer.id!][0], localState.selectedCard)
+      ) {
         await emit(endGame());
       }
       dispatch(deselectCard());
