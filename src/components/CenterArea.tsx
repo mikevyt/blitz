@@ -9,7 +9,7 @@ import {
 } from "../store/game/gameActions";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { deselectCard } from "../store/local/localActions";
-import { endGame } from "../store/multiplayer/multiplayerActions";
+import { endRound } from "../store/multiplayer/multiplayerActions";
 import { isEqual } from "../types/PlayingCard";
 import { PlayingCardStack } from "./PlayingCardStack";
 
@@ -76,7 +76,7 @@ export const CenterArea = () => {
         gameState.stack[peer.id!].length === 1 &&
         isEqual(gameState.stack[peer.id!][0], localState.selectedCard)
       ) {
-        await emit(endGame());
+        await emit(endRound());
       }
       dispatch(deselectCard());
     }

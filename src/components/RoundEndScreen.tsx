@@ -1,8 +1,11 @@
 import { Button, Card, Table } from "antd";
 import { calculateScores } from "../helpers/calculateScores";
+import { useAppEmit } from "../helpers/useAppEmit";
 import { useAppSelector } from "../store/hooks";
+import { endGame, endRound } from "../store/multiplayer/multiplayerActions";
 
 export const RoundEndScreen = () => {
+  const emit = useAppEmit();
   const multiplayer = useAppSelector((state) => state.multiplayer);
   const game = useAppSelector((state) => state.game);
   const scores = calculateScores(game);
@@ -38,6 +41,14 @@ export const RoundEndScreen = () => {
     };
   });
 
+  const handleEndGame = async () => {
+    await emit(endGame());
+  };
+
+  const handleNextRound = async () => {
+    await emit(endRound());
+  };
+
   return (
     <Card title="PileUp!">
       <Table
@@ -50,8 +61,8 @@ export const RoundEndScreen = () => {
         <div>Thanks for playing!</div>
       ) : (
         <div style={{ display: "flex", columnGap: "2rem" }}>
-          <Button>End Game</Button>
-          <Button>Next Round</Button>
+          <Button onClick={handleEndGame}>End Game</Button>
+          <Button onClick={handleNextRound}>Next Round</Button>
         </div>
       )}
     </Card>

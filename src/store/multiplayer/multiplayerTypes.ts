@@ -6,6 +6,7 @@ export enum MultiplayerActionType {
   ADD_EMOJI = "ADD_EMOJI",
   ADD_HOST = "ADD_HOST",
   START_GAME = "START_GAME",
+  END_ROUND = "END_ROUND",
   END_GAME = "END_GAME",
 }
 
@@ -27,6 +28,7 @@ export type MultiplayerAction =
   | AddHostAction
   | UpdateAction
   | StartGameAction
+  | EndRoundAction
   | EndGameAction;
 
 export interface UpdateAction extends AnyAction {
@@ -55,6 +57,9 @@ export interface StartGameAction extends AnyAction {
   type: MultiplayerActionType.START_GAME;
 }
 
+export interface EndRoundAction extends AnyAction {
+  type: MultiplayerActionType.END_ROUND;
+}
 export interface EndGameAction extends AnyAction {
   type: MultiplayerActionType.END_GAME;
 }

@@ -15,7 +15,7 @@ import {
 } from "../store/game/gameActions";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { deselectCard, selectCard } from "../store/local/localActions";
-import { endGame } from "../store/multiplayer/multiplayerActions";
+import { endRound } from "../store/multiplayer/multiplayerActions";
 import { PlayingCard as PlayingCardType, isEqual } from "../types/PlayingCard";
 
 export const PlayingCard = ({
@@ -143,7 +143,7 @@ export const PlayingCard = ({
       gameState.stack[peer.id!].length === 1 &&
       isEqual(gameState.stack[peer.id!][0], localState.selectedCard)
     ) {
-      await emit(endGame());
+      await emit(endRound());
     }
     dispatch(deselectCard());
   };

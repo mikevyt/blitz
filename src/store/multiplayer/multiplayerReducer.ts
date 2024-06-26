@@ -32,6 +32,8 @@ export const MultiplayerReducer: Reducer<
       return addHostReducer(state, action);
     case MultiplayerActionType.START_GAME:
       return startGameReducer(state);
+    case MultiplayerActionType.END_ROUND:
+      return endRoundReducer(state);
     case MultiplayerActionType.END_GAME:
       return endGameReducer(state);
     default:
@@ -75,6 +77,10 @@ export const startGameReducer = (state: MultiplayerState): MultiplayerState => {
   return { ...state, gameStatus: "ROUND_STARTED" };
 };
 
-export const endGameReducer = (state: MultiplayerState): MultiplayerState => {
+export const endRoundReducer = (state: MultiplayerState): MultiplayerState => {
   return { ...state, gameStatus: "ROUND_ENDED" };
+};
+
+export const endGameReducer = (state: MultiplayerState): MultiplayerState => {
+  return { ...state, gameStatus: "ENDED" };
 };
